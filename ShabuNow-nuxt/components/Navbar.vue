@@ -68,7 +68,7 @@
             <div
               class="flex flex-col justify-center items-start lg:text-base text-lg"
             >
-              <p>เข้าสู่ระบบ</p>
+              <p>เข้าสู่ระบบๆ</p>
               <p>หรือ สมัครสมาชิก</p>
             </div>
           </a>
