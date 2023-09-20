@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="" />
+    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShabuNow/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ShabuNow/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,6 +138,10 @@
       <path value="$PROJECT_DIR$/ShabuNow/vendor/nunomaduro/termwind" />
     </include_path>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2V42bHyEOZsHXjrL1c8LhkgYGbb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -142,14 +149,21 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/puun/WebApp-ShabuNow",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/puun/WebApp-ShabuNow/ShabuNow",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "discord-application",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
+    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner configuration_file="$PROJECT_DIR$/ShabuNow/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -164,6 +178,9 @@
       <option name="presentableId" value="Default" />
       <updated>1694081101423</updated>
       <workItem from="1694081102446" duration="949000" />
+      <workItem from="1694429086833" duration="54000" />
+      <workItem from="1694429254154" duration="34000" />
+      <workItem from="1694429296207" duration="29000" />
     </task>
     <servers />
   </component>
