@@ -9,8 +9,7 @@
       <a href="/" class="flex justify-center items-center">
         <div>
           <img
-            width="64"
-            height="64"
+            class="w-[32px] xl:w-[64px]"
             src="~/assets/img/logo.png"
             alt="ShabuNow"
           />
@@ -33,13 +32,14 @@
 
     <!-- Links -->
     <div
-      class="w-full flex flex-col lg:flex-row justify-end items-center text-center rounded-lg ease-out duration-300 lg:opacity-100"
+      class="w-full flex flex-col lg:flex-row justify-end items-center text-center text-lg lg:text-sm xl:text-base rounded-lg ease-out duration-300 lg:opacity-100"
       :class="[open ? 'opacity-0' : 'opacity-100']"
     >
       <ul class="lg:flex justify-around items-center w-auto mr-2">
-        <li class="m-4" v-for="link in links">
+        <li class="lg:m-0 m-4" v-for="link in links">
           <a
-            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 text-lg lg:text-base cursor-pointer rounded-xl py-2 px-4"
+            href="/"
+            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2"
           >
             {{ link.name }}
           </a>
@@ -47,7 +47,7 @@
       </ul>
 
       <!-- about user -->
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center w-auto">
         <div
           class="flex items-center flex-col lg:flex-row border-t-2 lg:border-l-2 lg:border-t-0 pt-5 lg:pt-0 lg:pl-2"
         >
@@ -56,7 +56,7 @@
             class="mx-4 flex items-center text-red-600 hover:text-red-500 ease-out duration-300"
           >
             <i class="bi bi-person-fill text-2xl mr-2"></i>
-            <div class="lg:text-base text-lg">
+            <div class="">
               <p>สวัสดีคุณ,</p>
               <p>Guest1175</p>
             </div>
@@ -65,16 +65,14 @@
             class="bg-gray-100 p-2 mt-4 lg:mt-0 rounded flex items-center border-2 hover:border-red-600 cursor-pointer text-red-600 hover:text-red-500 ease-out duration-300"
           >
             <i class="bi bi-lock-fill text-2xl mr-2"></i>
-            <div
-              class="flex flex-col justify-center items-start lg:text-base text-lg"
-            >
-              <p>เข้าสู่ระบบๆ</p>
+            <div class="flex flex-col justify-center items-start">
+              <p>เข้าสู่ระบบ</p>
               <p>หรือ สมัครสมาชิก</p>
             </div>
           </a>
           <Button class="lg:mx-4 mt-4 lg:mt-0 flex items-center">
             <i class="bi bi-box-arrow-right mr-2"></i>
-            <p class="lg:text-base text-lg">ออกจากระบบ</p>
+            <p class="">ออกจากระบบ</p>
           </Button>
         </div>
       </div>

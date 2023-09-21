@@ -8,15 +8,15 @@
         <table class="text-center text-sm lg:text-lg rounded-xl table-auto w-full border-2 border-slate-400 border-separate border-spacing-3">
             <thead>
                 <tr>
-                    <th v-for="data in datas" class="border border-slate-300 rounded-xl p-2 bg-gray-100">
-                        {{ data.title }}
+                    <th v-for="(header, index) in headers" :key="index" class="border border-slate-300 rounded-xl p-2 bg-gray-100">
+                        {{ header }}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td v-for="data in datas" class="border border-slate-300 rounded-xl p-2">
-                        {{ data.info }}
+                <tr v-for="(row, rowIndex) in datas" :key="rowIndex">
+                    <td v-for="(data, colIndex) in row" :key="colIndex" class="border border-slate-300 rounded-xl p-2">
+                        {{ data }}
                     </td>
                 </tr>
             </tbody>
@@ -26,6 +26,6 @@
 
 <script>
 export default {
-    props: ['datas','title']
+    props: ['datas','headers']
 }
 </script>
