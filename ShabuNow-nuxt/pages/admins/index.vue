@@ -19,13 +19,17 @@
           <h1>ประเภท : อาหารคาว</h1>
         </div>
         <!-- manage category  -->
-        <Button>
-          <slot name="button">จัดการหมวดหมู่อาหาร</slot>
-        </Button>
+        <a
+          href="/admins/category"
+          class="text-xl hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2 mt-10"
+        >
+          + เพิ่มหมวดหมู่
+        </a>
       </HeaderContainer>
       <GridContainer>
         <!-- menu item card -->
         <MenuItemCard v-for="food in foods" :imageUrl="food.imageUrl">
+          <h1>X</h1>
           <template v-slot:title>
             <!-- สลัดผักรวมมิตร -->
             {{ food.title }}
@@ -34,11 +38,17 @@
             <!-- ราคา ฿55 บาท -->
             {{ food.price }}
           </template>
-          <template v-slot:button> เลือกเมนูนี้ </template>
         </MenuItemCard>
         <!-- end -->
       </GridContainer>
       <!-- end menu container -->
+
+      <a
+        href="/admins/createMenu"
+        class="text-xl hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2 mt-10"
+      >
+        +เพิ่มเมนู
+      </a>
     </ContentContainer>
   </MainContainer>
 </template>
