@@ -1,6 +1,6 @@
 <template>
    <!-- navbar container -->
-   <nav class="lg:flex flex-row justify-between items-center px-4 w-auto shadow-sm ease-out duration-500 lg:h-[80px]" :class="[open ? 'h-[80px]' : 'h-[500px]']">
+   <nav class="lg:flex flex-row justify-between items-center px-4 w-auto shadow-sm ease-out duration-500 lg:h-[80px] mt-2" :class="[open ? 'h-[80px]' : 'h-[500px]']">
         <!-- Logo & toggle -->
         <div class="flex justify-between items-center">
             <a href="/" class="flex justify-center items-center">
@@ -21,7 +21,7 @@
 
             <ul class="lg:flex justify-around items-center w-auto mr-2">
                 <li class="lg:m-0 m-4" v-for="link in links">
-                    <a href="/" class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+                    <a :href="link.link"  class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
                         {{ link.name }}
                     </a>
                 </li>
@@ -58,16 +58,14 @@
 </template>
 
 <script>
-// import Button from './Button.vue'
-// import ButtonBorder from './ButtonBorder.vue'
 export default {
     setup() {
         const open = ref(false);
         const links = [
-            {name : "เลือกเมนู" , link : "#"},
-            {name : "ตะกร้าสินค้า" , link : "#"},
-            {name : "รายการที่สั่ง" , link : "#"},
-            {name : "คำสั่งซื้อลูกค้า" , link : "#"},
+            {name : "เลือกเมนู" , link : "/"},
+            {name : "ตะกร้าสินค้า" , link : "/carts"},
+            {name : "รายการที่สั่ง" , link : "/bills"},
+            {name : "คำสั่งซื้อลูกค้า" , link : "/orders"},
         ];
 
         function menuOpen() {

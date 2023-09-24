@@ -1,6 +1,4 @@
-
 <template>
-    <NavBar></NavBar>
     <section>
         <slot/>
     </section>

@@ -9,6 +9,7 @@
                 </slot>
             </p>
             <p class="mt-2 text-xl font-light">
+                ฿
                 <slot name="price">
                     Default price
                 </slot>

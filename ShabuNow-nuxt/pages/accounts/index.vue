@@ -8,9 +8,9 @@
         <hr>
         <ContentContainer>
             <!-- ข้อมูลส่วนตัว -->
-            <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8" v-for="user in users">
+            <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8 text-md md:text-2xl" v-for="user in users">
 
-                <h1 class="text-2xl font-semibold text-red-600">ข้อมูลส่วนตัว</h1>
+                <h1 class="font-semibold text-red-600">ข้อมูลส่วนตัว</h1>
 
                 <p class="mt-4">
                     <span class="font-medium">
@@ -33,10 +33,10 @@
             </div>
 
             <!-- เปลี่ยนรหัสผ่าน -->
-            <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8" v-for="user in users">
+            <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8 text-md md:text-2xl" v-for="user in users">
 
-                <h1 class="text-2xl font-semibold text-red-600">เปลี่ยนรหัสผ่าน</h1>
-                <p class="mt-4">
+                <h1 class="font-semibold text-red-600">เปลี่ยนรหัสผ่าน</h1>
+                <p class="mt-4 w-full">
                     <span class="font-medium">
                         อีเมลล์ :
                     </span> 
@@ -56,6 +56,11 @@
                 </InputField>
                 <!-- confirm password input field -->
                 <InputField placeholder="รหัสผ่านใหม่อีกครั้ง" type="password" name="confirm-password"/>
+
+                <Button class="mt-4 p-3 text-lg">
+                    ยืนยันการเปลี่ยนรหัสผ่าน
+                </Button>
+
             </div>
         </ContentContainer>
         <hr>
@@ -92,7 +97,11 @@ export default {
             ],
             // add table headers
             tableData: [
-                ['1', '1750', '11/12/2023', '150'],
+                ['1', '3750', '11/12/2023', '150'],
+                ['2', '2250', '10/12/2023', '53'],
+                ['3', '750', '9/12/2023', '250'],
+                ['4', '1750', '1/12/2023', '10'],
+                ['5', '4200', '28/11/2023', '55'],
             ],
         }
     },
