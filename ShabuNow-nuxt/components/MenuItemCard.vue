@@ -12,10 +12,11 @@
         <slot name="title"> Default title </slot>
       </p>
       <p class="mt-2 text-xl font-light">
+        ฿
         <slot name="price"> Default price </slot>
       </p>
 
-      <Button class="mt-2 w-full">
+      <Button class="mt-4 w-full">
         <i class="bi bi-plus-lg mr-1"></i>
         <slot name="button"> Defaut button text </slot>
       </Button>

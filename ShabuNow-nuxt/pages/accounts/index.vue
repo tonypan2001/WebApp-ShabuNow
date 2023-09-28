@@ -43,25 +43,29 @@
                     </span>
                     <input class="placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-red-600 focus:ring-red-600 focus:ring-1 sm:text-base" placeholder="รหัสผ่านใหม่" type="password" name="password"/>
                 </label> -->
-        <InputField placeholder="รหัสผ่านใหม่" type="password" name="password">
-          <template v-slot:icon>
-            <i class="bi bi-lock-fill text-2xl mr-2"></i>
-          </template>
-        </InputField>
-        <!-- confirm password input field -->
-        <InputField
-          placeholder="รหัสผ่านใหม่อีกครั้ง"
-          type="password"
-          name="confirm-password"
-        />
-      </div>
-    </ContentContainer>
-    <hr />
-    <!-- History table -->
-    <Table :datas="tableData" :headers="tableHeaders" class="mt-8">
-      <template v-slot:title> ประวัติการใช้บริการ </template>
-    </Table>
-  </MainContainer>
+                <InputField class="mt-4" placeholder="รหัสผ่านใหม่" type="password" name="password">
+                    <template v-slot:icon>
+                        <i class="bi bi-lock-fill text-2xl mr-2"></i> 
+                    </template>
+                </InputField>
+                <!-- confirm password input field -->
+                <InputField class="mt-4" placeholder="รหัสผ่านใหม่อีกครั้ง" type="password" name="confirm-password"/>
+
+                <Button class="mt-4 p-3 text-lg">
+                    ยืนยันการเปลี่ยนรหัสผ่าน
+                </Button>
+
+            </div>
+        </ContentContainer>
+        <hr>
+        <!-- History table -->
+        <Table :datas="tableData" :headers="tableHeaders" class="mt-8">
+            <template v-slot:title>
+                ประวัติการใช้บริการ
+            </template>
+
+        </Table>
+    </MainContainer>
 </template>
 
 <script>

@@ -7,8 +7,8 @@
         </HeaderContainer>
         <hr>
         <ContentContainer>
-            <div class="mt-4 py-4 flex justify-center items-center w-full">
-                <InputField class="mt-0" placeholder="ใส่จำนวนโต๊ะทั้งหมด" type="tableNumber" name="tableNumber"/>
+            <div class="mt-4 flex justify-center items-center w-full">
+                <InputField placeholder="ใส่จำนวนโต๊ะทั้งหมด" type="tableNumber" name="tableNumber"/>
                 <Button class="py-3 ml-2">
                     ยืนยัน
                 </Button>

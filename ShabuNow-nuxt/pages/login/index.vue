@@ -7,21 +7,21 @@
         <h1 class="font-bold text-2xl">Login</h1>
         <p class="mt-4 text-sm">If you already a member,login in</p>
         <form action="" class="flex flex-col gap-4">
-          <input
-            class="p-2 mt-8 rounded-xl border"
+          <InputField
+            class="p-2 mt-8 rounded-xl"
             type="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
           />
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
           />
           <!-- <button class="bg-red-500 text-white rounded-xl ">Log in</button> -->
           <Button>
-            <slot name="button"> Login </slot>
+            เข้าสู่ระบบ
           </Button>
           <br />
           <p>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+
 definePageMeta({
   layout: "custom",
 });

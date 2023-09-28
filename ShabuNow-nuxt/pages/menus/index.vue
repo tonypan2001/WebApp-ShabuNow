@@ -5,7 +5,7 @@
                 โปรดเลือกเมนูสุดคุ้ม
             </HeaderText>
             <!-- category dropdown button -->
-            <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4"/>
+            <ButtonDropdown title="เลือกหมวดหมู่อาหาร" :items="categories" class="mb-4"/>
             <!-- end -->
         </HeaderContainer>
         <hr>
@@ -14,9 +14,27 @@
             <!-- menu container -->
             <!-- Category Tag -->
             <HeaderContainer class="w-full">
-                <div class="text-2xl font-medium m-4 py-1.5 px-4 rounded-xl bg-red-600 text-white">
+                <div class="text-2xl font-medium m-4 py-1.5 px-4 rounded-lg bg-red-600 text-white">
                     <h1>ประเภท : อาหารคาว</h1> 
                 </div>
+
+                <!-- admin functions -->
+                <div class="flex flex-col md:flex-row">
+                    <!-- add menu -->
+                    <a href="/admins/createMenu"
+                    class="text-xl ease-out duration-150 border-black hover:border-red-600 border-2 hover:border-2 hover:text-red-600 cursor-pointer rounded px-1.5 py-1 m-2">
+                    <i class="bi bi-plus"></i>
+                    เพิ่มเมนู
+                    </a>
+
+                    <!-- add category  -->
+                    <a href="/admins/category"
+                    class="text-xl ease-out duration-150 border-black hover:border-red-600 border-2 hover:border-2 hover:text-red-600 cursor-pointer rounded px-1.5 py-1 m-2">
+                    <i class="bi bi-plus"></i>
+                    เพิ่มหมวดหมู่
+                    </a>
+                </div>
+
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->

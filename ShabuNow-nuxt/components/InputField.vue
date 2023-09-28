@@ -1,5 +1,5 @@
 <template>
-    <label class="relative block mt-4">
+    <label class="relative block">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
             <slot name="icon">
 
