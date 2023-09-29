@@ -30,7 +30,7 @@
 
         <textarea
         row="2"
-          class="mt-4 text-base block p-2.5 w-full text-slate-400 bg-white border border-slate-300 rounded-lg focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none"
+          class="mt-4 text-base block p-2.5 w-full bg-white border border-slate-300 rounded-lg focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none"
           placeholder="คำอธิบายเพิ่มเติม"
         ></textarea>
 

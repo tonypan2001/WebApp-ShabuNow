@@ -18,9 +18,36 @@
               placeholder="ชื่อหมวดหมู่"
               type="text"
               name="confirm-password"/>
-            <Button class="mt-4">เพิ่มหมวดหมู่</Button>
+            <Button class="mt-4 w-full">
+              <i class="bi bi-bookmark-plus-fill mr-2"></i>
+              เพิ่มหมวดหมู่
+            </Button>
           </div>
-      </div>
+          <div class="border-t w-full mt-8 py-4">
+            <h1 class="text-2xl">
+              สร้างแล้ว: <span class="font-medium">10</span> หมวดหมู่
+            </h1>
+            <TableNoHeader :datas="tableData" :headers="tableHeaders" class="mt-8">
+
+            </TableNoHeader>
+          </div>
+        </div>
+
     </ContentContainer>
   </MainContainer>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      tableHeaders: ['ชื่อหมวดหมู่'],
+      tableData: [
+        ['Drink'],
+        ['Sweet'],
+        ['Ice Cream'],
+      ]
+    }
+  }
+}
+</script>

@@ -1,6 +1,6 @@
 
 <template>
-    <div class="relative">
+    <div class="relative z-10">
         <ButtonBorder @click="isOpen = !isOpen" class="relative">
             <div class="block flex justify-center items-center">
                 <p class="mr-2">{{ title }}</p>

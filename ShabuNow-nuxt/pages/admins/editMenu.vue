@@ -30,11 +30,11 @@
         </select>
 
         <textarea
-          id="message"
-          rows="4"
-          class="mt-4 block p-2.5 w-full text-sm text-slate-400 bg-white border border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+        row="2"
+          class="mt-4 text-base block p-2.5 w-full bg-white border border-slate-300 rounded-lg focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none"
           placeholder="คำอธิบายเพิ่มเติม"
         ></textarea>
+        
         <div class="mx-auto mt-2">
           <label
             for="example1"

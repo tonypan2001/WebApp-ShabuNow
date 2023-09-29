@@ -13,6 +13,15 @@
         พนักงานสตาฟทั้งหมด
       </template>
     </Table>
+
+    <a 
+    href="/admins/createStaff"
+    class="">
+      <Button class="w-full py-2 px-6">
+        <i class="bi bi-person-plus-fill mr-2"></i>
+        เพิ่มพนักงานสตาฟ
+      </Button>
+    </a>
       
   </ContentContainer>
 </MainContainer>

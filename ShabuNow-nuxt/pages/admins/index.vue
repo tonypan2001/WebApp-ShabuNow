@@ -30,12 +30,6 @@
             เพิ่มเมนูอาหาร
             </ButtonBorder>
           </a>
-          <a href="/admins/editMenu" class="mt-4">
-            <ButtonBorder class="w-full">
-              <i class="bi bi-pencil-fill mr-2"></i>
-              แก้ไขเมนูอาหาร
-            </ButtonBorder>
-          </a>
         </div>
       </div>
 

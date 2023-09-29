@@ -2,11 +2,11 @@
   <!-- navbar container -->
   <nav
     class="lg:flex flex-row justify-between items-center px-4 w-auto shadow-sm ease-out duration-500 lg:h-[80px]"
-    :class="[open ? 'h-[80px]' : 'h-[500px]']"
+    :class="[open ? 'h-[80px]' : 'h-[550px]']"
   >
     <!-- Logo & toggle -->
     <div class="flex justify-between items-center">
-      <a href="/menu" class="flex justify-center items-center">
+      <a href="/" class="flex justify-center items-center">
         <div>
           <img
             class="w-[64px] md:w-[64px] ease-out duration-300"
@@ -32,8 +32,8 @@
 
     <!-- Links -->
     <div
-      class="w-full flex flex-col lg:flex-row justify-end items-center text-center text-lg lg:text-sm xl:text-base rounded-lg ease-out duration-300 lg:opacity-100"
-      :class="[open ? 'opacity-0' : 'opacity-100']"
+      class="w-full flex flex-col lg:flex lg:flex-row justify-end items-center text-center text-lg lg:text-sm xl:text-base rounded-lg ease-out duration-300 lg:opacity-100"
+      :class="[open ? 'hidden' : 'block']"
     >
       <ul class="lg:flex justify-around items-center w-auto mr-2">
         <li class="lg:m-0 m-4" v-for="link in links">
@@ -52,7 +52,7 @@
           >
 
           <a 
-          class="flex justify-center items-center text-red-600 hover:text-red-500 ease-out duration-300"
+          class="flex justify-center items-center text-gray-600 hover:text-red-500 mb-4 lg:mb-0 ease-out duration-300"
           href="/admins">
           <i class="bi bi-house-gear-fill text-2xl mx-2"></i>
           <!-- <i class="bi bi-gear-fill md:text-xl text-2xl mx-2"></i> -->
@@ -102,7 +102,7 @@ export default {
     setup() {
         const open = ref(false);
         const links = [
-            {name : "เลือกเมนู" , link : "/menus"},
+            {name : "เลือกเมนู" , link : "/"},
             {name : "ตะกร้าสินค้า" , link : "/carts"},
             {name : "รายการที่สั่ง" , link : "/bills"},
             {name : "คำสั่งซื้อลูกค้า" , link : "/orders"},
