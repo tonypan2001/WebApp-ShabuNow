@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShabuNow/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ShabuNow/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,8 +149,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/puun/WebApp-ShabuNow/ShabuNow",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/puun/WebApp-ShabuNow/ShabuNow-nuxt",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "discord-application",
     "vue.rearranger.settings.migration": "true"
@@ -181,6 +179,7 @@
       <workItem from="1694429086833" duration="54000" />
       <workItem from="1694429254154" duration="34000" />
       <workItem from="1694429296207" duration="29000" />
+      <workItem from="1695869624326" duration="20000" />
     </task>
     <servers />
   </component>
