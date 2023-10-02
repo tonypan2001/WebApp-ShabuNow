@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('category');
-            $table->string('imgPath');
-            $table->string('description');
-            $table->enum('status',['available']);
+            $table->foreignIdFor(\App\Models\Menu::class); //menu_id (fk)
+            $table->string('detail');
+            $table->enum('status', ['pending','ordered','ready','served']);
             $table->integer('price');
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('orders');
     }
 };
