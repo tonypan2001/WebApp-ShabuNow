@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->foreignIdFor(\App\Models\Category::class); //category_id(fk)
-            $table->string('imgPath');
+            $table->string('imgPath')->nullable();
             $table->string('description');
-            $table->enum('status',['available']);
+            $table->enum('status',['available','outofstock']);
             $table->integer('price');
         });
     }

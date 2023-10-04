@@ -21,8 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->enum('role', ['admin','chef','staff','customer']);
-            $table->integer('tableNumber');
-            $table->string('imgPath');
+            $table->string('imgPath')->nullable();
             $table->string('firstname');
             $table->string('surname');
             $table->integer('age');

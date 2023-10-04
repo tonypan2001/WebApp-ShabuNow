@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Menu::class); //menu_id (fk)
             $table->string('detail');
             $table->enum('status', ['pending','ordered','ready','served']);
-            $table->integer('price');
+            $table->foreignIdFor(\App\Models\Table::class); //table_id (fk)
         });
     }
 
