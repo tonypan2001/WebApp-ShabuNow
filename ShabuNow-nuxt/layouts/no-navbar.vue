@@ -11,3 +11,9 @@
   font-family: "Kanit", sans-serif;
 }
 </style>
+
+<script>
+export default {
+  layout: 'no-navbar'
+}
+</script>

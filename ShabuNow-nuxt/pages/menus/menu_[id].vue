@@ -28,22 +28,31 @@
                     </div>
                 </div>
             </div>
-            <!-- status menu option for chef role -->
             <div class="px-4 lg:px-8 py-4 w-2/3">
+                <!-- status menu option for chef role -->
                 <div class="flex flex-col justify-start items-start text-lg">
                     <h1 class="text-xl lg:text-2xl text-red-600">ปรับเปลี่ยนสถานะของเมนู</h1>
                     <select
                     class="mt-4 text-base focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none p-2.5 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3"
                     >
-                      <option value="available">พร้อมเสิร์ฟ</option>
-                      <option value="canceled">ยกเลิกชั่วคราว</option>
+                      <option value="available">พร้อมเสิร์ฟ (READY)</option>
+                      <option value="canceled">ยกเลิกชั่วคราว (NOT READY)</option>
                     </select>
                     <Button class="mt-4 w-full">
                         ยืนยันเปลี่ยนสถานะ
                     </Button>
                 </div>
+
+                <!-- for customer -->
+                <div class="flex flex-col justify-start items-start text-lg">
+                    <Button class="mt-4 w-full">
+                        <i class="bi bi-cart-plus mr-2"></i>
+                        เพิ่มเข้าตะกร้า
+                    </Button>
+                </div>
+
             </div>
-            <!-- end chef -->
+
         </div>
     </ContentContainer>
 </MainContainer>

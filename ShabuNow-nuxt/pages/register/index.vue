@@ -5,7 +5,7 @@
       <!-- form -->
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">Register</h1>
-        <p class="mt-4 text-sm">Let's create your account</p>
+        <p class="mt-4 text-sm">Let's create your account.</p>
         <form action="" class="flex flex-col gap-4 mt-4">
           <InputField
             class=""
@@ -79,10 +79,10 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
 // import { InputField } from '#build/components';
 
 definePageMeta({
-  layout: "custom",
+  layout: "no-navbar",
 });
 </script>

@@ -48,9 +48,9 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
 
 definePageMeta({
-  layout: "custom",
+  layout: "no-navbar",
 });
 </script>

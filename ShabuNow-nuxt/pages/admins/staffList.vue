@@ -34,7 +34,6 @@ export default {
       // add some datas to table
       tableHeaders: [
         'Name',
-        'Status',
       ],
       // add table headers
       tableData: [
