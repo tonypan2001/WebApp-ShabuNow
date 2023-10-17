@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// testing new branch Thanet
 Route::get('/', function () {
     return view('welcome');
 });
