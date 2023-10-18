@@ -57,6 +57,10 @@
 export default {
   // just some data
   data() {
+    definePageMeta({
+      middleware: ["admin"],
+      layout: "custom",
+    });
     return {
       foods: [
         {

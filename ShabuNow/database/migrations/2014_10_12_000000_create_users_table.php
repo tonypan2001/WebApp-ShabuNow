@@ -20,12 +20,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->enum('role', ['admin','chef','staff','customer']);
-            $table->integer('tableNumber');
-            $table->string('imgPath');
-            $table->string('firstname');
-            $table->string('surname');
-            $table->integer('age');
+                // role,tableNumber,imgPath,firstname,age ขอ nullable ก่อนเดี๋ยวมาลบ
+            // $table->enum('role', ['admin','chef','staff','customer'])->nullable();
+            $table->string('role')->nullable();
+
+            $table->integer('tableNumber')->nullable();
+            $table->string('imgPath')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('surname')->nullable();
+            $table->integer('age')->nullable();
         });
     }
 

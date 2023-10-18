@@ -6,36 +6,39 @@
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">Register</h1>
         <p class="mt-4 text-sm">Let's create your account</p>
-        <form action="" class="flex flex-col gap-4">
+        <form
+          @submit.prevent="handleSubmit"
+          action=""
+          class="flex flex-col gap-4"
+        >
           <input
             class="p-2 mt-8 rounded-xl border"
             type="text"
-            name="firstname"
-            placeholder="Firstname"
+            name="name"
+            placeholder="Name"
+            v-model="form.name"
           />
-          <input
-            class="p-2 rounded-xl border"
-            type="text"
-            name="lastname"
-            placeholder="Lastname"
-          />
+
           <input
             class="p-2 rounded-xl border"
             type="email"
             name="email"
             placeholder="Email"
+            v-model="form.email"
           />
           <input
             class="p-2 rounded-xl border"
             type="password"
             name="password"
             placeholder="Password"
+            v-model="form.password"
           />
           <input
             class="p-2 rounded-xl border"
             type="password"
             name="confirm-password"
             placeholder="Confirm password"
+            v-model="form.password_confirmation"
           />
           <div class="mx-auto mt-2">
             <label
@@ -73,8 +76,25 @@
   </section>
 </template>
 
-<script>
+<script setup>
+const auth = useAuthStore();
+const form = reactive({
+  name: null,
+  email: null,
+  password: null,
+  password_confirmation: null,
+});
+const errors = ref([]);
+const handleSubmit = async () => {
+  try {
+    await auth.register(form);
+  } catch (error) {
+    errors.value = console.log(error.response.errors);
+  }
+};
+
 definePageMeta({
   layout: "custom",
+  middleware: ["guest"],
 });
 </script>
