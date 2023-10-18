@@ -18,6 +18,12 @@
     "sass": "^1.67.0",
     "tailwindcss": "^3.3.3"
   },
+  "description": "Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "author": "",
+  "license": "ISC",
+
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",

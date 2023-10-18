@@ -9,35 +9,40 @@
         <form
           @submit.prevent="handleSubmit"
           action=""
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-4 mt-4"
         >
-          <input
-            class="p-2 mt-8 rounded-xl border"
+          <InputField
+            class=""
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Name NEED FIX!! DONHAVE SURNAME"
             v-model="form.name"
           />
-
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class=""
+            type="text"
+            name="lastname"
+            placeholder="LastName"
+          />
+          <InputField
+            class=""
             type="email"
             name="email"
             placeholder="Email"
             v-model="form.email"
           />
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class=""
             type="password"
             name="password"
             placeholder="Password"
             v-model="form.password"
           />
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class=""
             type="password"
             name="confirm-password"
-            placeholder="Confirm password"
+            placeholder="Confirm Password"
             v-model="form.password_confirmation"
           />
           <div class="mx-auto mt-2">
@@ -54,21 +59,27 @@
           </div>
           <!-- Register Button -->
           <Button>
-            <slot name="button"> Register </slot>
+            <slot name="button"> สมัครสมาชิก </slot>
           </Button>
           <br />
           <!-- Login Here -->
           <p>
-            Already have account?
-            <a href="/login" class="underline">Sign in</a>
+            สมัครบัญชีไว้แล้ว?
+            <a href="/login" class="underline">เข้าสู่ระบบที่นี่</a>
           </p>
         </form>
+        <div class="mt-8 text-red-600 hover:text-red-500 hover:underline">
+          <a href="/login">
+            <i class="bi bi-arrow-left-short"></i>
+            Back To Login
+          </a>
+        </div>
       </div>
       <!-- image -->
       <div class="w-1/2 sm:block hidden">
         <img
           class="rounded-2xl"
-          src="https://images.unsplash.com/photo-1493552152660-f915ab47ae9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
+          src="https://images.unsplash.com/photo-1549048085-bab2f1f49f65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2487&q=80"
           alt=""
         />
       </div>

@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('/order', \App\Http\Controllers\Api\OrderController::class);
+
+Route::apiResource('/menu', \App\Http\Controllers\Api\MenuController::class);
+
 Route::group([
 
     'middleware' => 'api',
@@ -31,7 +35,7 @@ Route::group([
     Route::post('register', [AuthController::class,'register']);
     // Route::post('logout', [AuthController::class,'logout']);
     Route::post('refresh', [AuthController::class,'refresh']);
-    Route::post('me', [AuthController::class,'me']);    
+    Route::post('me', [AuthController::class,'me']);
 });
     Route::middleware(['auth:sanctum'])->group(function() {
         Route::post('logout', [AuthController::class,'logout']);
