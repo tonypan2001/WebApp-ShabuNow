@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="" />
+    <list default="true" id="b9934c36-35ac-4cf8-bb70-f9627c3cee20" name="Changes" comment="Add makefile &amp; .gitignore (Not finish)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShabuNow-nuxt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ShabuNow-nuxt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShabuNow/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/ShabuNow/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShabuNow/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ShabuNow/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +24,11 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/ShabuNow-nuxt/package.json" />
+    <dismissed value="$PROJECT_DIR$/ShabuNow/package.json" />
+    <dismissed value="$USER_HOME$/Desktop/Work P/all file/01418442 webTech/ShabuNow-nuxt/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -151,9 +161,14 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/puun/WebApp-ShabuNow/ShabuNow-nuxt",
+    "last_opened_file_path": "C:/Users/beam_/Desktop/Work P/all file/01418442 webTech/ShabuNow-nuxt",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "discord-application",
+    "ts.external.directory.path": "C:\\Users\\beam_\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\232.8660.185\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -181,9 +196,45 @@
       <workItem from="1694429296207" duration="29000" />
       <workItem from="1695869624326" duration="20000" />
     </task>
+    <task id="LOCAL-00001" summary="Add makefile &amp; .gitignore (Not finish)">
+      <option name="closed" value="true" />
+      <created>1697643789850</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697643789850</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/prompan" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add makefile &amp; .gitignore (Not finish)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add makefile &amp; .gitignore (Not finish)" />
   </component>
 </project>

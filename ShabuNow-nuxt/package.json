@@ -22,15 +22,5 @@
   "version": "1.0.0",
   "main": "tailwind.config.js",
   "author": "",
-  "license": "ISC",
-
-  "dependencies": {
-    "@nuxtjs/auth": "^4.9.1",
-    "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",
-    "@nuxtjs/axios": "^5.13.6",
-    "@pinia/nuxt": "^0.5.1",
-    "pinia": "^2.1.7",
-    "pinia-plugin-persistedstate": "^3.2.0",
-    "vue-axios": "^3.5.2"
-  }
+  "license": "ISC"
 }
