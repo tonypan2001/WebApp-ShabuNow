@@ -1,21 +1,29 @@
+import { defineStore } from "pinia";
+
 export const useAuthStore = defineStore("auth", {
-  state: () => ({ user: {}, role: null }),
+  state: () => ({ user: {}, role: "admin" }),
+
   persist: ["user"],
   getters: {
-    getUser: (state) => state.count * 2,
+    getUser: (state) => state.user,
   },
   actions: {
     async login(formData) {
       const token = useTokenStore();
+      const userPermissions = useCookie("permissions");
+      const userRoles = useCookie("roles");
       try {
         console.log("YOu Clicked it");
         const { data } = await $fetch("http://localhost/api/auth/login", {
           method: "POST",
           body: { ...formData },
         });
+        console.log("TYPE!!", typeof data.user.role);
+        console.log("name of type:", data.user.role);
         console.log("auth_store", data);
         token.setToken(data.token);
         this.user = data.user;
+
         return navigateTo("/");
       } catch (error) {
         throw error;

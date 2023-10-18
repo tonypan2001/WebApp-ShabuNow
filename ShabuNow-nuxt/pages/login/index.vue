@@ -1,8 +1,9 @@
 <script setup>
 const auth = useAuthStore();
 const token = useTokenStore();
+const counter = useCounterStore();
 
-const form = reactive({
+const form = ref({
   email: "test@example.com",
   password: "password",
 });
@@ -10,10 +11,13 @@ const form = reactive({
 const errors = ref([]);
 const handleSubmit = async () => {
   try {
-    await auth.login(form);
+    await auth.login(form.value);
   } catch (error) {
-    errors.value = console.log(error.response.errors);
+    // errors.value = console.log(error.response.errors);
+    console.log(error);
   }
+  // const { error } = await counter.login(form.value);
+  // console.log(error);
 };
 definePageMeta({
   middleware: ["guest"],

@@ -2,6 +2,8 @@
   <MainContainer>
     <HeaderContainer>
       <HeaderText> โปรดเลือกเมนูสุดคุ้ม </HeaderText>
+      <h1 class="text-red-500">{{ auth.getUser.role }}</h1>
+      <button>Click me !</button>
       <!-- category dropdown button -->
       <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />
       <!-- end -->

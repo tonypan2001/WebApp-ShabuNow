@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     // ...
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "nuxt-permissions",
   ],
   imports: {
     dirs: ["./stores"],

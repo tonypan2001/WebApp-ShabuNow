@@ -3,6 +3,9 @@ const auth = useAuthStore();
 const token = useTokenStore();
 definePageMeta({
   layout: "custom",
+  middleware: [
+    "admin", // your auth middleware
+  ],
 });
 </script>
 
