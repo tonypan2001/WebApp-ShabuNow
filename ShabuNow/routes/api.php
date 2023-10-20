@@ -17,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'category'
+], function () {
+    Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+    Route::post('/store', [\App\Http\Controllers\Api\CategoryController::class, 'store']);
+    Route::put('/update/{name}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
+});
+
+
+//Route::apiResource('/category', \App\Http\Controllers\Api\CategoryController::class);
+
+Route::apiResource('/menu', \App\Http\Controllers\Api\MenuController::class);
