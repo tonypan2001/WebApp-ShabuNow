@@ -8,12 +8,13 @@
         <hr>
         <ContentContainer>
             <!-- Ordered List -->
-            <CartListCard v-for="food in foods" :imageUrl="food.imageUrl">
+            <CartListCard v-for="order in orders" :imageUrl="order.imageUrl">
+
                 <template v-slot:cart_menu>
-                    {{ food.title }}
+                    {{ menu::where('id', order.menu_id).first().name }}
                 </template>
                 <template v-slot:cart_price>
-                    {{ food.price }}
+                    {{ menu::where('id', order.menu_id).first().price }}
                 </template>
             </CartListCard>
 
@@ -49,7 +50,7 @@
     </MainContainer>
 </template>
 
-<script>
+<script setup lang="ts">
 import CartListCard from '../../components/CartListCard.vue'
 
 export default {
@@ -106,4 +107,7 @@ export default {
         this.changePrice();
     }
 }
+
+const { data: orders, pending } = await useMyFetch<any>("order", {})
+
 </script>

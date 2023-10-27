@@ -4,6 +4,7 @@
       <HeaderText>สร้างเมนู</HeaderText>
     </HeaderContainer>
     <hr />
+    <form @submit.prevent="onSubmit()" >
     <ContentContainer>
       <DetailCard class="mb-12">
         <template v-slot:detail_title>สร้างเมนูอาหาร</template>
@@ -50,5 +51,35 @@
         </Button>
       </DetailCard>
     </ContentContainer>
+    </form>
   </MainContainer>
 </template>
+
+<script setup lang="ts">
+const formData = ref({
+  name: ""
+})
+
+const formErrors = ref({
+  errors: null
+})
+
+async function onSubmit() {
+  const { name } = formData.value
+  const { data:response, error } = await useMyFetch<any>(
+      "menu",
+      {
+        method: "POST",
+        body: { name }
+      }
+  )
+
+  if (response.value !== null) {
+    await navigateTo(`/menus/${response.value}`)
+  } else {
+    console.log(error)
+    const { message } = error.value!.data
+    formErrors.value.errors = message
+  }
+}
+</script>
