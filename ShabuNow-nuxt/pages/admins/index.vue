@@ -3,6 +3,16 @@
     <HeaderContainer>
       <HeaderText> โปรดเลือกเมนูสุดคุ้ม </HeaderText>
 
+      <!-- add by pooh for debugging -->
+      <h1>email : {{ auth.getUser?.email }}</h1>
+      <h1>password :{{ auth.getUser?.surname }}</h1>
+      <h1>all :{{ auth.getUser }}</h1>
+
+      <template v-if="token.getStatus">
+        <button @click.prevent="auth.logout()">Logout</button>
+        <h1>{{ token.getStatus }}</h1>
+      </template>
+
       <!-- category dropdown button -->
       <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />
       <!-- end -->
@@ -58,7 +68,12 @@ export default {
   // just some data
   data() {
     definePageMeta({
-      middleware: ["admin"],
+      middleware: ["auth"],
+    });
+    const auth = useAuthStore();
+    const token = useTokenStore();
+    definePageMeta({
+      middleware: ["auth"],
       layout: "custom",
     });
     return {
@@ -88,6 +103,8 @@ export default {
           price: "฿145",
         },
       ],
+      token,
+      auth,
       // dropdown button
       categories: [
         {

@@ -2,22 +2,20 @@
   <MainContainer>
     <HeaderContainer>
       <HeaderText> โปรดเลือกเมนูสุดคุ้ม </HeaderText>
-      <h1 class="text-red-500">{{ auth.getUser.role }}</h1>
-      <button>Click me !</button>
+      <!-- debug by pooh -->
+      <h1>email : {{ auth.getUser?.email }}</h1>
+      <h1>password :{{ auth.getUser?.surname }}</h1>
+      <h1>all :{{ auth.getUser }}</h1>
+      <template v-if="token.getStatus">
+        <button @click.prevent="auth.logout()">Logout</button>
+        <h1>{{ token.getStatus }}</h1>
+      </template>
+
       <!-- category dropdown button -->
       <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />
       <!-- end -->
     </HeaderContainer>
     <hr />
-    <!-- By pooh auth testing -->
-    <template v-if="!token.getStatus">
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    </template>
-
-    <template v-if="token.getStatus">
-      <button @click.prevent="auth.logout()">logout</button>
-    </template>
 
     <ContentContainer>
       <!-- menu container -->
@@ -52,17 +50,16 @@
 <script>
 export default {
   // just some data
+  // definePageMeta({
+  //   middleware:  ["auth"],
 
   data() {
     definePageMeta({
-      middleware: ["auth"],
-      layout: "custom",
+      middleware: ["auth2"],
     });
     const auth = useAuthStore();
     const token = useTokenStore();
     return {
-      auth,
-      token,
       foods: [
         {
           imageUrl:
@@ -89,6 +86,8 @@ export default {
           price: "฿145",
         },
       ],
+      auth,
+      token,
       // dropdown button
       categories: [
         {

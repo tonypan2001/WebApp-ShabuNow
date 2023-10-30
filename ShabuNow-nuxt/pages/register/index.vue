@@ -14,11 +14,23 @@
           <input
             class="p-2 mt-8 rounded-xl border"
             type="text"
-            name="name"
-            placeholder="Name"
-            v-model="form.name"
+            name="firstname"
+            placeholder="Firstname"
+            v-model="form.firstname"
           />
-
+          <span v-if="errors.firstname" class="text-red-500">{{
+            errors.firstname[0]
+          }}</span>
+          <input
+            class="p-2 rounded-xl border"
+            type="text"
+            name="surname"
+            placeholder="surname"
+            v-model="form.surname"
+          />
+          <span v-if="errors.surname" class="text-red-500">{{
+            errors.surname[0]
+          }}</span>
           <input
             class="p-2 rounded-xl border"
             type="email"
@@ -26,6 +38,9 @@
             placeholder="Email"
             v-model="form.email"
           />
+          <span v-if="errors.email" class="text-red-500">{{
+            errors.email[0]
+          }}</span>
           <input
             class="p-2 rounded-xl border"
             type="password"
@@ -33,13 +48,19 @@
             placeholder="Password"
             v-model="form.password"
           />
+          <span v-if="errors.password" class="text-red-500">{{
+            errors.password[0]
+          }}</span>
           <input
             class="p-2 rounded-xl border"
             type="password"
-            name="confirm-password"
+            name="confirmPassword"
             placeholder="Confirm password"
             v-model="form.password_confirmation"
           />
+          <span v-if="errors.password_confirmation" class="text-red-500">{{
+            errors.password_confirmation[0]
+          }}</span>
           <div class="mx-auto mt-2">
             <label
               for="example1"
@@ -50,7 +71,11 @@
               id="example1"
               type="file"
               class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
+              name="photos"
             />
+            <span v-if="errors.photos" class="text-red-500">{{
+              errors.photos[0]
+            }}</span>
           </div>
           <!-- Register Button -->
           <Button>
@@ -78,23 +103,30 @@
 
 <script setup>
 const auth = useAuthStore();
+const token = useTokenStore();
 const form = reactive({
-  name: null,
+  firstname: null,
+  surname: null,
   email: null,
   password: null,
   password_confirmation: null,
+  photos: null,
 });
 const errors = ref([]);
 const handleSubmit = async () => {
   try {
     await auth.register(form);
+    // const { data } = await $fetch("http://localhost/api/login", {
+    //   method: "POST",
+    //   body: { ...form },
+    // });
   } catch (error) {
-    errors.value = console.log(error.response.errors);
+    // console.log(error.data.errors.email[0]);
+    errors.value = error.data.errors;
   }
 };
-
 definePageMeta({
-  layout: "custom",
   middleware: ["guest"],
+  layout: "custom",
 });
 </script>

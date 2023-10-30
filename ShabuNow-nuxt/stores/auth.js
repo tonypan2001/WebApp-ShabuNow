@@ -1,46 +1,39 @@
 import { defineStore } from "pinia";
+import { useTokenStore } from "./token";
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({ user: {}, role: "admin" }),
-
-  persist: ["user"],
+  state: () => ({
+    user: {},
+  }),
+  persist: {
+    paths: ["user"],
+  },
   getters: {
     getUser: (state) => state.user,
   },
   actions: {
     async login(formData) {
-      const token = useTokenStore();
-      const userPermissions = useCookie("permissions");
-      const userRoles = useCookie("roles");
       try {
-        console.log("YOu Clicked it");
-        const { data } = await $fetch("http://localhost/api/auth/login", {
+        const { data } = await $fetch("http://localhost/api/login", {
           method: "POST",
           body: { ...formData },
         });
-        console.log("TYPE!!", typeof data.user.role);
-        console.log("name of type:", data.user.role);
-        console.log("auth_store", data);
-        token.setToken(data.token);
-        this.user = data.user;
 
-        return navigateTo("/");
+        console.log(`auth_store`, data);
+        this.commonSetter(data);
       } catch (error) {
         throw error;
       }
     },
     async register(formData) {
-      const token = useTokenStore();
       try {
-        console.log("YOu Clicked it");
-        const { data } = await $fetch("http://localhost/api/auth/register", {
+        const { data } = await $fetch("http://localhost/api/register ", {
           method: "POST",
           body: { ...formData },
         });
-        console.log("auth_store", data);
-        token.setToken(data.token);
-        this.user = data.user;
-        return navigateTo("/login");
+
+        console.log(`auth_store_register`, data);
+        this.commonSetter(data);
       } catch (error) {
         throw error;
       }
@@ -48,20 +41,32 @@ export const useAuthStore = defineStore("auth", {
     async logout() {
       const tokenStore = useTokenStore();
       try {
-        console.log("YOu Clicked it");
-        const res = await $fetch("http://localhost/api/logout", {
+        const res = await $fetch("http://localhost/api/logout ", {
           method: "POST",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${tokenStore.getToken}`,
+            Authorization: `Bearer ${tokenStore.getToken}`, //when authorize 401
           },
-          //   body: { ...formData },
         });
         tokenStore.removeToken();
         console.log(res);
-        return navigateTo("/login");
       } catch (error) {
         throw error;
+      }
+    },
+    commonSetter(data) {
+      console.log(`commonSetter is worked!!`);
+      const tokenStore = useTokenStore();
+      tokenStore.setToken(data.token);
+      this.user = data.user;
+      console.log("userdetail: ", data.user.role);
+      //   return navigateTo("/");
+
+      if (data.user.role == "admin") {
+        return navigateTo("/admins");
+      }
+      if (data.user.role == "customer") {
+        return navigateTo("/");
       }
     },
   },
