@@ -48,8 +48,18 @@ Route::group([
 
 //Route::apiResource('/category', \App\Http\Controllers\Api\CategoryController::class);
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'order'
+], function () {
+    Route::get('{table}', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('create/{table}', [\App\Http\Controllers\Api\OrderController::class, 'create']);
+    Route::get('checkPending/{table}', [\App\Http\Controllers\Api\OrderController::class, 'checkPending']);
+    Route::get('sendOrders/{table}', [\App\Http\Controllers\Api\OrderController::class, 'sendOrders']);
+    Route::get('show/{order}', [\App\Http\Controllers\Api\OrderController::class, 'show']);
+});
+
 Route::apiResource('/menu', \App\Http\Controllers\Api\MenuController::class);
-Route::apiResource('/order', \App\Http\Controllers\Api\OrderController::class);
 
 
 Route::group([ //staff section --------------------------------------------------------------------------------------------
