@@ -75,7 +75,7 @@ async function onSubmit() {
   )
 
   if (response.value !== null) {
-    await navigateTo(`/menus/${response.value}`)
+    await navigateTo(`/menus/store/${response.value}`)
   } else {
     console.log(error)
     const { message } = error.value!.data

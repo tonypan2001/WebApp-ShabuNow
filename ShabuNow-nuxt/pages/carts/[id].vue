@@ -37,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
-
-
+  const route = useRoute();
+  const { data: orders, pending } = await useMyFetch<any>(`order/${route.params.id}`, {});
+  console.log(orders);
 </script>
