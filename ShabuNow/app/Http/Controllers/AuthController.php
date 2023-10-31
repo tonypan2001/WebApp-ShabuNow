@@ -44,26 +44,26 @@ class AuthController extends Controller
         //     'password' => 'required',
         //     'device_name' => 'required',
         // ]);
-     
+
         // real
         $user = User::where('email', $request->email)->first();
-     
+
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
      return $this->makeToken($user);
-        
+
     }
-    
+
     public function register(RegisterRequest $request)
     {
-     
-        
+
+
         $user = User::create($request->validated());
         return $this->makeToken($user);
-        
+
     }
     public function makeToken($user){
         $token =  $user->createToken('myToken')->plainTextToken;
@@ -71,7 +71,7 @@ class AuthController extends Controller
         return AuthResource::make([
             'token' => $token,
             'user'=>[
-                'name' => $user->name,
+                'username' => $user->username,
                 'email' => $user->email,
                 'role' => $user->role,
             ]

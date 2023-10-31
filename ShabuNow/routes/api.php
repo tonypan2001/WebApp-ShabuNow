@@ -46,8 +46,30 @@ Route::group([
     Route::put('/update/{name}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
 });
 
-
 //Route::apiResource('/category', \App\Http\Controllers\Api\CategoryController::class);
 
 Route::apiResource('/menu', \App\Http\Controllers\Api\MenuController::class);
 Route::apiResource('/order', \App\Http\Controllers\Api\OrderController::class);
+
+
+Route::group([ //staff section --------------------------------------------------------------------------------------------
+    'middleware' => 'api',
+    'prefix' => 'staff'
+], function () {
+    Route::get('/', [\App\Http\Controllers\Api\UserController::class, 'listStaff']);
+    Route::get('{user}', [\App\Http\Controllers\Api\UserController::class, 'show']); //show 1 User (NOT ONLY 1 STAFF)
+    Route::put('{user}/update', [\App\Http\Controllers\Api\UserController::class, 'update']); //show 1 User (NOT ONLY 1 STAFF)
+    Route::delete('{user}/delete', [\App\Http\Controllers\Api\UserController::class, 'destroy']);
+    Route::post('create', [\App\Http\Controllers\Api\UserController::class, 'store']);
+});
+
+Route::group([ //customer section --------------------------------------------------------------------------------------------
+    'middleware' => 'api',
+    'prefix' => 'customer'
+], function () {
+    Route::get('/', [\App\Http\Controllers\Api\UserController::class, 'listCustomer']);
+    Route::get('{user}', [\App\Http\Controllers\Api\UserController::class, 'show']); //show 1 User (NOT ONLY 1 STAFF)
+    Route::put('{user}/update', [\App\Http\Controllers\Api\UserController::class, 'update']); //show 1 User (NOT ONLY 1 STAFF)
+    Route::delete('{user}/delete', [\App\Http\Controllers\Api\UserController::class, 'destroy']);
+    Route::post('create', [\App\Http\Controllers\Api\UserController::class, 'store']);
+});
