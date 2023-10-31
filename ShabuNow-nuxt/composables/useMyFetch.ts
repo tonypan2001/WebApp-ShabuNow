@@ -1,10 +1,21 @@
-export default async function<T> (path: string, options : {}) {
+import {useAuthStore} from "~/stores/useAuthStore";
+type Headers = {[key: string] : string}
+export default async function <T>(path: string, options: {}) {
   const config = useRuntimeConfig()
-  return await useFetch<T>(path, {
+  const auth = useAuthStore()
+  const headers: Headers = {
+    "Accept" : "application/json"
+  }
+  if (auth.isLogin){
+    headers['Authorization'] = `Bearer ${auth.token}`
+  }
+
+  return await useLazyFetch<T>(path, {
     ...options,
     baseURL: config.public.apiBaseURL,
     headers: {
       "Accept": "application/json"
     }
   })
+
 }
