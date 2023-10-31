@@ -14,7 +14,7 @@
         </div>
 
       </HeaderContainer>
-      
+
       <!-- menu management -->
       <div class="flex justify-center items-center border-b py-6 w-full">
         <div class="flex flex-col w-full max-w-xl">
@@ -37,7 +37,7 @@
       <!-- staff management section -->
       <HeaderContainer class="w-full">
         <div
-        class="text-2xl font-medium m-4 py-1.5 px-4 rounded-xl bg-gray-600 text-white" 
+        class="text-2xl font-medium m-4 py-1.5 px-4 rounded-xl bg-gray-600 text-white"
         >
           <h1 class="flex justify-center items-center"><i class="bi bi-people-fill mr-2"></i>การจัดการพนักงาน</h1>
         </div>
@@ -66,6 +66,14 @@
 </template>
 
 <script>
-
+export default {
+  // just some data
+  data() {
+    definePageMeta({
+      middleware: ["admin"],
+      layout: "custom",
+    });
+  },
+};
 
 </script>

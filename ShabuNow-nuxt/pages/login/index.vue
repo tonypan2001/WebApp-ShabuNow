@@ -1,4 +1,34 @@
+<script setup>
+const auth = useAuthStore();
+const token = useTokenStore();
+
+const form = reactive({
+  email: "test@example.com",
+  password: "password",
+});
+
+const errors = ref([]);
+const handleSubmit = async () => {
+  try {
+    await auth.login(form);
+  } catch (error) {
+    errors.value = console.log(error.response.errors);
+  }
+};
+definePageMeta({
+  middleware: ["guest"],
+  layout: "custom",
+});
+
+
+definePageMeta({
+  layout: "custom",
+});
+</script>
 <template>
+  <!-- testing -->
+
+  <!-- testing -->
   <section class="bg-gray-50 min-h-screen flex items-center justify-center">
     <!-- login container -->
     <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
@@ -6,23 +36,39 @@
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">เข้าสู่ระบบ</h1>
         <p class="mt-4 text-sm">If you already a member, login in</p>
-        <form action="" class="flex flex-col gap-4">
+        {{ token.getToken }} {{ token.getStatus }}
+        <form
+          @submit.prevent="handleSubmit"
+          action=""
+          class="flex flex-col gap-4"
+        >
           <InputField
             class="p-2 mt-4 rounded-xl"
             type="email"
             name="email"
             placeholder="อีเมล"
+            v-model="form.email"
+            required
           />
+          <span v-if="errors.email" class="text-red-500">{{
+            errors.email[0]
+          }}</span>
           <InputField
             class="p-2 rounded-xl"
             type="password"
             name="password"
             placeholder="รหัสผ่าน"
+            v-model="form.password"
+            required
           />
+          <span v-if="errors.password" class="text-red-500">{{
+            errors.password[0]
+          }}</span>
           <!-- <button class="bg-red-500 text-white rounded-xl ">Log in</button> -->
           <Button>
-            เข้าสู่ระบบ
+            <slot name="button"> เข้าสู่ระบบ </slot>
           </Button>
+
           <br />
           <p>
             ยังไม่ได้สร้างบัญชี?

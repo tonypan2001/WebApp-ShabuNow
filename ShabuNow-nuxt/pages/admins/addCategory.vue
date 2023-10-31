@@ -19,21 +19,24 @@
         </div>
 
         <div class="flex flex-col justify-center items-start">
-            <InputField
+          <form @submit="addCategory" class="w-full m-0">
+            <input
+              v-model="name"
               class="mt-4 w-full"
               placeholder="ชื่อหมวดหมู่"
               type="text"
-              name="confirm-password"/>
-            <Button class="mt-4 w-full">
+              id="name"/>
+            <Button type="submit" class="mt-4 w-full">
               <i class="bi bi-bookmark-plus-fill mr-2"></i>
               เพิ่มหมวดหมู่
             </Button>
+          </form>
           </div>
           <div class="border-t w-full mt-8 py-4">
             <h1 class="text-2xl">
               สร้างแล้ว: <span class="font-medium">10</span> หมวดหมู่
             </h1>
-            <TableNoHeader :datas="tableData" :headers="tableHeaders" class="mt-8">
+            <TableNoHeader :datas="categorys" :headers="tableHeaders" class="mt-8">
 
             </TableNoHeader>
           </div>
@@ -43,7 +46,7 @@
   </MainContainer>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {

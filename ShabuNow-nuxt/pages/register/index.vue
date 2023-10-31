@@ -10,8 +10,9 @@
           <InputField
             class=""
             type="text"
-            name="firstname"
-            placeholder="FirstName"
+            name="name"
+            placeholder="Name NEED FIX!! DONHAVE SURNAME"
+            v-model="form.name"
           />
           <InputField
             class=""
@@ -24,18 +25,21 @@
             type="email"
             name="email"
             placeholder="Email"
+            v-model="form.email"
           />
           <InputField
             class=""
             type="password"
             name="password"
             placeholder="Password"
+            v-model="form.password"
           />
           <InputField
             class=""
             type="password"
             name="confirm-password"
             placeholder="Confirm Password"
+            v-model="form.password_confirmation"
           />
           <div class="mx-auto mt-2">
             <label

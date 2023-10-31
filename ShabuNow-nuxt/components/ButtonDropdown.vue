@@ -11,7 +11,7 @@
         <transition name="fade" appear>
             <ul v-if="isOpen" class="bg-white mt-1 rounded-lg p-2 border border-black absolute left-0 w-full">
                 <li v-for="(item, i) in items" :key="i" class="py-2 px-4 border-b rounded-lg hover:bg-gray-200">
-                    <a :href="item.link" class="block py-2 hover:text-red-600">{{ item.title }}</a>
+                    <a :href="item.link" class="block py-2 hover:text-red-600">{{ item.title=== undefined? item.name : item.title }}</a>
                 </li>
             </ul>
         </transition>
