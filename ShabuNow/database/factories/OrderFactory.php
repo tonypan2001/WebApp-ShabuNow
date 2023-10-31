@@ -21,6 +21,7 @@ class OrderFactory extends Factory
         return [
             'name' => fake()->name(),
             'menu_id' => Menu::find(rand(1, 20)),
+            'quantity' => fake()->numberBetween(1,10),
             'detail' => fake()->realTextBetween(120,200,2),
             'status' => $status[array_rand($status)],
             'table_id' => fake()->numberBetween(1,20),

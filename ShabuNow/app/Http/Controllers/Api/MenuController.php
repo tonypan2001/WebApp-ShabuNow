@@ -18,14 +18,6 @@ class MenuController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Menu $menu)
@@ -49,7 +41,10 @@ class MenuController extends Controller
         //
     }
 
-    public function create(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'min:1'],
