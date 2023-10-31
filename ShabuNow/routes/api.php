@@ -70,9 +70,6 @@ Route::group([
     Route::post('store', [MenuController::class, 'store']);
 });
 
-Route::apiResource('/menu', MenuController::class);
-
-
 Route::group([ //staff section --------------------------------------------------------------------------------------------
     'middleware' => 'api',
     'prefix' => 'staff'
