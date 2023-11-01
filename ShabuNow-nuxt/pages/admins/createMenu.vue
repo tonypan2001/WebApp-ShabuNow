@@ -4,6 +4,7 @@
       <HeaderText>สร้างเมนู</HeaderText>
     </HeaderContainer>
     <hr />
+    <form @submit.prevent="onSubmit()" >
     <ContentContainer>
       <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8 ">
 
@@ -61,6 +62,7 @@
         </Button>
       </div>
     </ContentContainer>
+    </form>
   </MainContainer>
 </template>
 

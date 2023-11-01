@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->foreignIdFor(\App\Models\Menu::class); //menu_id (fk)
-            $table->string('detail');
+            $table->string('detail')->nullable();
+            $table->integer('quantity');
             $table->enum('status', ['pending','ordered','ready','served']);
             $table->foreignIdFor(\App\Models\Table::class); //table_id (fk)
         });
