@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <NavBar></NavBar>
+  <Navbar></Navbar>
   <!-- Add by pooh can delete just debug -->
 
   <section>
