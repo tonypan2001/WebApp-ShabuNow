@@ -2,6 +2,8 @@
 
 <template>
   <NavBar></NavBar>
+  <!-- Add by pooh can delete just debug -->
+
   <section>
     <slot />
   </section>

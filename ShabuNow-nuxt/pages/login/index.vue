@@ -1,54 +1,22 @@
-<script setup>
-const auth = useAuthStore();
-const token = useTokenStore();
-
-const form = reactive({
-  email: "test@example.com",
-  password: "password",
-});
-
-const errors = ref([]);
-const handleSubmit = async () => {
-  try {
-    await auth.login(form);
-  } catch (error) {
-    errors.value = console.log(error.response.errors);
-  }
-};
-definePageMeta({
-  middleware: ["guest"],
-  layout: "custom",
-});
-
-
-definePageMeta({
-  layout: "custom",
-});
-</script>
 <template>
-  <!-- testing -->
-
-  <!-- testing -->
   <section class="bg-gray-50 min-h-screen flex items-center justify-center">
     <!-- login container -->
     <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
       <!-- form -->
       <div class="sm:w-1/2 px-8">
-        <h1 class="font-bold text-2xl">เข้าสู่ระบบ</h1>
-        <p class="mt-4 text-sm">If you already a member, login in</p>
+        <h1 class="font-bold text-2xl">Login</h1>
+        <h1>{{ token.getStatus }}</h1>
+        <p class="mt-4 text-sm">If you already a member,login in</p>
+
         {{ token.getToken }} {{ token.getStatus }}
-        <form
-          @submit.prevent="handleSubmit"
-          action=""
-          class="flex flex-col gap-4"
-        >
-          <InputField
-            class="p-2 mt-4 rounded-xl"
+        <h1>Auth: {{ auth.getUser.role }}</h1>
+        <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
+          <input
+            class="p-2 mt-8 rounded-xl border"
             type="email"
             name="email"
             placeholder="อีเมล"
             v-model="form.email"
-            required
           />
           <span v-if="errors.email" class="text-red-500">{{
             errors.email[0]
@@ -59,28 +27,23 @@ definePageMeta({
             name="password"
             placeholder="รหัสผ่าน"
             v-model="form.password"
-            required
           />
           <span v-if="errors.password" class="text-red-500">{{
             errors.password[0]
           }}</span>
           <!-- <button class="bg-red-500 text-white rounded-xl ">Log in</button> -->
-          <Button>
-            <slot name="button"> เข้าสู่ระบบ </slot>
+          <Button type="submit">
+            <slot name="button"> Login </slot>
           </Button>
-
           <br />
           <p>
             ยังไม่ได้สร้างบัญชี?
             <a href="/register" class="underline">สมัครสมาชิก</a>
           </p>
         </form>
-        <div class="mt-8 text-red-600 hover:text-red-500 hover:underline">
-          <a href="/">
-            <i class="bi bi-arrow-left-short"></i>
-            Back To Menu
-          </a>
-        </div>
+        <Button type="submit" @click.prevent="token.removeToken()">
+          <slot name="button"> Remove Token </slot>
+        </Button>
       </div>
       <!-- image -->
       <div class="w-1/2 sm:block hidden">
@@ -94,9 +57,29 @@ definePageMeta({
   </section>
 </template>
 
-<script setup lang="ts">
-
+<script setup>
 definePageMeta({
-  layout: "no-navbar",
+  middleware: ["guest"],
+  layout: "custom",
 });
+
+const auth = useAuthStore();
+const token = useTokenStore();
+const form = reactive({
+  email: "test@example.com",
+  password: "password",
+});
+const errors = ref([]);
+const handleSubmit = async () => {
+  try {
+    await auth.login(form);
+    // const { data } = await $fetch("http://localhost/api/login", {
+    //   method: "POST",
+    //   body: { ...form },
+    // });
+  } catch (error) {
+    // console.log(error.data.errors.email[0]);
+    errors.value = error.data.errors;
+  }
+};
 </script>
