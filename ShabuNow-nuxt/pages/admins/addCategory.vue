@@ -46,20 +46,44 @@
   </MainContainer>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      tableHeaders: ['หมวดหมู่'],
-      tableData: [
-        ['Drink'],
-        ['Sweet'],
-        ['Ice Cream'],
-      ]
-    }
+<script setup lang="ts">
+const name = ref('');
+
+async function useFetch<T>(url: string): Promise<{ data: T }> {
+  const response = await fetch(url);
+  const data = await response.json();
+  return { data };
+}
+async function addCategory() {
+  const categoryName = name.value;
+  console.log("Category Name:", categoryName);
+  const { data:response, error } = await useMyFetch<any>(
+      "http://localhost/api/category/store",
+      {
+        method: "POST",
+        body: { name }
+      }
+  )
+  console.log("response" ,response);
+  console.log(error.value)
+
+  if (error.value=== null) {
+    console.log("response", response);
+    const { data: newCategory } = await useFetch<Category[]>('http://localhost/api/category');
+    categorys.push(newCategory.pop())
+    console.log("Updated categories", categorys);
   }
 }
-</script>
+type Category = {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
+
+const {data: categorys} = await useFetch<Category[]>('http://localhost/api/category')
+
+</script>>
 
 <style>
 .bg-cover-category {
