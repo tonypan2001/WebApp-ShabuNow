@@ -60,7 +60,7 @@ export const useAuthStore = defineStore("auth", {
       tokenStore.setToken(data.token);
       this.user = data.user;
       console.log("userdetail: ", data.user.role);
-      //   return navigateTo("/");
+        // return navigateTo("/");
 
       if (data.user.role == "admin") {
         return navigateTo("/admins");

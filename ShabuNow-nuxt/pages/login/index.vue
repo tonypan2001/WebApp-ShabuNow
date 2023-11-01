@@ -9,24 +9,26 @@
         <p class="mt-4 text-sm">If you already a member,login in</p>
 
         {{ token.getToken }} {{ token.getStatus }}
-        <h1>Auth: {{ auth.getUser.role }}</h1>
+        <!-- <h1>Auth: {{ auth.getUser.role }}</h1> -->
         <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-          <input
-            class="p-2 mt-8 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl mt-4"
+            id="email"
             type="email"
             name="email"
             placeholder="อีเมล"
-            v-model="form.email"
+            v-model.trim="form.email"
           />
           <span v-if="errors.email" class="text-red-500">{{
             errors.email[0]
           }}</span>
           <InputField
             class="p-2 rounded-xl"
+            id="email"
             type="password"
             name="password"
             placeholder="รหัสผ่าน"
-            v-model="form.password"
+            v-model.trim="form.password"
           />
           <span v-if="errors.password" class="text-red-500">{{
             errors.password[0]
@@ -58,16 +60,18 @@
 </template>
 
 <script setup>
+import { Input } from 'postcss';
+
 definePageMeta({
   middleware: ["guest"],
-  layout: "custom",
+  layout: "no-navbar",
 });
 
 const auth = useAuthStore();
 const token = useTokenStore();
 const form = reactive({
-  email: "test@example.com",
-  password: "password",
+  email: "",
+  password: "",
 });
 const errors = ref([]);
 const handleSubmit = async () => {
@@ -78,8 +82,9 @@ const handleSubmit = async () => {
     //   body: { ...form },
     // });
   } catch (error) {
-    // console.log(error.data.errors.email[0]);
+    console.log(error.data.errors.email[0]);
     errors.value = error.data.errors;
+    // throw error
   }
 };
 </script>

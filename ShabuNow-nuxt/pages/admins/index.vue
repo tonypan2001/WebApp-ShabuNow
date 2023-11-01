@@ -90,7 +90,7 @@ export default {
     const token = useTokenStore();
     definePageMeta({
       middleware: ["auth"],
-      layout: "custom",
+      // layout: "custom",
     });
     return {
       foods: [
