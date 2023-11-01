@@ -3,13 +3,13 @@
     <HeaderContainer>
       <HeaderText> โปรดเลือกเมนูสุดคุ้ม </HeaderText>
       <!-- debug by pooh -->
-      <h1>email : {{ auth.getUser?.email }}</h1>
-      <h1>password :{{ auth.getUser?.surname }}</h1>
+      <!-- <h1>email : {{ auth.getUser?.email }}</h1>
+      <h1>password :{{ auth.getUser?.surname }}</h1> -->
       <h1>all :{{ auth.getUser }}</h1>
-      <template v-if="token.getStatus">
+      <!-- <template v-if="token.getStatus">
         <button class="text-red-500" @click.prevent="auth.logout()">Logout</button>
         <h1>{{ token.getStatus }}</h1>
-      </template>
+      </template> -->
 
       <!-- category dropdown button -->
       <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />

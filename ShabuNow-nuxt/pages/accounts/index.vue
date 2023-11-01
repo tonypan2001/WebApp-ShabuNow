@@ -14,11 +14,11 @@
 
         <p class="mt-4">
           <span class="font-medium"> ชื่อลูกค้า : </span>
-          {{ user.name }}
+          {{ auth.getUser.username }}
         </p>
         <p class="mt-4">
           <span class="font-medium"> วันที่สมัครสมาชิก : </span>
-          {{ user.mem_date }}
+          {{ auth.getUser.mem_date }}
         </p>
         <p class="mt-4">
           <span class="font-medium"> แต้มสะสม : </span>
@@ -34,7 +34,7 @@
         <h1 class="text-2xl font-semibold text-red-600">เปลี่ยนรหัสผ่าน</h1>
         <p class="mt-4">
           <span class="font-medium"> อีเมลล์ : </span>
-          {{ user.email }}
+          {{ auth.getUser.email }}
         </p>
         <!-- password input field -->
         <!-- <label class="relative block mt-4">
@@ -70,8 +70,10 @@
 
 <script>
 export default {
-    data() {
+  data() {
+      const auth = useAuthStore()
         return {
+            auth,
             // customers or users detail
             users: [
                 {

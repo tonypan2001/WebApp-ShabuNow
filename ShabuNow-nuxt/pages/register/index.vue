@@ -8,7 +8,7 @@
         <p class="mt-4 text-sm">Let's create your account.</p>
         <form action="" class="flex flex-col gap-4 mt-4">
           <InputField
-            class=""
+            class="p-2 rounded-xl mt-4"
             type="text"
             name="firstname"
             placeholder="Firstname"
@@ -17,8 +17,8 @@
           <span v-if="errors.firstname" class="text-red-500">{{
             errors.firstname[0]
           }}</span>
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl"
             type="text"
             name="surname"
             placeholder="surname"
@@ -27,8 +27,8 @@
           <span v-if="errors.surname" class="text-red-500">{{
             errors.surname[0]
           }}</span>
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl"
             type="email"
             name="email"
             placeholder="Email"
@@ -37,8 +37,8 @@
           <span v-if="errors.email" class="text-red-500">{{
             errors.email[0]
           }}</span>
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl"
             type="password"
             name="password"
             placeholder="Password"
@@ -47,8 +47,8 @@
           <span v-if="errors.password" class="text-red-500">{{
             errors.password[0]
           }}</span>
-          <input
-            class="p-2 rounded-xl border"
+          <InputField
+            class="p-2 rounded-xl"
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
@@ -79,17 +79,11 @@
           </Button>
           <br />
           <!-- Login Here -->
-          <p>
+          <p class="mb-8">
             สมัครบัญชีไว้แล้ว?
             <a href="/login" class="underline">เข้าสู่ระบบที่นี่</a>
           </p>
         </form>
-        <div class="mt-8 text-red-600 hover:text-red-500 hover:underline">
-          <a href="/login">
-            <i class="bi bi-arrow-left-short"></i>
-            Back To Login
-          </a>
-        </div>
       </div>
       <!-- image -->
       <div class="w-1/2 sm:block hidden">

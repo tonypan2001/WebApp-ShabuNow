@@ -66,13 +66,14 @@
             <i class="bi bi-person-fill md:text-xl text-2xl mr-2"></i>
             <div class="">
               <p>สวัสดีคุณ,</p>
-              <p>Guest1175</p>
+              <p>{{ auth.getUser.username }}</p>
+              <!-- <p>Guest1175</p> -->
             </div>
           </a>
           <!-- end of welcome user-->
 
           <!-- login and register -->
-          <a
+          <a v-if="!auth.getUser"
           href="/login"
           class="bg-gray-100 p-2 mt-4 lg:mt-0 rounded flex items-center border-2 hover:border-red-600 cursor-pointer text-red-600 hover:text-red-500 ease-out duration-300"
           >
@@ -85,7 +86,7 @@
           <!-- end of login and register -->
 
           <!-- logout btn -->
-          <Button class="lg:mx-4 mt-4 lg:mt-0 flex items-center">
+          <Button @click.prevent="auth.logout()" class="lg:mx-4 mt-4 lg:mt-0 flex items-center">
             <i class="bi bi-box-arrow-right md:text-xl text-2xl mr-2"></i>
             <p class="">ออกจากระบบ</p>
           </Button>
@@ -100,6 +101,7 @@
 <script>
 export default {
     setup() {
+        const auth = useAuthStore()
         const open = ref(false);
         const links = [
             {name : "เลือกเมนู" , link : "/"},
@@ -112,7 +114,7 @@ export default {
       open.value = !open.value;
     }
 
-    return { links, open, menuOpen };
+    return { links, open, menuOpen, auth };
   },
 };
 </script>

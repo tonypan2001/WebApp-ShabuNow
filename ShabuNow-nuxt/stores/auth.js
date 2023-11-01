@@ -3,12 +3,16 @@ import { useTokenStore } from "./token";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    user: {},
+    //Prompan
+    token: "",
+    user: {username:"",email:"",role:""},
   }),
   persist: {
     paths: ["user"],
   },
   getters: {
+    // Prompan
+    // getUser: (state) => state.token !== "",
     getUser: (state) => state.user,
   },
   actions: {
@@ -54,12 +58,18 @@ export const useAuthStore = defineStore("auth", {
         throw error;
       }
     },
+    // setUser(name, email, role) {
+    //   this.user.name = name
+    //   this.user.email = email
+    //   this.user.role = role
+    // },
     commonSetter(data) {
       console.log(`commonSetter is worked!!`);
       const tokenStore = useTokenStore();
       tokenStore.setToken(data.token);
       this.user = data.user;
       console.log("userdetail: ", data.user.role);
+      console.log("username", data.user.username);
         // return navigateTo("/");
 
       if (data.user.role == "admin") {
