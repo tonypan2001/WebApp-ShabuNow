@@ -117,23 +117,8 @@ export default {
 }
 </script>
 <script setup lang="ts">
-type Menu = {
-  category_id: number;
-  created_at: string;
-  description: string;
-  id: number;
-  imgPath: string | null;
-  name: string;
-  price: number;
-  status: string;
-  updated_at: string;
-}
-type Category = {
-  id: number;
-  created_at: string;
-  updated_at: string;
-  name: string;
-}
+import { Menu, Category } from '~/models/defineType';
+
 async function useFetch<T>(url: string): Promise<{ data: T }> {
   const response = await fetch(url);
   const data = await response.json();
