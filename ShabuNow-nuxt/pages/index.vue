@@ -114,3 +114,32 @@ export default {
   },
 };
 </script>
+<script setup lang="ts">
+import { Menu, Category } from '~/models/defineType';
+
+async function useFetch<T>(url: string): Promise<{ data: T }> {
+  const response = await fetch(url);
+  const data = await response.json();
+  return { data };
+}
+function categorizeMenusByCategory(menus: Menu[], categories: Category[]): Menu[][] {
+  const categorizedMenus: Menu[][] = [];
+
+  menus.forEach((menu) => {
+    const categoryId = menu.category_id;
+    if (categorizedMenus[categoryId-1]) {
+      categorizedMenus[categoryId-1].push(menu);
+    } else {
+      categorizedMenus[categoryId-1] = [menu];
+    }
+  });
+
+  return categorizedMenus;
+}
+
+const {data: menus} = await useFetch<Menu[]>('http://localhost/api/menu')
+const {data: categorys} = await useFetch<Category[]>('http://localhost/api/category')
+
+const categorizedMenus = categorizeMenusByCategory(menus, categorys)
+
+</script>

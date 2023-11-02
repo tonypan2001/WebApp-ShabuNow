@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex flex-col justify-center items-start">
-          <form @submit="addCategory" class="w-full m-0">
+          <form @submit.prevent="addCategory" class="w-full m-0">
             <input
               v-model="name"
               class="mt-4 w-full"
@@ -34,11 +34,11 @@
           </div>
           <div class="border-t w-full mt-8 py-4">
             <h1 class="text-2xl">
-              สร้างแล้ว: <span class="font-medium">10</span> หมวดหมู่
+              สร้างแล้ว: <span class="font-medium">{{ count }}</span> หมวดหมู่
             </h1>
-            <TableNoHeader :datas="categorys" :headers="tableHeaders" class="mt-8">
+            <TableNoHeaderForAddCategory :datas="categorys" :headers="tableHeaders" class="mt-8">
 
-            </TableNoHeader>
+            </TableNoHeaderForAddCategory>
           </div>
         </div>
 
@@ -47,6 +47,8 @@
 </template>
 
 <script setup lang="ts">
+import { Category } from '~/models/defineType';
+
 const name = ref('');
 
 async function useFetch<T>(url: string): Promise<{ data: T }> {
@@ -68,20 +70,26 @@ async function addCategory() {
   console.log(error.value)
 
   if (error.value=== null) {
-    console.log("response", response);
-    const { data: newCategory } = await useFetch<Category[]>('http://localhost/api/category');
-    categorys.push(newCategory.pop())
-    console.log("Updated categories", categorys);
+    fetchData()
   }
 }
-type Category = {
-  id: number;
-  created_at: string;
-  updated_at: string;
-  name: string;
+
+const categorys = ref<Category[]>([]);
+const count = ref(0);
+
+// ตัวอย่างการใช้งาน async function
+async function fetchData() {
+  try {
+    const { data: categories } = await useFetch<Category[]>('http://localhost/api/category',);
+    categorys.value = categories;
+    count.value = categories.length;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-const {data: categorys} = await useFetch<Category[]>('http://localhost/api/category')
+fetchData();
+
 
 </script>>
 

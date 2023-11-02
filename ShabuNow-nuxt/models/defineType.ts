@@ -2,13 +2,13 @@ export type User = {
     id: number;
     name: string;
     email: string;
-    email_verified_at: string | null;
+    email_verified_at: string | "";
     password: string;
     remember_token: string;
     created_at: string;
     updated_at: string;
     role: 'admin' | 'chef' | 'staff' | 'customer';
-    imgPath: string | null;
+    imgPath: string | "";
     firstname: string;
     surname: string;
     age: number;
@@ -17,7 +17,7 @@ export type User = {
 export type PasswordResetToken = {
     email: string;
     token: string;
-    created_at: string | null;
+    created_at: string | "";
 };
 
 export type FailedJob = {
@@ -35,9 +35,9 @@ export type PersonalAccessToken = {
     tokenable: any; // Replace any with the appropriate type
     name: string;
     token: string;
-    abilities: string | null;
-    last_used_at: string | null;
-    expires_at: string | null;
+    abilities: string | "";
+    last_used_at: string | "";
+    expires_at: string | "";
     created_at: string;
     updated_at: string;
 };
@@ -74,7 +74,7 @@ export type Menu = {
     updated_at: string;
     name: string;
     category_id: number; // Assuming the foreign key is a number
-    imgPath: string | null;
+    imgPath: string | "";
     description: string;
     status: 'available' | 'outofstock';
     price: number;
