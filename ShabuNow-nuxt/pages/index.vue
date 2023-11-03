@@ -12,8 +12,14 @@
       </template> -->
 
       <!-- category dropdown button -->
-      <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />
+<!--      <ButtonDropdownScroll title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />-->
       <!-- end -->
+      <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>
+      <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>
+      <a class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
+              v-if="auth.getUser.role === 'customer'" :href="'/carts/' + table_id">
+        <slot><i class="bi bi-cart-plus mr-2"></i>ราคารวม : {{ price }}</slot>
+      </a>
     </HeaderContainer>
     <hr />
 
@@ -22,13 +28,13 @@
             <!-- Category Tag -->
             <HeaderContainer class="w-full">
                 <div class="text-2xl font-medium m-4 py-1.5 px-4 rounded-lg bg-red-600 text-white">
-                    <h1>ประเภท : {{ categorys[categoryMenu[0].category_id-1].name }}</h1>
+                    <h1>ประเภท : {{ categories[categoryMenu[0].category_id-1].name }}</h1>
                 </div>
 
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id" :edit_menu="'/admins/editMenu'">
+                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null">
 
                     <template v-slot:title>
                         <!-- สลัดผักรวมมิตร -->
@@ -50,7 +56,7 @@
     </MainContainer>
 </template>
 
-<script lang="ts">
+<script lang="js">
 export default {
   data() {
     definePageMeta({
@@ -110,32 +116,51 @@ export default {
   },
 };
 </script>
-<script setup lang="ts">
-import { Menu, Category } from '~/models/defineType';
+<script setup lang="js">
 
-async function useFetch<T>(url: string): Promise<{ data: T }> {
-  const response = await fetch(url);
-  const data = await response.json();
-  return { data };
-}
-function categorizeMenusByCategory(menus: Menu[], categories: Category[]): Menu[][] {
-  const categorizedMenus: Menu[][] = [];
+const table_id = 3;
+const auth = useAuthStore();
+const token = useTokenStore();
+console.log(auth.getUser.role)
+function categorizeMenusByCategory(menus) {
+  const categorizedMenus = [];
 
   menus.forEach((menu) => {
     const categoryId = menu.category_id;
-    if (categorizedMenus[categoryId-1]) {
-      categorizedMenus[categoryId-1].push(menu);
+    if (categorizedMenus[categoryId - 1]) {
+      categorizedMenus[categoryId - 1].push(menu);
     } else {
-      categorizedMenus[categoryId-1] = [menu];
+      categorizedMenus[categoryId - 1] = [menu];
     }
   });
 
   return categorizedMenus;
 }
+async function getPrice() {
+  const data = await $fetch(`http://localhost/api/order/${table_id}/getOrder`);
+  if (data) {
+    let totalPrice = 0;
+    data.menus.forEach(menu => {
+      totalPrice += menu.price * menu.pivot.quantity;
+    });
+    return totalPrice;
+  } else return 0
+}
 
-const {data: menus} = await useFetch<Menu[]>('http://localhost/api/menu')
-const {data: categorys} = await useFetch<Category[]>('http://localhost/api/category')
-
-const categorizedMenus = categorizeMenusByCategory(menus, categorys)
+const menus = await $fetch("http://localhost/api/menu", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+});
+const categories = await $fetch('http://localhost/api/category', {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+  },
+});
+const categorizedMenus = categorizeMenusByCategory(menus)
+const price = await getPrice();
+console.log(auth.getUser)
 
 </script>
