@@ -36,11 +36,39 @@
       :class="[open ? 'hidden' : 'block']"
     >
       <ul class="lg:flex justify-around items-center w-auto mr-2">
-        <li class="lg:m-0 m-4" v-for="link in links">
+        <!-- <li class="lg:m-0 m-4" v-for="link in links">
           <a
             :href="link.link"
             class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             {{ link.name }}
+          </a>
+        </li> -->
+        <li class="lg:m-0 m-4">
+          <a
+            href="/"
+            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            เลือกเมนู
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
+          <a
+            href="/carts"
+            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            ตะกร้าสินค้า
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
+          <a
+            href="/bills"
+            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            รายการที่สั่ง
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'staff'">
+          <a
+            href="/orders"
+            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            คำสั่งซื้อลูกค้า
           </a>
         </li>
       </ul>
@@ -51,7 +79,7 @@
           class="flex items-center flex-col lg:flex-row border-t-2 lg:border-l-2 lg:border-t-0 pt-5 lg:pt-0 lg:pl-2"
           >
 
-          <a v-if="auth.getUser.role === 'admin'"
+          <a v-if="auth.getUser.role === 'admin' || auth.getUser.role === 'chef'"
           class="flex justify-center items-center text-gray-600 hover:text-red-500 mb-4 lg:mb-0 ease-out duration-300"
           href="/admins">
           <i class="bi bi-house-gear-fill text-2xl mx-2"></i>
@@ -66,7 +94,7 @@
             <i class="bi bi-person-fill md:text-xl text-2xl mr-2"></i>
             <div class="">
               <p>สวัสดีคุณ,</p>
-              <p>{{ auth.getUser.username }}</p>
+              <p>{{ auth.getUser.firstname }}</p>
               <!-- <p>Guest1175</p> -->
             </div>
           </a>

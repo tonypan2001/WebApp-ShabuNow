@@ -53,9 +53,6 @@
 <script lang="ts">
 export default {
   data() {
-    definePageMeta({
-      middleware: ["auth2"],
-    });
     const auth = useAuthStore();
     const token = useTokenStore();
     return {

@@ -19,37 +19,96 @@ import { Input } from 'postcss';
           <div class="bg-cover-overlay"></div>
         </div>
 
-        <form action="">
-          <InputField
+        <form @submit.prevent="handleRegisterStaff()" action="">
+          <InputField v-model="formData.username"
+            class="mt-4"
+            type="text"
+            name="username"
+            placeholder="Username"
+          />
+          <div>
+            <span v-if="errors.username" class="text-red-500">
+              {{ errors.username }}
+            </span>
+          </div>
+          <InputField v-model="formData.firstname"
             class="mt-4"
             type="text"
             name="firstname"
             placeholder="Firstname"
           />
-          <InputField
+          <div>
+            <span v-if="errors.firstname" class="text-red-500">
+              {{ errors.firstname }}
+            </span>
+          </div>
+          <InputField v-model="formData.surname"
             class="mt-4"
             type="text"
-            name="lastname"
-            placeholder="Lastname"
+            name="surname"
+            placeholder="Surname"
           />
-          <InputField
+          <div>
+            <span v-if="errors.surname" class="text-red-500">
+              {{ errors.surname }}
+            </span>
+          </div>
+          <InputField v-model="formData.email"
             class="mt-4"
             type="email"
             name="email"
             placeholder="Email"
           />
-          <InputField
+          <div>
+            <span v-if="errors.email" class="text-red-500">
+              {{ errors.email }}
+            </span>
+          </div>
+          <InputField v-model="formData.password"
             class="mt-4"
             type="password"
             name="password"
             placeholder="Password"
           />
-          <InputField
+          <div>
+            <span v-if="errors.password" class="text-red-500">
+              {{ errors.password }}
+            </span>
+          </div>
+          <InputField v-model="formData.confirm_password"
             class="mt-4"
             type="password"
             name="confirm-password"
             placeholder="Confirm password"
           />
+          <div>
+            <span v-if="errors.confirm_password" class="text-red-500">
+              {{ errors.confirm_password }}
+            </span>
+          </div>
+
+          <!-- checkboxes to select role chef or staff -->
+          <div class="mt-4">
+            <h3 class="mb-2 text-base text-gray-900">เลือกตำแหน่ง:</h3>
+
+            <div class="flex items-center">
+              <label @click="selectRole('chef')" id="chef" for="chef-checkbox" class="flex items-center cursor-pointer ease-out duration-300 hover:border-red-500 px-4 py-2 border rounded">
+                <input type="checkbox" name="chef-checkbox" id="chef-checkbox" class="accent-red-500">
+                <p class="text-base text-gray-900 ml-2">Chef</p>
+              </label>
+  
+              <label @click="selectRole('staff')" id="staff" for="staff-checkbox" class="flex items-center cursor-pointer ease-out duration-300 hover:border-red-500 ml-5 px-4 py-2 border rounded">
+                <input type="checkbox" name="staff-checkbox" id="staff-checkbox" class="accent-red-500">
+                <p class="text-base text-gray-900 ml-2">Staff</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="mt-4 text-base">
+            <p class="text-red-500">{{ message.error }}</p>
+            <p class="text-green-500">{{ message.success }}</p>
+          </div>
+
           <div class="mx-auto my-8">
             <label
               for="example1"
@@ -72,6 +131,65 @@ import { Input } from 'postcss';
     </ContentContainer>
   </MainContainer>
 </template>
+
+<script setup lang="ts">
+const auth = useAuthStore()
+const token = useTokenStore()
+const formData = reactive({
+  username: "",
+  firstname: "",
+  surname: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+  role: "",
+})
+const message = reactive({
+  error: "",
+  success: "",
+})
+const errors = ref([])
+async function handleRegisterStaff() {
+  console.log(formData)
+  try {
+    const staff = await $fetch("http://localhost/api/staff/create", {
+      method: "POST",
+      body: formData
+    })
+    message.success = "สร้างบัญชีสำเร็จ"
+    message.error = ""
+  } catch (error) {
+    message.success = ""
+    message.error = "เกิดข้อผิดพลาด"
+    console.log("Error" + error)
+    if (error.response) {
+      console.error("Response Status:", error.response.status);
+      console.error("Response Data:", error.response.data);
+    }
+  }
+}
+
+// checkbox
+function selectRole(role:string) {
+  const chefbox = document.getElementById('chef-checkbox') as HTMLInputElement
+  const staffbox = document.getElementById('staff-checkbox') as HTMLInputElement
+  const chef = document.getElementById('chef') as HTMLElement
+  const staff = document.getElementById('staff') as HTMLElement
+  if (role === 'chef') {
+    formData.role = "chef"
+    chefbox.checked = true
+    staffbox.checked = false
+    chef.classList.add("border-red-500")
+    staff.classList.remove("border-red-500")
+  } else if (role === 'staff') {
+    formData.role = "staff"
+    chefbox.checked = false
+    staffbox.checked = true
+    chef.classList.remove("border-red-500")
+    staff.classList.add("border-red-500")
+  }
+}
+</script>
 
 <style>
 .bg-cover-category {

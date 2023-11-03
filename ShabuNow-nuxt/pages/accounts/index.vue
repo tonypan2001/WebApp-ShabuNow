@@ -11,12 +11,29 @@
       >
         <h1 class="text-2xl font-semibold text-red-600">ข้อมูลส่วนตัว</h1>
 
-        <p class="mt-4">
+        <!-- username อาจไม่จำเป็น -->
+        <!-- <p class="mt-4">
           <span class="font-medium"> Username : </span>
           {{ auth.getUser.username }}
-        </p>
-        <p class="mt-4">
+        </p> -->
+        <!-- if user customer-->
+        <p class="mt-4" v-if="auth.getUser.role === 'customer'">
           <span class="font-medium"> ชื่อลูกค้า : </span>
+          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
+        </p>
+        <!-- if user staff -->
+        <p class="mt-4" v-if="auth.getUser.role === 'staff'">
+          <span class="font-medium"> ชื่อพนักงานสตาฟ : </span>
+          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
+        </p>
+        <!-- if user admin-->
+        <p class="mt-4" v-if="auth.getUser.role === 'admin'">
+          <span class="font-medium"> ชื่อแอดมิน : </span>
+          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
+        </p>
+        <!-- if user chef-->
+        <p class="mt-4" v-if="auth.getUser.role === 'chef'">
+          <span class="font-medium"> ชื่อเชฟ : </span>
           {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
         </p>
         <p class="mt-4">
@@ -45,7 +62,7 @@
                     </template>
                 </InputField>
                 <div class="mt-2">
-                  <span v-if="message.error" class="text-red-500">{{
+                  <span v-if="message.error" class="text-red-500 text-base">{{
                     message.error
                   }}</span>
                 </div>
@@ -64,7 +81,7 @@
                 </Button>
 
                 <div class="mt-2">
-                <span v-if="message.success" class="text-green-500">{{
+                <span v-if="message.success" class="text-green-500 text-base">{{
                   message.success
                 }}</span>
                 </div>

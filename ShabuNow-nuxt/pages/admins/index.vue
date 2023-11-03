@@ -1,7 +1,7 @@
 <template>
   <MainContainer>
     <HeaderContainer>
-      <HeaderText> โปรดเลือกเมนูสุดคุ้ม </HeaderText>
+      <HeaderText> ระบบจัดการร้านอาหาร </HeaderText>
 
       <!-- add by pooh for debugging -->
       <!-- <h1>email : {{ auth.getUser?.email }}</h1>
@@ -15,13 +15,13 @@
       </template> -->
 
       <!-- category dropdown button -->
-      <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" />
+      <!-- <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mb-4" /> -->
       <!-- end -->
     </HeaderContainer>
     <hr />
     <ContentContainer>
       <!-- menu management section -->
-      <HeaderContainer class="w-full">
+      <HeaderContainer v-if="auth.getUser.role === 'chef'" class="w-full">
         <div
         class="text-2xl font-medium m-4 py-1.5 px-4 rounded-xl bg-gray-600 text-white"
         >
@@ -31,7 +31,7 @@
       </HeaderContainer>
 
       <!-- menu management -->
-      <div class="flex justify-center items-center border-b py-6 w-full">
+      <div v-if="auth.getUser.role === 'chef'" class="flex justify-center items-center border-b py-6 w-full">
         <div class="flex flex-col w-full max-w-xl">
           <a href="/admins/addCategory">
             <ButtonBorder class="w-full">
@@ -50,7 +50,7 @@
 
       <hr>
       <!-- staff management section -->
-      <HeaderContainer class="w-full">
+      <HeaderContainer v-if="auth.getUser.role === 'admin'" class="w-full">
         <div
         class="text-2xl font-medium m-4 py-1.5 px-4 rounded-xl bg-gray-600 text-white"
         >
@@ -59,7 +59,7 @@
       </HeaderContainer>
 
       <!-- staff management -->
-      <div class="flex justify-center items-center border-b py-6 w-full">
+      <div v-if="auth.getUser.role === 'admin'" class="flex justify-center items-center border-b py-6 w-full">
         <div class="flex flex-col w-full max-w-xl">
           <a href="/admins/staff/create">
             <ButtonBorder class="w-full">
@@ -67,7 +67,7 @@
               เพิ่มพนักงานสตาฟ
             </ButtonBorder>
           </a>
-          <a href="/admins/staffList" class="mt-4">
+          <a href="/admins/staff" class="mt-4">
             <ButtonBorder class="w-full">
               <i class="fa-solid fa-list mr-2"></i>
               ดูรายชื่อพนักงานสตาฟ
@@ -84,15 +84,8 @@
 export default {
   // just some data
   data() {
-    definePageMeta({
-      middleware: ["auth"],
-    });
     const auth = useAuthStore();
     const token = useTokenStore();
-    definePageMeta({
-      middleware: ["auth"],
-      // layout: "custom",
-    });
     return {
       foods: [
         {
