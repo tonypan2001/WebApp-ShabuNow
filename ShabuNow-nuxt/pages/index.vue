@@ -52,10 +52,6 @@
 
 <script lang="ts">
 export default {
-  // just some data
-  // definePageMeta({
-  //   middleware:  ["auth"],
-
   data() {
     definePageMeta({
       middleware: ["auth2"],

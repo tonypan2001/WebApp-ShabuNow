@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import { useTokenStore } from "./token";
+import { useRoute } from "vue-router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     //Prompan
-    token: "",
-    user: {username:"",email:"",role:""},
+    user: {},
   }),
   persist: {
     paths: ["user"],
@@ -70,6 +70,7 @@ export const useAuthStore = defineStore("auth", {
       this.user = data.user;
       console.log("userdetail: ", data.user.role);
       console.log("username", data.user.username);
+      console.log("user_id", data.user.id);
         // return navigateTo("/");
 
       if (data.user.role == "admin") {

@@ -6,9 +6,19 @@
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">Register</h1>
         <p class="mt-4 text-sm">Let's create your account.</p>
-        <form action="" class="flex flex-col gap-4 mt-4">
+        <form @submit.prevent="handleSubmit" action="" class="flex flex-col gap-4 mt-4">
           <InputField
             class="p-2 rounded-xl mt-4"
+            type="text"
+            name="username"
+            placeholder="Username"
+            v-model="form.username"
+          />
+          <span v-if="errors.username" class="text-red-500">{{
+            errors.username[0]
+          }}</span>
+          <InputField
+            class="p-2 rounded-xl"
             type="text"
             name="firstname"
             placeholder="Firstname"
@@ -21,7 +31,7 @@
             class="p-2 rounded-xl"
             type="text"
             name="surname"
-            placeholder="surname"
+            placeholder="Surname"
             v-model="form.surname"
           />
           <span v-if="errors.surname" class="text-red-500">{{
@@ -101,12 +111,13 @@
 const auth = useAuthStore();
 const token = useTokenStore();
 const form = reactive({
-  firstname: null,
-  surname: null,
-  email: null,
-  password: null,
-  password_confirmation: null,
-  photos: null,
+  username: "",
+  firstname: "",
+  surname: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+  photos: "",
 });
 const errors = ref([]);
 const handleSubmit = async () => {
@@ -123,6 +134,6 @@ const handleSubmit = async () => {
 };
 definePageMeta({
   middleware: ["guest"],
-  layout: "custom",
+  layout: "no-navbar",
 });
 </script>

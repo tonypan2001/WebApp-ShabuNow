@@ -51,7 +51,7 @@
           class="flex items-center flex-col lg:flex-row border-t-2 lg:border-l-2 lg:border-t-0 pt-5 lg:pt-0 lg:pl-2"
           >
 
-          <a 
+          <a v-if="auth.getUser.role === 'admin'"
           class="flex justify-center items-center text-gray-600 hover:text-red-500 mb-4 lg:mb-0 ease-out duration-300"
           href="/admins">
           <i class="bi bi-house-gear-fill text-2xl mx-2"></i>

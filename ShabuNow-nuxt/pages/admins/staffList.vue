@@ -15,7 +15,7 @@
     </Table>
 
     <a 
-    href="/admins/createStaff"
+    href="/admins/staff/create"
     class="">
       <Button class="w-full py-2 px-6">
         <i class="bi bi-person-plus-fill mr-2"></i>

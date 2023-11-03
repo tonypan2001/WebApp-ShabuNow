@@ -61,7 +61,7 @@
       <!-- staff management -->
       <div class="flex justify-center items-center border-b py-6 w-full">
         <div class="flex flex-col w-full max-w-xl">
-          <a href="/admins/createStaff">
+          <a href="/admins/staff/create">
             <ButtonBorder class="w-full">
               <i class="bi bi-person-plus-fill mr-2"></i>
               เพิ่มพนักงานสตาฟ
