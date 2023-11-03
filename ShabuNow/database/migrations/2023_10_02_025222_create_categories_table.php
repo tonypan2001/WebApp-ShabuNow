@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->foreignIdFor(\App\Models\Category::class); //category_id(fk)
-            $table->string('imgPath')->nullable();
-            $table->string('description');
-            $table->enum('status',['available','outofstock']);
-            $table->integer('price');
         });
     }
 
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('categories');
     }
 };
