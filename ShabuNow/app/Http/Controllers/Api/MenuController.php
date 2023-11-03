@@ -65,38 +65,51 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,int $id){
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',                        
-            'description' => 'required',            
-            'price' => 'required'
-        ]);
-        if($validator->fails()){
+    
+    //  $menu = Menu::find($id);
+    //     if($menu) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'menu' => $menu
+    //         ],200);
+    //     }else{
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => "No Such a menu found"
+    //         ],404);
+    //     }
+     public function update(Menu $menu, Request $request){
+        $Ismenu = Menu::find($menu);
+        if($Ismenu != null){
+            $data = $request->validate([
+                'name' => ['required', 'string', 'min:1'],
+                'price' => ['required', 'integer', 'min:1'],            
+                'description' => ['required', 'string', 'min:1'],
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'category_id' => ['required'],
+                'status' => ['required']
+            ]);
+            $menu->update($data);
             return response()->json([
-                'status' => 422,
-                'errors' => $validator->message()
-            ],422);
-        }else{
-            $menu = Menu::find($id);
-            
-            if($menu){
-                $menu->update([
-                    'name' => $request->name,
-                    'price' => $request->price,
-                    'description' => $request->description
-                    ]);
-                return response()->json([
-                    'status' => 200,
-                    'message' => "Menu updated Successfully"
-                ],200);
-            }else{
-                return response()->json([
-                    'status' => 500,
-                    'message' => "NO such menu find"
-                ],500);
-            }
+                'status' => 200,
+                'message' => 'updated menu successfully',
+                'menu' => $menu
+            ],200);
         }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such a menu found"
+            ],404);
+        }
+        
+
+        
+
+        // return redirect(route('product.index'))->with('success', 'Product Updated Succesffully');
+
     }
+
 
 
     /**
@@ -117,7 +130,8 @@ class MenuController extends Controller
             'price' => ['required', 'integer', 'min:1'],
             'category' => ['required', 'string'],
             'description' => ['required', 'string', 'min:1'],
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => ['required']
         ]);
 
 
@@ -130,8 +144,8 @@ class MenuController extends Controller
         $menu = new Menu();
 
         $menu->name = $request->get('name');
-        $menu->price = $request->get('price');
-        $menu->category_id = $category->id;
+        $menu->price = $request->get('price');        
+        $menu->category_id = $request->get('category_id');        
         $menu->description = $request->get('description');
         $menu->status = 'available';
 

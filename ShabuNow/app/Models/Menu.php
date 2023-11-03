@@ -11,7 +11,7 @@ class Menu extends Model
     use HasFactory;
 
     // Mass Assignment ควรใส่ "name" ลงในอาร์เรย์ "fillable" ในโมเดล Menu เพื่ออนุญาตให้มีการกำหนดค่าผ่าน Mass Assignment ได้แบบปลอดภัย.
-    protected $fillable = ['name', 'description', 'price'];
+    protected $fillable = ['name', 'description','price','status','category_id'];
 
     // set time format
     protected $dates = ['created_at', 'updated_at'];

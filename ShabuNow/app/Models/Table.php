@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Table extends Model
 {
     use HasFactory;
+    protected $fillable = ['status','user_id'];
 
     public function user() : HasOne
     {

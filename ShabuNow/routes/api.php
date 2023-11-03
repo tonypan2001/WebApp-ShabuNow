@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,16 +57,26 @@ Route::group([
 });
 
 Route::group([
-    'middlemare' => 'api',
+    'middleware' => 'api',
     'prefix' => 'menu'
 ], function () {
     Route::get('/', [MenuController::class, 'index']);
     Route::post('store', [MenuController::class, 'store']);
     Route::get('show/{menu}', [MenuController::class, 'show']);    
     Route::get('show/{menu}/edit', [MenuController::class, 'edit']);    
-    Route::put('show/{menu}/edit', [MenuController::class, 'update']);    
+    Route::put('show/{menu}/edit', [MenuController::class, 'update']);        
+});
 
-    
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'table'
+], function () {
+    Route::get('/', [TableController::class, 'index']);
+    Route::post('store', [TableController::class, 'store']);
+    Route::get('show/{table}', [TableController::class, 'show']);    
+    Route::get('show/{table}/edit', [TableController::class, 'edit']);    
+    Route::put('show/{table}/edit', [TableController::class, 'update']);        
 });
 
 

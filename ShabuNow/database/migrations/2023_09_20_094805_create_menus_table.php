@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(\App\Models\Category::class); //category_id(fk)
             $table->string('imgPath')->nullable();
-            $table->string('description');
+            $table->string('description');            
             $table->enum('status',['available','outofstock']);
             $table->integer('price');
         });
