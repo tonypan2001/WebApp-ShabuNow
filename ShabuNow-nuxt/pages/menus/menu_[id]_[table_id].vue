@@ -67,8 +67,7 @@ import {useAuthStore} from "~/stores/auth";
 
 const auth = useAuthStore();
 const route = useRoute();
-const menu = await $fetch(`http://localhost/api/menu/${route.params.id}`)
-console.log(menu)
+const menu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`)
 
 async function addMenu() {
   if (auth.getUser.role !== 'customer') {
@@ -77,7 +76,7 @@ async function addMenu() {
   const menu_id = route.params.id;
   const quantity = document.getElementsByName('custom-input-number')[0].value
   console.log(menu_id, quantity)
-  const response = await $fetch(`http://localhost/api/order/${route.params.table_id}/addMenu`, {
+  const response = await $fetch(`http://localhost/api/order/store/${route.params.table_id}`, {
     method: 'POST',
     body: { menu_id, quantity }
   });
