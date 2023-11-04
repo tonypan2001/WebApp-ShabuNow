@@ -19,7 +19,7 @@ class OrderFactory extends Factory
     {
         $number = fake()->numberBetween(1,20);
         $name = Menu::find($number)->name;
-        $status = array('pending','ordered','ready','served');
+        $status = array('pending','ordered','served');
         return [
             'menu_id' => $number,
             'name' => $name,
