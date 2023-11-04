@@ -14,8 +14,7 @@ class OrderController extends Controller
     public function orderWithPrice()
     {
         $orderWithPrice = DB::table('menus')
-            ->join('orders', 'orders.menu_id', '=', 'menus.id')
-            ->get();
+            ->join('orders', 'orders.menu_id', '=', 'menus.id');
         return $orderWithPrice;
     }
 
@@ -28,22 +27,24 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $orderWithPrice = $this->orderWithPrice();
-        $orders = $orderWithPrice->where('orders.id', '=' , $order->id);
+        $orders = $orderWithPrice->where('orders.id', '=' , $order->id)->first();
         return $orders;
     }
     public function index(Table $table)
     {
         $orders = $this->orderWithPrice();
-        $orders = $orders->where('table_id', '=' , $table->id);
+        $orders = $orders->where('table_id', '=' , $table->id)->get();
         return $orders;
     }
 
     public function checkPending(Table $table)
     {
-        $orders = $this->orderWithPrice();
-        $orders = $orders->where('table_id', '=' , $table->id);
-        $orders = $orders->where('status', '=' , 'pending');
-        return $orders;
+        $orderwithPrice = DB::table('menus')
+            ->join('orders', 'orders.menu_id', '=', 'menus.id')
+            ->where('orders.table_id', '=' , $table->id)
+            ->where('orders.status', '=' , 'pending')
+            ->get();
+        return $orderwithPrice;
     }
 
 
@@ -56,7 +57,7 @@ class OrderController extends Controller
 
     public function sendOrders(Table $table)
     {
-        $orders = Order::where('table_id', '=' , $table->id)->get();
+        $orders = Order::where('table_id', '=' , $table->id);
         $orders = $orders->where('table_id', '=' , $table->id);
         $orders = $orders->where('status', '=' , 'pending');
         foreach ($orders as $order)
@@ -66,7 +67,7 @@ class OrderController extends Controller
         }
 
         $orders = $this->orderWithPrice();
-        $orders = $orders->where('table_id', '=' , $table->id);
+        $orders = $orders->where('table_id', '=' , $table->id)->get();
         return $orders;
     }
 
