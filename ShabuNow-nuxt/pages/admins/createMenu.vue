@@ -8,28 +8,28 @@
     <ContentContainer>
       <DetailCard class="mb-12">
         <template v-slot:detail_title>สร้างเมนูอาหาร</template>
-        <InputField
+        <InputField v-model="formData.name"
         class="mt-4"
         placeholder="ชื่อเมนู"
         type="text"
-        name="confirm-password"
+        name="name"
         />
-        <InputField
+        <InputField v-model="formData.price"
         class="mt-4"
         placeholder="ราคา (THB)"
         type="number"
-        name="confirm-password"
+        name="price"
         />
-        <select
+        <select v-model="formData.category"
         class="mt-4 text-base text-slate-400 focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none p-2.5 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3"
         >
           <option selected>เลือกหมวดหมู่</option>
           <option value="food">อาหาร</option>
-          <option value="drink">เครื่องดื่ม</option>
+          <option value="Drinks">เครื่องดื่ม</option>
           <option value="sweet">ของหวาน</option>
         </select>
 
-        <textarea
+        <textarea v-model="formData.description"
         row="2"
           class="mt-4 text-base block p-2.5 w-full bg-white border border-slate-300 rounded-lg focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none"
           placeholder="คำอธิบายเพิ่มเติม"
@@ -56,31 +56,57 @@
 </template>
 
 <script setup lang="ts">
-const formData = ref({
-  name: ""
+import {Category} from "~/models/defineType";
+
+const formData = reactive({
+  name: "",
+  price: "",
+  category: "",
+  description: ""
 })
 
-const formErrors = ref({
-  errors: null
+const error = reactive({
+  errors: ""
 })
+
+// const {data: categories} = await useFetch<Category[]>('http://localhost/api/category')
 
 async function onSubmit() {
-  const { name } = formData.value
-  const { data:response, error } = await useMyFetch<any>(
-      "menu",
-      {
-        method: "POST",
-        body: { name }
-      }
-  )
-
-  if (response.value !== null) {
-    await navigateTo(`/menus/store/${response.value}`)
-  } else {
-    console.log(error)
-    const { message } = error.value!.data
-    formErrors.value.errors = message
+  console.log(formData)
+  try {
+    const menu = await $fetch("http://localhost/api/menu/store", {
+      method: "POST",
+      body: formData
+    })
+    error.success = "สร้างเมนูสำเร็จ"
+    error.errors = ""
+  } catch (error) {
+    error.success = ""
+    error.errors = "สร้างเมนูไม่สำเร็จ"
+    console.log("Error" + error)
+    if (error.response) {
+      console.error("Response Status:" , error.response.status);
+      console.error("Response Data:" , error.response.data);
+    }
   }
+  // const { name } = formData.value
+  // const { data:response, error } = await $fetch<any>(
+  //     "http://localhost/api/menu/store",
+  //     {
+  //       method: "POST",
+  //       body: { name }
+  //     }
+  // )
+  //
+  // console.log(formData.value)
+  // console.log(response.value)
+  // if (response.value !== null) {
+  //   await navigateTo(`/menus/store/${formData.value}`)
+  // } else {
+  //   console.log(error)
+  //   const { message } = error.value!.data
+  //   formErrors.value.errors = message
+  // }
 }
 
 </script>
