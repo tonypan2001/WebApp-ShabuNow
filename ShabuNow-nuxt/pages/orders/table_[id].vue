@@ -88,8 +88,6 @@ function filterOrder(orders: Order[])
 
 const FilteredOrder = filterOrder(orders)
 
-
-
 // export default {
 //   data() {
 //     return {
