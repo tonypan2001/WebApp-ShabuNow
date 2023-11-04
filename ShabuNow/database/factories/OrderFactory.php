@@ -17,10 +17,12 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
+        $number = fake()->numberBetween(1,20);
+        $name = Menu::find($number)->name;
         $status = array('pending','ordered','ready','served');
         return [
-            'name' => fake()->name(),
-            'menu_id' => Menu::find(rand(1, 20)),
+            'menu_id' => $number,
+            'name' => $name,
             'quantity' => fake()->numberBetween(1,10),
             'detail' => fake()->realTextBetween(120,200,2),
             'status' => $status[array_rand($status)],
