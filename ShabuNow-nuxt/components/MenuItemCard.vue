@@ -14,6 +14,9 @@
       <p class="mt-2 text-xl font-light">
         <slot name="price"> Default price </slot>
       </p>
+      <a class="mt-2 text-xl font-light">
+        <slot name="paths"> Click it! </slot>
+      </a>
 
       <Button class="mt-2 w-full">
         <i class="bi bi-plus-lg mr-1"></i>
