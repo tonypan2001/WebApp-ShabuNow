@@ -43,17 +43,53 @@
                     </Button>
                 </div>
 
-                <!-- for customer -->
-                <div class="flex flex-col justify-start items-start text-lg">
-                    <Button class="mt-4 w-full">
-                        <i class="bi bi-cart-plus mr-2"></i>
-                        เพิ่มเข้าตะกร้า
-                    </Button>
-                </div>
-
+                <form @submit.prevent="onSubmit()" action="">
+                  <!-- for customer -->
+                  <div class="flex flex-col justify-start items-start text-lg">
+                      <Button class="mt-4 w-full">
+                          <i class="bi bi-cart-plus mr-2"></i>
+                          เพิ่มเข้าตะกร้า
+                      </Button>
+                  </div>
+                </form>
             </div>
 
         </div>
     </ContentContainer>
 </MainContainer>
 </template>
+
+<script setup lang="ts">
+
+const route = useRoute()
+
+const formData = reactive({
+  menu_id: route.params.id,
+  quantity: 1,
+})
+
+const error = reactive({
+  errors: ""
+})
+async function onSubmit() {
+
+  console.log(route.params.id)
+  try {
+    //แก้ระบบโต๊ะ
+    const res = await $fetch("http://localhost/api/order/store/1/", {
+      method: "POST",
+      body: formData
+    })
+    error.success = "ส่ง order สำเร็จ"
+    error.errors = ""
+  } catch (error) {
+    error.errors = "ส่ง order ไม่สำเร็จ"
+    error.success = ""
+    console.log("Error" + error)
+    if (error.response) {
+      console.error("Response Status:" , error.response.status);
+      console.error("Response Data:" , error.response.data);
+    }
+  }
+}
+</script>
