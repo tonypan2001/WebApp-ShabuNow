@@ -40,6 +40,20 @@ class OrderController extends Controller
         return $orders;
     }
 
+    public function checkOrdered()
+    {
+        $orders = $this->orderWithPrice();
+        $orders = $orders->where('status', '=' , 'ordered');
+        return $orders;
+    }
+
+    public function served(Order $order)
+    {
+        $order->status = 'served';
+        $order->save();
+        return $order;
+    }
+
     public function sendOrders(Table $table)
     {
         $orders = Order::where('table_id', '=' , $table->id)->get();
