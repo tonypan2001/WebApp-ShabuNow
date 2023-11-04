@@ -6,18 +6,8 @@
     <hr />
     <form @submit.prevent="onSubmit()" >
     <ContentContainer>
-      <div class="w-2/3 p-4 text-xl font-light border rounded-xl mt-8 ">
-
-        <div class="overflow-hidden border h-[150px] flex flex-col lg:flex-row justify-around items-center rounded-xl bg-cover-category object-cover bg-center bg-no-repeat">
-          <h1 class="text-xl lg:text-3xl font-semibold text-white z-10">
-            เพิ่มเมนูอาหาร
-          </h1>
-          <div class="z-10 text-white text-6xl lg:text-8xl">
-            <i class="fa-solid fa-bowl-food"></i>
-          </div>
-          <div class="bg-cover-overlay"></div>
-        </div>
-
+      <DetailCard class="mb-12">
+        <template v-slot:detail_title>สร้างเมนูอาหาร</template>
         <InputField
         class="mt-4"
         placeholder="ชื่อเมนู"
@@ -45,7 +35,7 @@
           placeholder="คำอธิบายเพิ่มเติม"
         ></textarea>
 
-        <div class="mx-auto my-8">
+        <div class="mx-auto mt-2">
           <label
             class="mt-4 mb-1 block text-lg font-medium text-gray-700"
             >อัพโหลดรูปภาพ</label
@@ -56,26 +46,41 @@
             class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
           />
         </div>
-        <hr class="mt-4">
         <Button class="mt-4 w-full">
           <slot name="button">ยืนยัน</slot>
         </Button>
-      </div>
+      </DetailCard>
     </ContentContainer>
     </form>
   </MainContainer>
 </template>
 
-<style>
-.bg-cover-category {
-  position: relative;
-  background-image: url('../../assets/img/cover1.jpg');
-  background-position: center;
+<script setup lang="ts">
+const formData = ref({
+  name: ""
+})
+
+const formErrors = ref({
+  errors: null
+})
+
+async function onSubmit() {
+  const { name } = formData.value
+  const { data:response, error } = await useMyFetch<any>(
+      "menu",
+      {
+        method: "POST",
+        body: { name }
+      }
+  )
+
+  if (response.value !== null) {
+    await navigateTo(`/menus/store/${response.value}`)
+  } else {
+    console.log(error)
+    const { message } = error.value!.data
+    formErrors.value.errors = message
+  }
 }
-.bg-cover-overlay {
-  background-color: rgba(0, 0, 0, .35);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-</style>
+
+</script>
