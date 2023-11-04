@@ -14,15 +14,14 @@ class OrderController extends Controller
     public function orderWithPrice()
     {
         $orderWithPrice = DB::table('menus')
-            ->join('orders', 'orders.menu_id', '=', 'menus.id')
-            ->get();
+            ->join('orders', 'orders.menu_id', '=', 'menus.id');
         return $orderWithPrice;
     }
 
     public function show(Order $order)
     {
         $orderWithPrice = $this->orderWithPrice();
-        $orders = $orderWithPrice->where('orders.id', '=' , $order->id);
+        $orders = $orderWithPrice->where('orders.id', '=' , $order->id)->first();
         return $orders;
     }
     public function index(Table $table)
@@ -38,6 +37,22 @@ class OrderController extends Controller
         $orders = $orders->where('table_id', '=' , $table->id);
         $orders = $orders->where('status', '=' , 'pending');
         return $orders;
+    }
+    public function checkOrdered()
+    {
+        
+        $orders = Order::where('status', '=' , 'ordered')->get();
+        return $orders;
+        // $orders = $this->orderWithPrice();
+        // $orders = $orders->where('status', '=' , 'ordered');
+        // return $orders;
+    }
+
+    public function served(Order $order)
+    {
+        $order->status = 'served';
+        $order->save();
+        return $order;
     }
 
     public function sendOrders(Table $table)
