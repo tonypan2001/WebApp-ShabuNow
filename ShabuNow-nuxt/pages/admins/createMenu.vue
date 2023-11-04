@@ -82,4 +82,5 @@ async function onSubmit() {
     formErrors.value.errors = message
   }
 }
+
 </script>
