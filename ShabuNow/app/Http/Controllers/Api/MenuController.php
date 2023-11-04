@@ -20,9 +20,9 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Menu $menu)
+    public function show(string $id)
     {
-        return $menu;
+        return Menu::find($id);
     }
 
     /**

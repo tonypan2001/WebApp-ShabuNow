@@ -19,6 +19,12 @@ class OrderController extends Controller
         return $orderWithPrice;
     }
 
+    public function checkOrdered()
+    {
+        $orders = Order::where('status', '=' , 'ordered')->get();
+        return $orders;
+    }
+
     public function show(Order $order)
     {
         $orderWithPrice = $this->orderWithPrice();
@@ -40,12 +46,6 @@ class OrderController extends Controller
         return $orders;
     }
 
-    public function checkOrdered()
-    {
-        $orders = $this->orderWithPrice();
-        $orders = $orders->where('status', '=' , 'ordered');
-        return $orders;
-    }
 
     public function served(Order $order)
     {
