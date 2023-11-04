@@ -24,11 +24,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstname' => ['required','min:3','max:255'],
-            'surname' => ['required','min:3','max:255'],
             'username' => ['required','min:3','max:255'],
             'role' => ['required'],
-            'age' => ['required','integer','min:18','max:100'],
             'password' => ['min:5','required_with:confirm_password','same:confirm_password'],
             'confirm_password' => ['min:5'],
             'email' => ['required','email'],
@@ -37,11 +34,8 @@ class UserController extends Controller
         ]);
 
         $user = new User();
-        $user->firstname = $request->get('firstname');
-        $user->surname = $request->get('surname');
         $user->email = $request->get('email');
         $user->username = $request->get('username');
-        $user->age = $request->get('age');
         $user->role = $request->get('role');
         $user->password = Hash::make($request->get('password'));
 
@@ -101,39 +95,21 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'firstname' => ['required','min:3','max:255'],
-            'surname' => ['required','min:3','max:255'],
             'username' => ['required','min:3','max:255'],
             'role' => ['required'],
-            'age' => ['required','integer','min:18','max:100'],
             'password' => ['min:5','required_with:confirm_password','same:confirm_password'],
             'confirm_password' => ['min:5'],
             'email' => ['required','email'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $user->firstname = $request->get('firstname');
-        $user->surname = $request->get('surname');
         $user->email = $request->get('email');
         $user->username = $request->get('username');
-        $user->age = $request->get('age');
         $user->role = $request->get('role');
 
-        if($request->get('firstname') == null)
-        {
-            $user->firstname = $request->get('firstname');
-        }
-        if($request->get('surname') == null)
-        {
-            $user->surname = $request->get('surname');
-        }
         if($request->get('username') == null)
         {
             $user->username = $request->get('username');
-        }
-        if($request->get('age') == null)
-        {
-            $user->age = $request->get('age');
         }
         if($request->get('role') == null)
         {
