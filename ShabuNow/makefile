@@ -10,6 +10,8 @@ build:
 
 	@./vendor/bin/sail up -d
 	@./vendor/bin/sail artisan key:generate
+	@./vendor/bin/sail composer require tymon/jwt-auth
+	@./vendor/bin/sail artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 	@./vendor/bin/sail artisan jwt:secret
 	@./vendor/bin/sail yarn install
 

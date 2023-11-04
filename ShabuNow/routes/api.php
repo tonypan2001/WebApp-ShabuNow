@@ -56,7 +56,7 @@ Route::group([
 });
 
 Route::group([
-    'middlemare' => 'api',
+    'middleware' => 'api',
     'prefix' => 'menu'
 ], function () {
     Route::post('store', [MenuController::class, 'store']);

@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-18b95591f4b-1f3bd1c50fb8acc5": {
+		"mysql8-18b9559ce3b-fc74cedc4e13838": {
 			"provider": "mysql",
 			"driver": "mysql8",
 			"name": "localhost",
@@ -13,6 +13,12 @@
 				"configurationType": "MANUAL",
 				"home": "mysql_client",
 				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"rewriteBatchedStatements": "true",
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
+					"allowPublicKeyRetrieval": "YES"
+				},
 				"auth-model": "native"
 			}
 		}
