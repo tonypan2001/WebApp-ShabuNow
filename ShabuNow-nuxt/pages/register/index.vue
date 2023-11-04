@@ -17,7 +17,7 @@
           <span v-if="errors.username" class="text-red-500">{{
             errors.username[0]
           }}</span>
-          <InputField
+          <!-- <InputField
             class="p-2 rounded-xl"
             type="text"
             name="firstname"
@@ -26,8 +26,8 @@
           />
           <span v-if="errors.firstname" class="text-red-500">{{
             errors.firstname[0]
-          }}</span>
-          <InputField
+          }}</span> -->
+          <!-- <InputField
             class="p-2 rounded-xl"
             type="text"
             name="surname"
@@ -36,7 +36,7 @@
           />
           <span v-if="errors.surname" class="text-red-500">{{
             errors.surname[0]
-          }}</span>
+          }}</span> -->
           <InputField
             class="p-2 rounded-xl"
             type="email"
@@ -112,8 +112,8 @@ const auth = useAuthStore();
 const token = useTokenStore();
 const form = reactive({
   username: "",
-  firstname: "",
-  surname: "",
+  // firstname: "",
+  // surname: "",
   email: "",
   password: "",
   password_confirmation: "",
