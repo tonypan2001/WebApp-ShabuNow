@@ -31,28 +31,6 @@ import { Input } from 'postcss';
               {{ errors.username }}
             </span>
           </div>
-          <!-- <InputField v-model="formData.firstname"
-            class="mt-4"
-            type="text"
-            name="firstname"
-            placeholder="Firstname"
-          />
-          <div>
-            <span v-if="errors.firstname" class="text-red-500">
-              {{ errors.firstname }}
-            </span>
-          </div> -->
-          <!-- <InputField v-model="formData.surname"
-            class="mt-4"
-            type="text"
-            name="surname"
-            placeholder="Surname"
-          />
-          <div>
-            <span v-if="errors.surname" class="text-red-500">
-              {{ errors.surname }}
-            </span>
-          </div> -->
           <InputField v-model="formData.email"
             class="mt-4"
             type="email"
@@ -137,8 +115,6 @@ const auth = useAuthStore()
 const token = useTokenStore()
 const formData = reactive({
   username: "",
-  // firstname: "",
-  // surname: "",
   email: "",
   password: "",
   confirm_password: "",
