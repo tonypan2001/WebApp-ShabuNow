@@ -17,24 +17,9 @@
           {{ auth.getUser.username }}
         </p> -->
         <!-- if user customer-->
-        <p class="mt-4" v-if="auth.getUser.role === 'customer'">
-          <span class="font-medium"> ชื่อลูกค้า : </span>
-          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
-        </p>
-        <!-- if user staff -->
-        <p class="mt-4" v-if="auth.getUser.role === 'staff'">
-          <span class="font-medium"> ชื่อพนักงานสตาฟ : </span>
-          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
-        </p>
-        <!-- if user admin-->
-        <p class="mt-4" v-if="auth.getUser.role === 'admin'">
-          <span class="font-medium"> ชื่อแอดมิน : </span>
-          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
-        </p>
-        <!-- if user chef-->
-        <p class="mt-4" v-if="auth.getUser.role === 'chef'">
-          <span class="font-medium"> ชื่อเชฟ : </span>
-          {{ auth.getUser.firstname }} {{ auth.getUser.surname }}
+        <p class="mt-4">
+          <span class="font-medium"> ชื่อผู้ใช้ : </span>
+          {{ auth.getUser.username }}
         </p>
         <p class="mt-4">
           <span class="font-medium"> วันที่สมัครสมาชิก : </span>
@@ -99,8 +84,8 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
 const auth = useAuthStore()
+console.log(auth.getUser.username)
 const formData = reactive({
   old_password: "",
   new_password: "",
