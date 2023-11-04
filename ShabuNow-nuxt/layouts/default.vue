@@ -6,7 +6,7 @@
     await navigateTo("/login");
   }
   const accessCustomerPath = ['/', '/menus/menu_[id]', '/accounts', '/bills']
-  const accessStaffPath = ['/', '/orders', '/accounts']
+  const accessStaffPath = ['/', '/orders', '/accounts', '/menus/menu_[id]', '/bills']
   const accessAdminPath = ['/','/admins','/admins/staff','/admins/staff/create','/accounts']
   const accessChefPath = ['/','/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
   if (auth.getUser.role === "customer" && !accessCustomerPath.includes(route.path)) {
