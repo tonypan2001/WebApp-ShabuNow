@@ -8,7 +8,7 @@
   const accessCustomerPath = ['/', '/menus/menu_[id]', '/accounts', '/bills']
   const accessStaffPath = ['/', '/orders', '/accounts']
   const accessAdminPath = ['/','/admins','/admins/staff','/admins/staff/create','/accounts']
-  const accessChefPath = ['/','/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
+  const accessChefPath = ['/', '/menus/menu_[id]', '/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
   if (auth.getUser.role === "customer" && !accessCustomerPath.includes(route.path)) {
     await navigateTo("/");
   } else if (auth.getUser.role === "staff" && !accessStaffPath.includes(route.path)) {

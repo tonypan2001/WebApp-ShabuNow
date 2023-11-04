@@ -23,24 +23,22 @@
         <slot name="price"> Default price </slot>
       </p>
 
-      <a :href="add_to_cart" class="mt-4 w-full">
+      <NuxtLink :to="to" class="mt-4 w-full">
         <Button class="w-full">
           <i class="bi bi-plus-lg mr-1"></i>
           <slot name="button"> Defaut button text </slot>
         </Button>
-      </a>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "./Button.vue";
-
 export default {
-  props: {
-    imageUrl: String,
-    edit_menu: String,
-    add_to_cart: String,
-  },
+    props: {
+        imageUrl: String,
+        edit_menu: String,
+        to: String,
+    },
 };
 </script>

@@ -46,28 +46,28 @@
         <li class="lg:m-0 m-4">
           <a
             href="/"
-            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             เลือกเมนู
           </a>
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
           <a
             href="/carts"
-            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             ตะกร้าสินค้า
           </a>
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
           <a
             href="/bills"
-            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             รายการที่สั่ง
           </a>
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'staff'">
           <a
             href="/orders"
-            class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             คำสั่งซื้อลูกค้า
           </a>
         </li>
@@ -94,7 +94,7 @@
             <i class="bi bi-person-fill md:text-xl text-2xl mr-2"></i>
             <div class="">
               <p>สวัสดีคุณ,</p>
-              <p>{{ auth.getUser.firstname }}</p>
+              <p>{{ auth.getUser.username }} <span v-if="auth.getUser.role === 'staff' || auth.getUser.role === 'admin' || auth.getUser.role === 'chef'">({{ auth.getUser.role }})</span></p>
               <!-- <p>Guest1175</p> -->
             </div>
           </a>

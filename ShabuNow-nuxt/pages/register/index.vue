@@ -117,10 +117,12 @@ const form = reactive({
   email: "",
   password: "",
   password_confirmation: "",
+  // role: "customer",
   photos: "",
 });
 const errors = ref([]);
 const handleSubmit = async () => {
+  console.log(form)
   try {
     await auth.register(form);
     // const { data } = await $fetch("http://localhost/api/login", {

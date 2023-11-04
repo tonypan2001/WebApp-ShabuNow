@@ -4,7 +4,7 @@
       <HeaderText>สร้างเมนู</HeaderText>
     </HeaderContainer>
     <hr />
-    <form @submit.prevent="onSubmit()" >
+    <form @submit.prevent="onSubmit()" action="">
     <ContentContainer>
       <DetailCard class="mb-12">
         <template v-slot:detail_title>สร้างเมนูอาหาร</template>

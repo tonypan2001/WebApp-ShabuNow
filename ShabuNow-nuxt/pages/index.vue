@@ -28,7 +28,7 @@
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id" :edit_menu="'/admins/editMenu'">
+                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :to="`/menus/menu_${menu.id}`" :edit_menu="'/admins/editMenu'">
 
                     <template v-slot:title>
                         <!-- สลัดผักรวมมิตร -->
