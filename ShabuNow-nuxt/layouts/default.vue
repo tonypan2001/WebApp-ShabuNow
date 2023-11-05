@@ -5,10 +5,10 @@
   // if (!tokenStore.getStatus) {
   //   await navigateTo("/login");
   // }
-  // const accessCustomerPath = ['/', '/menus/menu_[id]', '/accounts', '/bills', '/carts/table_[id]']
-  // const accessStaffPath = ['/home','/', '/orders', '/accounts', '/orders/table_[id]']
-  // const accessAdminPath = ['/','/admins','/admins/staff','/admins/staff/create','/accounts']
-  // const accessChefPath = ['/', '/menus/menu_[id]', '/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
+  // const accessCustomerPath = ['/home','/', '/menus/menu_[id]_[table_id]', '/accounts', '/bills', '/carts/table_[id]','/[category_id]']
+  // const accessStaffPath = ['/home','/', '/orders', '/accounts', '/orders/table_[id]','/[category_id]']
+  // const accessAdminPath = ['/home','/','/admins','/admins/staff','/admins/staff/create','/accounts','/[category_id]']
+  // const accessChefPath = ['/home','/', '/menus/menu_[id]_[table_id]', '/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts','/[category_id]']
   // if (auth.getUser.role === "customer" && !accessCustomerPath.includes(route.path)) {
   //   await navigateTo("/");
   // } else if (auth.getUser.role === "staff" && !accessStaffPath.includes(route.path)) {

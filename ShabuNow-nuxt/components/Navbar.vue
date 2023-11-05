@@ -45,6 +45,13 @@
         </li> -->
         <li class="lg:m-0 m-4">
           <a
+              href="/home"
+              class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            หน้าแรก
+          </a>
+        </li>
+        <li class="lg:m-0 m-4">
+          <a
             href="/"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             เลือกเมนู
