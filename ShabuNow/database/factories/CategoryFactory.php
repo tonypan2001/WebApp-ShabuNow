@@ -62,7 +62,7 @@ class CategoryFactory extends Factory
             'Swedish',
             'Caribbean');
             return [
-                'name' => array_rand($foodCategories),
+                'name' => $foodCategories[array_rand($foodCategories)],
             ];
     }
 }

@@ -65,7 +65,7 @@ class MenuFactory extends Factory
             'Apple Pie',
             'Key Lime Pie');
         return [
-            'name' => array_rand($foodNames),
+            'name' => $foodNames[array_rand($foodNames)],
             'category_id' => Category::find(rand(1, 5)),
             'description' => fake()->realTextBetween(120,200,2),
             'status' => $status[array_rand($status)],
