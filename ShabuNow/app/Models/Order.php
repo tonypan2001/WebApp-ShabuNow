@@ -2,18 +2,30 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
     use HasFactory;
 
-    public function menus() : BelongsToMany
+    public function menus() : HasMany
     {
-        return $this->belongsToMany(Menu::class, 'order_menus', 'order_id', 'menu_id')->withPivot('quantity');
+        return $this->hasMany(Menu::class);
+    }
+
+    // set time format
+    protected $dates = ['created_at', 'updated_at'];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y/m/d - H:i:s');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y/m/d - H:i:s');
     }
 }

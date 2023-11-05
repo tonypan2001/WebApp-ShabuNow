@@ -22,6 +22,9 @@
         ฿
         <slot name="price"> Default price </slot>
       </p>
+      <a class="mt-2 text-xl font-light">
+        <slot name="paths"> Click it! </slot>
+      </a>
 
       <NuxtLink v-if="auth.getUser.role !== 'admin'" :to="to" class="mt-4 w-full">
         <Button class="w-full">

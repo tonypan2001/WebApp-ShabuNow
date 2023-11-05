@@ -2,17 +2,27 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Menu extends Model
 {
     use HasFactory;
 
-    public function orders() : BelongsToMany
+    // Mass Assignment ควรใส่ "name" ลงในอาร์เรย์ "fillable" ในโมเดล Menu เพื่ออนุญาตให้มีการกำหนดค่าผ่าน Mass Assignment ได้แบบปลอดภัย.
+    protected $fillable = ['name', 'description','price','status','category_id'];
+
+    // set time format
+    protected $dates = ['created_at', 'updated_at'];
+
+    public function getCreatedAtAttribute($value)
     {
-        return $this->belongsToMany(Order::class, 'order_menus', 'menu_id', 'order_id')->withPivot('quantity');
+        return Carbon::parse($value)->format('Y/m/d - H:i:s');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y/m/d - H:i:s');
     }
 }
-

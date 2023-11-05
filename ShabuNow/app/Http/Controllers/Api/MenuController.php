@@ -6,37 +6,111 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return Menu::get();
+    public function index(){
+        $menus = Menu::all();
+        if($menus->count() > 0){
+        return response()->json([
+            'status' => 200,
+            'menus' => $menus
+        ],200);
+    }else{
+        return response()->json([
+            'status' => 404,
+            'message ' => 'No Records Found'
+        ],404);
     }
+}
 
     /**
      * Display the specified resource.
      */
-    public function show(Menu $menu)
-    {
-        return $menu;
+    public function show($id){
+        $menu = Menu::find($id);
+        if($menu) {
+            return response()->json([
+                'status' => 200,
+                'menu' => $menu
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such a menu found"
+            ],404);
+        }
     }
-
-    public function showMenuById(string $id)
-    {
-        return Menu::find($id);
-    }
+    public function edit(Request $request,int $id){
+        
+        $menu = Menu::find($id);
+        if($menu) {
+            return response()->json([
+                'status' => 200,
+                'menu' => $menu
+            ],200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such a menu found"
+            ],404);
+        }
+            }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    
+    //  $menu = Menu::find($id);
+    //     if($menu) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'menu' => $menu
+    //         ],200);
+    //     }else{
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => "No Such a menu found"
+    //         ],404);
+    //     }
+     public function update(Menu $menu, Request $request){
+        $Ismenu = Menu::find($menu);
+        if($Ismenu != null){
+            $data = $request->validate([
+                'name' => ['required', 'string', 'min:1'],
+                'price' => ['required', 'integer', 'min:1'],            
+                'description' => ['required', 'string', 'min:1'],
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'category_id' => ['required'],
+                'status' => ['required']
+            ]);
+            $menu->update($data);
+            return response()->json([
+                'status' => 200,
+                'message' => 'updated menu successfully',
+                'menu' => $menu
+            ],200);
+        }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such a menu found"
+            ],404);
+        }
+        
+
+        
+
+        // return redirect(route('product.index'))->with('success', 'Product Updated Succesffully');
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -56,7 +130,8 @@ class MenuController extends Controller
             'price' => ['required', 'integer', 'min:1'],
             'category' => ['required', 'string'],
             'description' => ['required', 'string', 'min:1'],
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => ['required']
         ]);
 
 
@@ -69,8 +144,8 @@ class MenuController extends Controller
         $menu = new Menu();
 
         $menu->name = $request->get('name');
-        $menu->price = $request->get('price');
-        $menu->category_id = $category->id;
+        $menu->price = $request->get('price');        
+        $menu->category_id = $request->get('category_id');        
         $menu->description = $request->get('description');
         $menu->status = 'available';
 

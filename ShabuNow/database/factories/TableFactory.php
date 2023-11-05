@@ -17,8 +17,10 @@ class TableFactory extends Factory
      */
     public function definition(): array
     {
+        $status = array('available', 'used');
         return [
-            'status' => 'available',
+            'status' => $status[array_rand($status)],
+            'user_id' => User::find(rand(1,20)),
         ];
     }
 }
