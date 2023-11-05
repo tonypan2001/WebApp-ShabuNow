@@ -114,7 +114,7 @@ class OrderController extends Controller
         $table->user_id = null;
         $table->save();
 
-        $user->table_id = null;
+        $user->tableNumber = null;
         $user->save();
 
         $historys = History::where('user_id', '=' , $user->id)->get();
