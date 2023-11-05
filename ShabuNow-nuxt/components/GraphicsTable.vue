@@ -1,5 +1,5 @@
 <template>
-    <a v-for="(tableNumber, index) in tableNumbers" :key="index" class="relative p-4 m-4 ease-out duration-300 border-2 hover:border-red-600 rounded-lg cursor-pointer">
+    <a :href="href" :tableNumber="tableNumber" class="relative p-4 m-4 ease-out duration-300 border-2 hover:border-red-600 rounded-lg cursor-pointer">
         <div class="w-[100px] h-[120px] bg-amber-600 rounded-lg flex justify-center items-center z-10">
             <div class="flex flex-col justify-center items-center">
                 <span class="text-base text-white">โต๊ะที่</span>
@@ -18,6 +18,6 @@
 
 <script>
 export default {
-    props: ['tableNumbers'],
+    props: ['tableNumbers','href', "tableNumber"],
 }
 </script>

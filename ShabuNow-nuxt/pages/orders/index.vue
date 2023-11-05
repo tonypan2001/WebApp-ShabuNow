@@ -22,9 +22,10 @@
             </div>
 
             <GridContainer class="mt-8">
-
                 <!-- หมายเลขโต๊ะ -->
-               <GraphicsTable :tableNumbers="tableNumbers"/>
+              <div v-for="(tableNumber, index) in tableNumbers" :key="index">
+                <GraphicsTable :tableNumber="tableNumber" :href="'/orders/table_' + tableNumber" />
+              </div>
 
             </GridContainer>
 
@@ -84,7 +85,6 @@ export default {
                 console.log('Delete');
             }
         },
-
         tableNumbersGen(count) {
             const tableNumbers = []
             for(let i = 1; i<= count; i++) {
@@ -96,6 +96,7 @@ export default {
             this.hideConfirmationDialog()
             this.counter.count++
             this.tableNumbers.push(this.tableNumbers.length + 1)
+
         },
         decrementTable() {
             if (this.tableNumbers.length > 0) {
