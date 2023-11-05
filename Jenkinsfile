@@ -17,6 +17,7 @@ pipeline {
                         laravelsail/php82-composer:latest \
                         composer install --ignore-platform-reqs'
                         sh 'cp .env.example .env'
+                         sh 'vendor/bin/sail down'
                         sh 'vendor/bin/sail up -d'
                         sh 'vendor/bin/sail yarn install'
                         sh 'vendor/bin/sail yarn dev'
