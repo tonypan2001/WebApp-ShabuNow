@@ -53,7 +53,7 @@ Route::group([
     Route::get('{table}', [OrderController::class, 'index']);
     Route::post('store/{table}', [OrderController::class, 'store']);
     Route::get('checkPending/{table}', [OrderController::class, 'checkPending']);
-    Route::get('sendOrders/{table}', [OrderController::class, 'sendOrders']);
+    Route::post('sendOrders/{table}', [OrderController::class, 'sendOrders']);
     Route::get('show/{order}', [OrderController::class, 'show']);
     Route::get('/checkOrdered/1/', [OrderController::class, 'checkOrdered']);
     Route::put('served/{order}', [OrderController::class, 'served']);

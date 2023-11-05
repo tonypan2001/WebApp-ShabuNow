@@ -59,18 +59,13 @@ class OrderController extends Controller
 
     public function sendOrders(Table $table)
     {
-        $orders = Order::where('table_id', '=' , $table->id);
-        $orders = $orders->where('table_id', '=' , $table->id);
+        $orders = Order::where('table_id', '=' , $table->id)->get();
         $orders = $orders->where('status', '=' , 'pending');
         foreach ($orders as $order)
         {
             $order->status = 'ordered';
             $order->save();
         }
-
-        $orders = $this->orderWithPrice();
-        $orders = $orders->where('table_id', '=' , $table->id)->get();
-        return $orders;
     }
 
     public function store(Request $request, Table $table)
@@ -97,7 +92,7 @@ class OrderController extends Controller
 
     public function checkBill(Table $table)
     {
-        $orderstobill = Order::where('table_id', '=' , $table->id);
+        $orderstobill = Order::where('table_id', '=' , $table->id)->get();
         $user = \App\Models\User::where('id', '=' , $table->user_id)->first();
         foreach ($orderstobill as $order) {
             $history = new History();
