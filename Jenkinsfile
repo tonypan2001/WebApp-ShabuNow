@@ -7,7 +7,7 @@ pipeline {
                         url: 'https://github.com/tonypan2001/WebApp-ShabuNow.git'
                }
           }
-          stage('Build') {
+          stage('Backend Setup') {
                steps {
                     dir('ShabuNow') {
                         sh 'docker run --rm \
@@ -18,16 +18,16 @@ pipeline {
                         composer install --ignore-platform-reqs'
                         sh 'cp .env.example .env'
                          sh 'vendor/bin/sail down'
-                        sh 'vendor/bin/sail up -d'
-                        sh 'vendor/bin/sail yarn install'
-                        sh 'vendor/bin/sail yarn dev'
+                        sh 'vendor/bin/sail up -d'                                             
                     }
                }
           }
-          stage('Test') {
+          stage('Frontend Setup') {
                steps {
-                    echo 'testing...'
-                    //sh 'mvn test'
+                    dir('ShabuNow-nuxt') {
+                       sh 'npm install'
+                       sh 'npm run dev'
+                    }
                }
           }
           stage('Deploy') {
