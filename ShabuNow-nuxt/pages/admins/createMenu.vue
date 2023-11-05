@@ -33,16 +33,17 @@
           placeholder="คำอธิบายเพิ่มเติม"
         ></textarea>
 
-        <div class="mx-auto mt-2">
+        <div class="mx-auto my-8">
           <label
             class="mt-4 mb-1 block text-lg font-medium text-gray-700"
             >อัพโหลดรูปภาพ</label
           >
-          <input
+          <input @change="handleChangeFile"
             id="example1"
             type="file"
             class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
           />
+          <p>{{ file?.name }}</p>
         </div>
         <Button class="mt-4 w-full">
           <slot name="button">ยืนยัน</slot>
@@ -56,24 +57,55 @@
 <script setup lang="ts">
 import {Category} from "~/models/defineType";
 import {navigateTo} from "#app";
+import {format} from "node:url";
 
 const formData = reactive({
   name: "",
   price: "",
   category: "",
-  description: ""
+  description: "",
+  imgPath: ""
 })
 
 const error = reactive({
   errors: ""
 })
 
-// const {data: categories} = await useFetch<Category[]>('http://localhost/api/category')
+function generateUniqueId() {
+  const timestamp = new Date().getTime();
+  const random = Math.random().toString(36).substring(2);
+  return timestamp + random;
+}
+
+const file = ref<File|null>(null)
+
+const handleChangeFile = (event: Event) => {
+  const [_file] = (event.target as HTMLInputElement).files as FileList
+
+  file.value = _file
+  console.log("added file: "+file.value.name)
+}
 
 async function onSubmit() {
   console.log(formData)
   try {
-    const menu = await $fetch("http://localhost/api/menu/store", {
+    const body = new FormData()
+    const generateNewFilename = generateUniqueId() + ".jpeg"
+    console.log(generateNewFilename)
+    console.log("uploaded file: "+file.value + "--"+ file.value.name)
+    body.append('file', file.value, generateNewFilename)
+
+    const response = await $fetch("/api/upload", {
+      method: "POST", body
+    })
+
+    if (response.success) {
+      console.log("File upload successful");
+      formData.imgPath = generateNewFilename
+      console.log("formData.imgPath set to:", formData.imgPath);
+    }
+
+    await $fetch("http://localhost/api/menu/store", {
       method: "POST",
       body: formData
     })
@@ -85,29 +117,10 @@ async function onSubmit() {
     error.errors = "สร้างเมนูไม่สำเร็จ"
     console.log("Error" + error)
     if (error.response) {
-      console.error("Response Status:", error.response.status);
-      console.error("Response Data:", error.response.data);
+      console.error("Response Status:" , error.response.status);
+      console.error("Response Data:" , error.response.data);
     }
   }
-
-  // const { name } = formData.value
-  // const { data:response, error } = await $fetch<any>(
-  //     "http://localhost/api/menu/store",
-  //     {
-  //       method: "POST",
-  //       body: { name }
-  //     }
-  // )
-  //
-  // console.log(formData.value)
-  // console.log(response.value)
-  // if (response.value !== null) {
-  //   await navigateTo(`/menus/store/${formData.value}`)
-  // } else {
-  //   console.log(error)
-  //   const { message } = error.value!.data
-  //   formErrors.value.errors = message
-  // }
 }
 
 const categories = await $fetch('http://localhost/api/category', {
