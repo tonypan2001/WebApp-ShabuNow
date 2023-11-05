@@ -14,8 +14,8 @@
       <!-- category dropdown button -->
       <div class="block flex justify-center items-center">
         <!-- end -->
-        <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>
-        <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>
+<!--        <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>-->
+<!--        <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>-->
         <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mx-4" />
         <a class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
            v-if="auth.getUser.role === 'customer'" :href="'/carts/table_' + table_id">
@@ -36,7 +36,7 @@
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'chef'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
+                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
                     <template v-slot:title>
                         <!-- สลัดผักรวมมิตร -->
@@ -58,15 +58,6 @@
     </MainContainer>
 </template>
 
-<script lang="js">
-export default {
-  data() {
-    definePageMeta({
-      middleware: ["auth2"],
-    });
-  },
-};
-</script>
 <script setup lang="js">
 const auth = useAuthStore();
 console.log(auth.getUser.id)

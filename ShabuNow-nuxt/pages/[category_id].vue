@@ -14,8 +14,8 @@
       <!-- category dropdown button -->
       <div class="block flex justify-center items-center">
         <!-- end -->
-        <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>
-        <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>
+<!--        <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>-->
+<!--        <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>-->
         <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mx-4" />
         <a class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
            v-if="auth.getUser.role === 'customer'" :href="'/carts/table_' + table_id">
@@ -59,15 +59,15 @@
   </MainContainer>
 </template>
 
-<script lang="js">
-export default {
-  data() {
-    definePageMeta({
-      middleware: ["auth2"],
-    });
-  },
-};
-</script>
+<!--<script lang="js">-->
+<!--export default {-->
+<!--  data() {-->
+<!--    definePageMeta({-->
+<!--      middleware: ["auth2"],-->
+<!--    });-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
 <script setup lang="js">
 
 import {useRoute} from "vue-router";
