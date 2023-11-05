@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Table;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
@@ -43,6 +44,19 @@ class TableController extends Controller
         $tableToRemove = Table::count();
         $table = Table::find($tableToRemove);
         $table->delete();
+    }
+
+    public function checkIn(User $user, Table $table)
+    {
+        $table->user_id = $user->id;
+        $user->tableNumber = $table->id;
+
+        $table->status = 'used';
+
+        $table->save();
+        $user->save();
+
+        return $table;
     }
 
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\Menu;
 use App\Models\Order;
 use App\Models\Table;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -93,4 +95,29 @@ class OrderController extends Controller
         return $order;
     }
 
+    public function checkBill(Table $table)
+    {
+        $orderstobill = Order::where('table_id', '=' , $table->id);
+        $user = \App\Models\User::where('id', '=' , $table->user_id)->first();
+        foreach ($orderstobill as $order) {
+            $history = new History();
+            $history->name = $order->name;
+            $history->quantity = $order->quantity;
+            $history->detail = $order->detail;
+            $history->user_id = $user->id;
+            $history->save();
+            $history->refresh();
+            $order->delete();
+        }
+
+        $table->status = 'available';
+        $table->user_id = null;
+        $table->save();
+
+        $user->table_id = null;
+        $user->save();
+
+        $historys = History::where('user_id', '=' , $user->id)->get();
+        return [$historys,$user, $table];
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TableController;
@@ -56,6 +57,7 @@ Route::group([
     Route::get('show/{order}', [OrderController::class, 'show']);
     Route::get('/checkOrdered/1/', [OrderController::class, 'checkOrdered']);
     Route::put('served/{order}', [OrderController::class, 'served']);
+    Route::delete('checkBill/{table}', [OrderController::class, 'checkBill']);
 });
 
 Route::group([
@@ -102,6 +104,14 @@ Route::group([
     Route::post('/create', [TableController::class, 'store']);
     Route::put('/update/{table}', [TableController::class, 'update']);
     Route::delete('/delete', [TableController::class, 'destroy']);
+    Route::post('/checkIn/{user}/{table}', [TableController::class, 'checkIn']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'history'
+], function () {
+    Route::get('/show/{user}', [HistoryController::class, 'show']);
 });
 
 
