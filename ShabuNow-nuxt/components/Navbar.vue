@@ -66,7 +66,7 @@
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
           <a
-            href="/bills"
+              :href="`/bills/table_${table_id}`"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             รายการที่สั่ง
           </a>

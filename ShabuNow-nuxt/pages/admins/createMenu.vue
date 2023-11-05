@@ -24,9 +24,7 @@
         class="mt-4 text-base text-slate-400 focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none p-2.5 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3"
         >
           <option selected>เลือกหมวดหมู่</option>
-          <option value="food">อาหาร</option>
-          <option value="Drinks">เครื่องดื่ม</option>
-          <option value="sweet">ของหวาน</option>
+          <option v-for="catogory in categories"> {{ catogory.name }}</option>
         </select>
 
         <textarea v-model="formData.description"
@@ -57,6 +55,7 @@
 
 <script setup lang="ts">
 import {Category} from "~/models/defineType";
+import {navigateTo} from "#app";
 
 const formData = reactive({
   name: "",
@@ -80,15 +79,17 @@ async function onSubmit() {
     })
     error.success = "สร้างเมนูสำเร็จ"
     error.errors = ""
+    await navigateTo(`/admins`)
   } catch (error) {
     error.success = ""
     error.errors = "สร้างเมนูไม่สำเร็จ"
     console.log("Error" + error)
     if (error.response) {
-      console.error("Response Status:" , error.response.status);
-      console.error("Response Data:" , error.response.data);
+      console.error("Response Status:", error.response.status);
+      console.error("Response Data:", error.response.data);
     }
   }
+
   // const { name } = formData.value
   // const { data:response, error } = await $fetch<any>(
   //     "http://localhost/api/menu/store",
@@ -108,5 +109,12 @@ async function onSubmit() {
   //   formErrors.value.errors = message
   // }
 }
+
+const categories = await $fetch('http://localhost/api/category', {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+  },
+});
 
 </script>

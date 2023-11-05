@@ -20,15 +20,15 @@
           <span id="discount_price" class="text-red-600 font-semibold text-3xl ml-2 ease-in duration-150">฿ {{ sum }}</span>
         </div>
 
-<!--        <p class="ml-3 font-normal text-lg text-gray-700 mt-2">-->
-<!--          <i class="bi bi-coin mr-2 text-yellow-500"></i>-->
-<!--          แต้มที่ใช้ไปทั้งหมด : 50 คะแนน-->
-<!--        </p>-->
+        <!--        <p class="ml-3 font-normal text-lg text-gray-700 mt-2">-->
+        <!--          <i class="bi bi-coin mr-2 text-yellow-500"></i>-->
+        <!--          แต้มที่ใช้ไปทั้งหมด : 50 คะแนน-->
+        <!--        </p>-->
 
         <!-- Add menu button -->
-        <NuxtLink :to="`/bills/table_${route.params.id}`">
-<!--        <NuxtLink :to="`/bills`">-->
-          <Button class="mt-8 py-4 w-full md:w-auto">
+        <!--        <NuxtLink :to="`/bills/table_${route.params.id}`">-->
+        <NuxtLink :to="`/bills`">
+          <Button class="mt-8 py-4 w-full md:w-auto" v-if ="auth.getUser.role === 'staff'">
             <i class="bi bi-cash mr-1"></i>
             ยืนยันการชำระเงิน
           </Button>
@@ -41,12 +41,8 @@
 
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
-
-definePageMeta({
-  middleware: ['customer','admin']
-})
-
 const route = useRoute()
+const auth = useAuthStore();
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
   const res = await fetch(url);
@@ -57,7 +53,7 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
 const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/${route.params.id}`)
 
 const tableHeaders = [
-    'ลำดับ',
+  'ลำดับ',
   'รายการอาหาร',
   'จำนวน',
   'ราคา']
