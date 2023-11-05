@@ -16,8 +16,53 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-        ];
+        $foodCategories = array(
+            'Appetizers',
+            'Main Dishes',
+            'Desserts',
+            'Beverages',
+            'Salads',
+            'Pizzas',
+            'Burgers',
+            'Seafood',
+            'Pasta',
+            'Sushi',
+            'Vegetarian',
+            'Sandwiches',
+            'Soups',
+            'Chicken',
+            'Steaks',
+            'Mexican',
+            'Italian',
+            'Chinese',
+            'Indian',
+            'Thai',
+            'Japanese',
+            'Mediterranean',
+            'Fast Food',
+            'BBQ',
+            'Vegan',
+            'Gluten-Free',
+            'Greek',
+            'Korean',
+            'French',
+            'Turkish',
+            'Vietnamese',
+            'Cajun',
+            'African',
+            'Spanish',
+            'Brazilian',
+            'German',
+            'Soul Food',
+            'Peruvian',
+            'Irish',
+            'Middle Eastern',
+            'Russian',
+            'Polish',
+            'Swedish',
+            'Caribbean');
+            return [
+                'name' => array_rand($foodCategories),
+            ];
     }
 }
