@@ -36,7 +36,7 @@
       </HeaderContainer>
       <GridContainer>
         <!-- menu item card -->
-        <MenuItemCard v-for="menu in categorizedMenus" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null">
+        <MenuItemCard v-for="menu in categorizedMenus" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'chef'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
           <template v-slot:title>
             <!-- สลัดผักรวมมิตร -->
@@ -55,6 +55,7 @@
       <!-- end menu container -->
     </ContentContainer>
 
+
   </MainContainer>
 </template>
 
@@ -71,9 +72,14 @@ export default {
 
 import {useRoute} from "vue-router";
 
-const table_id = 3;
 const auth = useAuthStore();
 const route = useRoute();
+let table_id = 0;
+const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+if(user.tableNumber)
+{
+  table_id = user.tableNumber;
+}
 function categorizeMenusByCategory(menus, category) {
   const categorizedMenus = [];
 
@@ -86,14 +92,20 @@ function categorizeMenusByCategory(menus, category) {
   return categorizedMenus;
 }
 async function getPrice() {
-  const data = await $fetch(`http://localhost/api/order/${table_id}`);
-  if (data) {
-    let totalPrice = 0;
-    data.forEach(item => {
-      totalPrice += item.price * item.quantity;
-    });
-    return totalPrice;
-  } else return 0
+  if ( table_id != 0) {
+    const data = await $fetch(`http://localhost/api/order/${table_id}`);
+    if (data) {
+      let totalPrice = 0;
+      data.forEach(item => {
+        totalPrice += item.price * item.quantity;
+      });
+      return totalPrice;
+    } else return 0
+  }
+  else
+  {
+    return "-";
+  }
 }
 
 const menus = await $fetch("http://localhost/api/menu", {
