@@ -25,6 +25,11 @@ class MenuController extends Controller
         return $menu;
     }
 
+    public function showMenuById(string $id)
+    {
+        return Menu::find($id);
+    }
+
     /**
      * Update the specified resource in storage.
      */

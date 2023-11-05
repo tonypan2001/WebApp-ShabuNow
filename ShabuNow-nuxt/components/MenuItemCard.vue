@@ -7,7 +7,7 @@
       alt=""/>
 
       <!-- edit menu button for admin -->
-      <a :href="edit_menu" v-if="auth.getUser.role === 'chef'"
+      <a v-if="edit_menu != null && auth.getUser.role === 'chef'" :href="edit_menu"
       class="absolute top-2 right-2 ease-out duration-200 hover:-translate-y-1 hover:translate-x-1 shadow-lg hover:bg-red-500 bg-red-600 text-white px-2 py-1 rounded-xl">
         <i class="bi bi-pencil-square"></i>
         แก้ไข

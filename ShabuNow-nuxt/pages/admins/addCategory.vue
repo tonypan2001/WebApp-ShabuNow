@@ -21,7 +21,7 @@
         <div class="flex flex-col justify-center items-start">
           <form @submit.prevent="addCategory" class="w-full m-0">
             <input
-              v-model="name"
+              v-model="categoryName"
               class="mt-4 w-full"
               placeholder="ชื่อหมวดหมู่"
               type="text"
@@ -36,7 +36,7 @@
             <h1 class="text-2xl">
               สร้างแล้ว: <span class="font-medium">{{ count }}</span> หมวดหมู่
             </h1>
-            <TableNoHeaderForAddCategory :datas="categorys" :headers="tableHeaders" class="mt-8">
+            <TableNoHeaderForAddCategory :datas="categorys" :headers="header" class="mt-8">
 
             </TableNoHeaderForAddCategory>
           </div>
@@ -46,51 +46,43 @@
   </MainContainer>
 </template>
 
-<script setup lang="ts">
-import { Category } from '~/models/defineType';
+<script setup lang="js">
 
-const name = ref('');
-
-async function useFetch<T>(url: string): Promise<{ data: T }> {
-  const response = await fetch(url);
-  const data = await response.json();
-  return { data };
-}
+const categoryName = ref('');
 async function addCategory() {
-  const categoryName = name.value;
-  console.log("Category Name:", categoryName);
-  const { data:response, error } = await useMyFetch<any>(
+  const name = categoryName.value;
+  console.log(categoryName)
+  const response = await $fetch(
       "http://localhost/api/category/store",
       {
         method: "POST",
         body: { name }
       }
   )
-  console.log("response" ,response);
-  console.log(error.value)
-
-  if (error.value=== null) {
-    fetchData()
+  if (response.message === "Category stored successfully") {
+    fetchData();
   }
 }
 
-const categorys = ref<Category[]>([]);
+const categorys = ref([]);
+
 const count = ref(0);
+
+const header = {
+  name : 'ชื่อหมวดหมู่'
+}
 
 // ตัวอย่างการใช้งาน async function
 async function fetchData() {
   try {
-    const { data: categories } = await useFetch<Category[]>('http://localhost/api/category',);
+    let categories = await $fetch('http://localhost/api/category');
     categorys.value = categories;
     count.value = categories.length;
   } catch (error) {
     console.error(error);
   }
 }
-
 fetchData();
-
-
 </script>>
 
 <style>
