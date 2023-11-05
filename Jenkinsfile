@@ -22,6 +22,14 @@ pipeline {
                     }
                }
           }
+          stage('Testing') {
+               steps {
+                    dir('ShabuNow') {
+                        sh 'vendor/bin/sail artisan test'                                             
+                    }
+               }
+          }
+          
           stage('Frontend Setup') {
                steps {
                     dir('ShabuNow-nuxt') {
@@ -32,7 +40,9 @@ pipeline {
           }
           stage('Deploy') {
                steps {
-                    sh 'java -jar ./target/book-1.0.jar'
+                    dir('ShabuNow-nuxt') {                     
+                       sh 'npm run dev'
+                    }
                }
           }
      }
