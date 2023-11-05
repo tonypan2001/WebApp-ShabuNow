@@ -48,6 +48,10 @@
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
 
+definePageMeta({
+  middleware: ['admin']
+})
+
 const route = useRoute()
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {

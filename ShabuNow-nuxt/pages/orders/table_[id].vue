@@ -42,6 +42,10 @@
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
 
+definePageMeta({
+  middleware: ['customer','admin']
+})
+
 const route = useRoute()
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
@@ -78,11 +82,10 @@ function filterOrder(orders: Order[])
       id: i++,
       name: order.name,
       quantity: order.quantity,
-      price: order.price*order.quantity
+      price: order.price * order.quantity,
     })
-    sum += order.price*order.quantity
+    sum += order.price * order.quantity
   })
-
   return orderList
 }
 

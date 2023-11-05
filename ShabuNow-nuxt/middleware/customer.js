@@ -7,7 +7,5 @@ export default defineNuxtRouteMiddleware((to, from) => {
   }
   if (auth.getUser.role === "customer") {
     return navigateTo("/");
-  } else if (auth.getUser.role === "staff") {
-    return navigateTo("/")
   }
 });

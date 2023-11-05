@@ -21,8 +21,8 @@
                             <h1>ราคา ฿ 75 บาท</h1> 
                         </div>
                         <hr class="my-4">
-                        <h1 class="text-xl mt-2 underline">รายละเอียดเมนู</h1>
-                        <p class="my-4 text-lg text-gray-800">
+                        <h1 class="text-xl mt-2">รายละเอียดเมนู</h1>
+                        <p class="my-4 text-lg font-light text-gray-800">
                             He oppose at thrown desire of no. Announcing impression unaffected day his are unreserved indulgence. Him hard find read are you sang. Parlors visited noisier how explain pleased his see suppose. Do ashamed assured on related offence at equally totally.
                         </p>
                     </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="px-4 lg:px-8 py-4 w-2/3">
                 <!-- status menu option for chef role -->
-                <div class="flex flex-col justify-start items-start text-lg">
+                <div v-if="auth.getUser.role === 'chef'" class="flex flex-col justify-start items-start text-lg">
                     <h1 class="text-xl lg:text-2xl text-red-600">ปรับเปลี่ยนสถานะของเมนู</h1>
                     <select
                     class="mt-4 text-base focus:ring-red-600 focus:border-red-600 focus:ring-1 focus:outline-none p-2.5 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3"
@@ -60,6 +60,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: ['admin']
+})
+
+const auth = useAuthStore()
 
 const route = useRoute()
 
