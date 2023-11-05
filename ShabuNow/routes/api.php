@@ -100,8 +100,8 @@ Route::group([
     Route::get('/count', [TableController::class, 'count']);
     Route::get('{table}', [TableController::class, 'show']);
     Route::post('create', [TableController::class, 'store']);
-    Route::put('{table}/update', [TableController::class, 'update']);
-    Route::delete('{table}/delete', [TableController::class, 'destroy']);
+    Route::put('/update/{table}', [TableController::class, 'update']);
+    Route::delete('/delete/{table}', [TableController::class, 'destroy']);
 });
 
 

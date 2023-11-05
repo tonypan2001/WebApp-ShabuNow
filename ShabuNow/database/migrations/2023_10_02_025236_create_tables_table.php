@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('status',['available', 'used']);
-            $table->foreignIdFor(\App\Models\User::class); // user_id (fk)
+            $table->foreignIdFor(\App\Models\User::class)->nullable(); // user_id (fk)
         });
     }
 
