@@ -63,7 +63,7 @@
 export default {
   data() {
     definePageMeta({
-      middleware: ["auth2"],
+      // middleware: ["auth2"],
     });
   },
 };

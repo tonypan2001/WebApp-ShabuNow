@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-  const tokenStore = useTokenStore();
-  const auth = useAuthStore();
-  const route = useRoute();
-  if (!tokenStore.getStatus) {
-    await navigateTo("/login");
-  }
-  const accessCustomerPath = ['/', '/menus/menu_[id]', '/accounts', '/bills', '/carts/table_[id]']
-  const accessStaffPath = ['/home','/', '/orders', '/accounts', '/orders/table_[id]']
-  const accessAdminPath = ['/','/admins','/admins/staff','/admins/staff/create','/accounts']
-  const accessChefPath = ['/', '/menus/menu_[id]', '/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
-  if (auth.getUser.role === "customer" && !accessCustomerPath.includes(route.path)) {
-    await navigateTo("/");
-  } else if (auth.getUser.role === "staff" && !accessStaffPath.includes(route.path)) {
-    await navigateTo("/")
-  } else if (auth.getUser.role === "admin" && !accessAdminPath.includes(route.path)) {
-    await navigateTo("/")
-  } else if (auth.getUser.role === "chef" && !accessChefPath.includes(route.path)) {
-    await navigateTo("/")
-  }
+  // const tokenStore = useTokenStore();
+  // const auth = useAuthStore();
+  // const route = useRoute();
+  // if (!tokenStore.getStatus) {
+  //   await navigateTo("/login");
+  // }
+  // const accessCustomerPath = ['/', '/menus/menu_[id]', '/accounts', '/bills', '/carts/table_[id]']
+  // const accessStaffPath = ['/home','/', '/orders', '/accounts', '/orders/table_[id]']
+  // const accessAdminPath = ['/','/admins','/admins/staff','/admins/staff/create','/accounts']
+  // const accessChefPath = ['/', '/menus/menu_[id]', '/admins','/admins/addCategory','/admins/createMenu','/admins/editMenu','/accounts']
+  // if (auth.getUser.role === "customer" && !accessCustomerPath.includes(route.path)) {
+  //   await navigateTo("/");
+  // } else if (auth.getUser.role === "staff" && !accessStaffPath.includes(route.path)) {
+  //   await navigateTo("/")
+  // } else if (auth.getUser.role === "admin" && !accessAdminPath.includes(route.path)) {
+  //   await navigateTo("/")
+  // } else if (auth.getUser.role === "chef" && !accessChefPath.includes(route.path)) {
+  //   await navigateTo("/")
+  // }
 </script>
 
 <template>
