@@ -46,8 +46,11 @@ class TableController extends Controller
         $table->delete();
     }
 
-    public function checkIn(User $user, Table $table)
+    public function checkIn(Request $request)
     {
+        $table = Table::where('id', $request->get("tableid"))->first();
+        $user = User::where('id', $request->get("userid"))->first();
+
         $table->user_id = $user->id;
         $user->tableNumber = $table->id;
 

@@ -104,7 +104,7 @@ Route::group([
     Route::post('/create', [TableController::class, 'store']);
     Route::put('/update/{table}', [TableController::class, 'update']);
     Route::delete('/delete', [TableController::class, 'destroy']);
-    Route::post('/checkIn/{user}/{table}', [TableController::class, 'checkIn']);
+    Route::post('/checkIn', [TableController::class, 'checkIn']);
 });
 
 Route::group([
