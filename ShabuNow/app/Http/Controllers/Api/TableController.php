@@ -30,10 +30,19 @@ class TableController extends Controller
         return $table;
     }
 
-    public function destroy(Table $table)
+    public function store()
     {
+        $table = new Table();
+        $table->id = Table::count() + 1;
+        $table->status = 'available';
+        $table->save();
+    }
+
+    public function destroy()
+    {
+        $tableToRemove = Table::count();
+        $table = Table::find($tableToRemove);
         $table->delete();
-        return Table::get();
     }
 
 }
