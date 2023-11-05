@@ -27,12 +27,12 @@
 
         <!-- Add menu button -->
         <!--        <NuxtLink :to="`/bills/table_${route.params.id}`">-->
-        <NuxtLink :to="`/bills`">
+        <form @submit.prevent="onSubmit()" action="">
           <Button class="mt-8 py-4 w-full md:w-auto" v-if ="auth.getUser.role === 'staff'">
             <i class="bi bi-cash mr-1"></i>
             ยืนยันการชำระเงิน
           </Button>
-        </NuxtLink>
+        </form>
       </TotalPrice>
 
     </ContentContainer>
@@ -86,6 +86,22 @@ function filterOrder(orders: Order[])
 }
 
 const FilteredOrder = filterOrder(orders)
+
+async function onSubmit() {
+  try
+  {
+    console.log(route.params.id)
+    const checkBill = await $fetch(`http://localhost/api/order/checkBill/${route.params.id}/`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+      },
+    })
+    await navigateTo(`/orders`)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 // export default {
 //   data() {

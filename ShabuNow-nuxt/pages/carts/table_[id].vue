@@ -33,12 +33,18 @@
                 </div>
                 <hr>
                 <!-- Add menu button -->
-              <NuxtLink :to="`/`">
+              <NuxtLink v-if="auth.getUser.role === 'customer'"  :to="`/`">
                 <Button class="mt-8 py-4 w-full md:w-auto">
                   <i class="bi bi-plus-lg mr-1"></i>
                   เพิ่มเมนูอาหาร
                 </Button>
               </NuxtLink>
+              <form @submit.prevent="onSubmit()" action="" v-if="auth.getUser.role === 'customer'" >
+                <Button class="mt-8 py-4 w-full md:w-auto">
+                  <i class="bi bi-plus-lg mr-1"></i>
+                  ส่งรายการอาหาร
+                </Button>
+              </form>
             </TotalPrice>
 
         </ContentContainer>
@@ -47,12 +53,14 @@
 
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
+import {navigateTo} from "#app";
 
 definePageMeta({
   middleware: ['admin']
 })
 
 const route = useRoute()
+const auth = useAuthStore();
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
   const res = await fetch(url);
@@ -71,5 +79,22 @@ function sumPrice(orders: Order[]) {
 }
 
 const totalPrice = sumPrice(orders);
+
+async function onSubmit() {
+  console.log(orders)
+  try {
+    const menu = await $fetch(`http://localhost/api/order/sendOrders/${route.params.id}`,{     method: "POST",
+      method: "POST",
+    })
+    await navigateTo(`/bills/table_${route.params.id}`)
+  } catch (error) {
+    console.log("Error" + error)
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+  }
+}
 
 </script>
