@@ -52,7 +52,7 @@
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
           <a
-            href="/carts"
+            :href="`/carts/table_${table_id}`"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             ตะกร้าสินค้า
           </a>
@@ -119,33 +119,40 @@
             <p class="">ออกจากระบบ</p>
           </Button>
           <!-- end of logout btn -->
-
+          {{  }}
         </div>
       </div>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-    setup() {
-        const auth = useAuthStore()
-        const open = ref(false);
-        const links = [
-            {name : "เลือกเมนู" , link : "/"},
-            {name : "ตะกร้าสินค้า" , link : "/carts"},
-            {name : "รายการที่สั่ง" , link : "/bills"},
-            {name : "คำสั่งซื้อลูกค้า" , link : "/orders"},
-        ];
+<script lang="js" setup>
 
-    function menuOpen() {
-      open.value = !open.value;
-    }
+import { ref } from 'vue';
+const auth = useAuthStore();
 
-    return { links, open, menuOpen, auth };
-  },
-};
+const open = ref(false);
+// const links = [
+//   { name: "เลือกเมนู", link: "/" },
+//   { name: "ตะกร้าสินค้า", link: "/carts" },
+//   { name: "รายการที่สั่ง", link: "/bills" },
+//   { name: "คำสั่งซื้อลูกค้า", link: "/orders" },
+// ];
+
+function menuOpen() {
+  open.value = !open.value;
+}
+
+let table_id = 0;
+const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+if(user.tableNumber)
+{
+  table_id = user.tableNumber;
+}
+
+
 </script>
+
 
 <style lang="scss" scoped>
 * {

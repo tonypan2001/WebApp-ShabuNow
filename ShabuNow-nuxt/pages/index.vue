@@ -18,7 +18,7 @@
         <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>
         <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mx-4" />
         <a class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
-           v-if="auth.getUser.role === 'customer'" :href="'/carts/' + table_id">
+           v-if="auth.getUser.role === 'customer'" :href="'/carts/table_' + table_id">
           <slot><i class="bi bi-cart-plus mr-2"></i>ราคารวม : {{ price }}</slot>
         </a>
       </div>
@@ -36,7 +36,7 @@
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null">
+                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
                     <template v-slot:title>
                         <!-- สลัดผักรวมมิตร -->
@@ -68,9 +68,14 @@ export default {
 };
 </script>
 <script setup lang="js">
-
-const table_id = 3;
 const auth = useAuthStore();
+console.log(auth.getUser.id)
+let table_id = 0;
+const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+if(user.tableNumber)
+{
+  table_id = user.tableNumber;
+}
 console.log(auth.getUser.role)
 function categorizeMenusByCategory(menus) {
   const categorizedMenus = [];
@@ -86,15 +91,23 @@ function categorizeMenusByCategory(menus) {
   return categorizedMenus;
 }
 async function getPrice() {
-  const data = await $fetch(`http://localhost/api/order/${table_id}`);
-  console.log('order :', data)
-  if (data) {
-    let totalPrice = 0;
-    data.forEach(item => {
-      totalPrice += item.price * item.quantity;
-    });
-    return totalPrice;
-  } else return 0
+  if ( table_id != 0)
+  {
+    const data = await $fetch(`http://localhost/api/order/${table_id}`);
+    console.log('order :', data)
+    if (data) {
+      let totalPrice = 0;
+      data.forEach(item => {
+        totalPrice += item.price * item.quantity;
+      });
+      return totalPrice;
+    } else return 0
+  }
+  else
+  {
+    return "-";
+  }
+
 }
 
 const menus = await $fetch("http://localhost/api/menu", {
