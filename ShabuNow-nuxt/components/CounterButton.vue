@@ -2,7 +2,7 @@
     <div class="custom-number-input h-10 w-32 flex flex-col items-center justify-center">
         <label for="custom-input-number" class="w-full text-gray-700 text-base text-center font-semibold">
           <slot name="counter_title">
-            Counter Title
+            {{ title }}
           </slot>
         </label>
         <div class="flex flex-row h-10 w-full border rounded-lg relative bg-transparent mt-1">
@@ -21,6 +21,12 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  props: ['title', 'initialNumber']
+}
+</script>
 
 <script setup>
 const counter = reactive({number: 1})
