@@ -102,8 +102,7 @@ Route::group([
     Route::put('{table}/update', [TableController::class, 'update']);
     Route::delete('{table}/delete', [TableController::class, 'destroy']);
 });
-}
-]);
+
 
 Route::controller(AuthController::class)->middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout','logout');
