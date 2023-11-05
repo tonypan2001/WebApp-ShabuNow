@@ -33,8 +33,7 @@ pipeline {
           stage('Frontend Setup') {
                steps {
                     dir('ShabuNow-nuxt') {
-                       sh 'npm install'
-                       sh 'npm run dev'
+                       sh 'npm install'                
                     }
                }
           }
