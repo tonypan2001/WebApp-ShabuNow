@@ -91,6 +91,20 @@ Route::group([ //customer section ----------------------------------------------
     Route::post('create', [UserController::class, 'store']);
 });
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'table'
+], function () {
+    Route::get('/', [TableController::class, 'index']);
+    Route::get('/count', [TableController::class, 'count']);
+    Route::get('{table}', [TableController::class, 'show']);
+    Route::post('create', [TableController::class, 'store']);
+    Route::put('{table}/update', [TableController::class, 'update']);
+    Route::delete('{table}/delete', [TableController::class, 'destroy']);
+});
+}
+]);
+
 Route::controller(AuthController::class)->middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout','logout');
 });
