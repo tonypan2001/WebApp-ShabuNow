@@ -18,7 +18,7 @@
         <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>
         <ButtonDropdown title="หมวดหมู่อาหาร" :items="categories" class="mx-4" />
         <a class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
-           v-if="auth.getUser.role === 'customer'" :href="'/carts/' + table_id">
+           v-if="auth.getUser.role === 'customer'" :href="'/carts/table_' + table_id">
           <slot><i class="bi bi-cart-plus mr-2"></i>ราคารวม : {{ price }}</slot>
         </a>
       </div>
