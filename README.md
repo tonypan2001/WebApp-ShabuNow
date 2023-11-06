@@ -124,7 +124,7 @@ sail artisan migrate:fresh --seed
 [JIRA](https://prompan.atlassian.net/jira/software/projects/SFP/boards/2/timeline?shared=&atlOrigin=eyJpIjoiMWVhNjg4MDUyYjZkNGY0YjhlOTk4ZGIyNTA2YmU4OWIiLCJwIjoiaiJ9)
 >
 >
-[burndown chart](https://o365ku-my.sharepoint.com/:x:/g/personal/pathorn_y_live_ku_th/EfLxkyPJhPZEnIFoOK0Jze4Bsv_FvRxumKjyl6oxUfindg?rtime=8lWkPube20g
+[burndown chart](https://o365ku-my.sharepoint.com/:x:/g/personal/pathorn_y_live_ku_th/EfLxkyPJhPZEnIFoOK0Jze4Bsv_FvRxumKjyl6oxUfindg?rtime=8lWkPube20g)
 
 # ผลการรัน unit test
 >รันด้วยคำสั่ง
