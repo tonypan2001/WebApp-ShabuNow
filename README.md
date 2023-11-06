@@ -147,9 +147,20 @@ sail artisan test
 >
 <img width="5936" alt="UI flow" src="https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/a6447c2f-97d3-42fd-a924-357024729104">
 
+# User persona
+
+>
+>
+
 ![Userpersona](https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/56405bc6-8341-4ef9-a976-9590694900a7)
 
-![Userpersona](https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/4b915cef-bd64-4ffe-8d49-ab3d6d84429a)
+# Burndown chart
+
+>
+>
+
+![burndownChart](https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/b71011c9-16b1-4f91-b470-69a9a2a2096e)
+
 
 
 
