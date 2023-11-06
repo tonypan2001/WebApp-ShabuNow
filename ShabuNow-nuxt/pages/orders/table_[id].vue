@@ -47,6 +47,7 @@ definePageMeta({
 })
 
 const route = useRoute()
+const config = useRuntimeConfig()
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
   const res = await fetch(url);
@@ -54,7 +55,7 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
   return { data };
 }
 
-const { data: orders } = await useFetch<Order[]>($config.apiBaseURL + `order/${route.params.id}`)
+const { data: orders } = await useFetch<Order[]>(config.public.apiBaseURL + `order/${route.params.id}`)
 
 const tableHeaders = [
     'ลำดับ',
