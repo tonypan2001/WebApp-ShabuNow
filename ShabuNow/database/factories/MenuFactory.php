@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MenuFactory extends Factory
 {
-    
+
 
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class MenuFactory extends Factory
      */
     public function definition(): array
     {
-        
+
         $status = array('available','outofstock');
         $foodNames = array(
             'Spaghetti Bolognese',
@@ -72,6 +72,7 @@ class MenuFactory extends Factory
             'category_id' => Category::find(rand(1, 5)),
             'description' => fake()->realTextBetween(120,200,2),
             'status' => $status[array_rand($status)],
+            'imgPath' => 'salmonpic.png',
             'price' => fake()->numberBetween(20,200),
         ];
     }
