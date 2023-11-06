@@ -45,10 +45,11 @@ Route::group([
 
 //Route::apiResource('/category', \App\Http\Controllers\Api\CategoryController::class);
 
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'order'
-], function () {
+], function () { 
     Route::get('{table}', [OrderController::class, 'index']);
     Route::post('store/{table}', [OrderController::class, 'store']);
     Route::get('checkPending/{table}', [OrderController::class, 'checkPending']);

@@ -11,6 +11,17 @@ class Order extends Model
 {
     use HasFactory;
 
+    // $table->id();
+    //         $table->timestamps();
+    //         $table->string('name')->nullable();
+    //         $table->foreignIdFor(\App\Models\Menu::class)->nullable(); //menu_id (fk)
+    //         $table->string('detail')->nullable();
+    //         $table->integer('quantity');
+    //         $table->enum('status', ['pending','ordered','ready','served']);
+    //         $table->foreignIdFor(\App\Models\Table::class)->nullable(); //table_id (fk)
+
+    protected $fillable = ['name', 'detail','quantity','status'];
+
     public function menus() : HasMany
     {
         return $this->hasMany(Menu::class);

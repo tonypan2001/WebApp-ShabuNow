@@ -15,18 +15,18 @@ class MenuController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $menus = Menu::all();
-        if($menus->count() > 0){
-        return response()->json([
-            'status' => 200,
-            'menus' => $menus
-        ],200);
-    }else{
-        return response()->json([
-            'status' => 404,
-            'message ' => 'No Records Found'
-        ],404);
-    }
+        return Menu::all();
+    //     if($menus->count() > 0){
+    //     return response()->json([
+    //         'status' => 200,
+    //         'menus' => $menus
+    //     ],200);
+    // }else{
+    //     return response()->json([
+    //         'status' => 404,
+    //         'message ' => 'No Records Found'
+    //     ],404);
+    // }
 }
 
     /**
@@ -131,7 +131,7 @@ class MenuController extends Controller
             'category' => ['required', 'string'],
             'description' => ['required', 'string', 'min:1'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'category_id' => ['required']
+            'category_id' => ['required'] 
         ]);
 
 

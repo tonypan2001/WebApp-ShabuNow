@@ -27,7 +27,7 @@ class OrderController extends Controller
     public function index(Table $table)
     {
         $orders = $this->orderWithPrice();
-        $orders = $orders->where('table_id', '=' , $table->id);
+        $orders = $orders->where('table_id', '=' , $table->id)->get();
         return $orders;
     }
 
@@ -76,6 +76,7 @@ class OrderController extends Controller
         $request->validate([
                 'menu_id' => ['required'],
                 'quantity' => ['required','integer','min:1','max:100'],
+                
             ]);
 
         $order = new Order();
@@ -83,7 +84,7 @@ class OrderController extends Controller
         $order->menu_id = $request->get('menu_id');
         $order->quantity = $request->get('quantity');
         $menu = Menu::find($request->get('menu_id'));
-        $order->name = $menu->name;
+        $order->name = $menu->name;        
         $order->table_id = $table->id;
         $order->status = 'pending';
 
