@@ -87,23 +87,20 @@ const handleChangeFile = (event: Event) => {
 }
 
 async function onSubmit() {
-  console.log(formData)
   try {
     const body = new FormData()
     const generateNewFilename = generateUniqueId() + ".jpeg"
+    formData.imgPath = generateNewFilename
+    console.log(formData)
+
     console.log(generateNewFilename)
     console.log("uploaded file: "+file.value + "--"+ file.value.name)
+
     body.append('file', file.value, generateNewFilename)
 
     const response = await $fetch("/api/upload", {
       method: "POST", body
     })
-
-    if (response.success) {
-      console.log("File upload successful");
-      formData.imgPath = generateNewFilename
-      console.log("formData.imgPath set to:", formData.imgPath);
-    }
 
     await $fetch("http://localhost/api/menu/store", {
       method: "POST",
