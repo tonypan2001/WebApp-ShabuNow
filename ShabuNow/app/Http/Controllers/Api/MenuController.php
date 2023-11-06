@@ -68,12 +68,13 @@ class MenuController extends Controller
         $menu->category_id = $category->id;
         $menu->description = $request->get('description');
         $menu->status = 'available';
+        $menu->imgPath = $request->get('imgPath');
 
-        if($request->file('image') != null )
-        {
-            $imagePath = $request->file('image')->store('foodImages', 'public');
-            $menu->imgPath = $imagePath;
-        }
+//        if($request->file('imgPath') != null )
+//        {
+//            $imagePath = $request->file('imgPath')->store('foodImages', 'public');
+//            $menu->imgPath = $imagePath;
+//        }
 
         $menu->save();
         $menu->refresh();
