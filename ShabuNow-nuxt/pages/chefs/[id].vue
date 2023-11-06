@@ -147,7 +147,7 @@ export default {
   },
   mounted() {
     this.menuId = this.$route.params.id;
-    alert(this.menuId);
+    // alert(this.menuId);
     this.getMenu(this.menuId);
   },
   methods: {
@@ -169,9 +169,10 @@ export default {
         .put(`http://localhost/api/menu/update/${this.menuId}`, this.menu)
         .then((res) => {
           console.log(res, "res");
-          alert(res.data);
+          // alert(res.data);
           // this.menu = res.data.menu;
           this.errorList = {};
+          navigateTo(`/chefs`);
         })
         .catch(function (error) {
           console.log(error, "errors");

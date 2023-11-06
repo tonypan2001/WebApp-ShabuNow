@@ -5,10 +5,10 @@
       <!-- form -->
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">Login</h1>
-        <h1>{{ token.getStatus }}</h1>
+<!--        <h1>{{ token.getStatus }}</h1>-->
         <p class="mt-4 text-sm">If you already a member,login in</p>
 
-        {{ token.getToken }} {{ token.getStatus }}
+<!--        {{ token.getToken }} {{ token.getStatus }}-->
         <!-- <h1>Auth: {{ auth.getUser.role }}</h1> -->
         <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
           <InputField
@@ -43,9 +43,9 @@
             <a href="/register" class="underline">สมัครสมาชิก</a>
           </p>
         </form>
-        <Button type="submit" @click.prevent="token.removeToken()">
-          <slot name="button"> Remove Token </slot>
-        </Button>
+<!--        <Button type="submit" @click.prevent="token.removeToken()">-->
+<!--          <slot name="button"> Remove Token </slot>-->
+<!--        </Button>-->
       </div>
       <!-- image -->
       <div class="w-1/2 sm:block hidden">
@@ -80,6 +80,18 @@ const handleSubmit = async () => {
     //   method: "POST",
     //   body: { ...form },
     // });
+    if(auth.getUser.role === 'customer')
+    {
+      await navigateTo("/home");
+    }
+    else if (auth.getUser.role === 'chef')
+    {
+      await navigateTo("/chefs");
+    }
+    else if (auth.getUser.role === 'staff')
+    {
+      await navigateTo("/orders");
+    }
   } catch (error) {
     console.log(error.data.errors.email[0]);
     errors.value = error.data.errors;

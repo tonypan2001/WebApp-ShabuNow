@@ -106,17 +106,9 @@ async function onSubmit() {
       method: "POST",
       body: formData
     })
-    error.success = "สร้างเมนูสำเร็จ"
-    error.errors = ""
     await navigateTo(`/admins`)
   } catch (error) {
-    error.success = ""
-    error.errors = "สร้างเมนูไม่สำเร็จ"
     console.log("Error" + error)
-    if (error.response) {
-      console.error("Response Status:" , error.response.status);
-      console.error("Response Data:" , error.response.data);
-    }
   }
 }
 

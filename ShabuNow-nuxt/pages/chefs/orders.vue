@@ -2,7 +2,7 @@
   <MainContainer>
     <HeaderContainer>
       <h1 class="text-red-500">Chef page</h1>
-      <HeaderText> Incomming Order </HeaderText>
+      <HeaderText> Incoming Order </HeaderText>
       <!-- debug by pooh -->
       <!-- <h1>email : {{ auth.getUser?.email }}</h1>
         <h1>password :{{ auth.getUser?.surname }}</h1>

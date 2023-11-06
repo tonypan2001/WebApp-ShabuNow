@@ -23,10 +23,10 @@
         />
         <a
           class="border-2 border-black hover:border-red-600 ease-in-out duration-300 hover:text-red-600 rounded py-1.5 px-4 font-semibold"
-          v-if="auth.getUser.role === 'customer'"
+          v-if="auth.getUser.role === 'customer' && table_id"
           :href="'/carts/table_' + table_id"
         >
-          <slot><i class="bi bi-cart-plus mr-2"></i>ราคารวม : {{ price }}</slot>
+          <slot ><i class="bi bi-cart-plus mr-2"></i>ราคารวม : {{ price }}</slot>
         </a>
       </div>
     </HeaderContainer>

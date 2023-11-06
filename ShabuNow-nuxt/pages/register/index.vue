@@ -108,6 +108,8 @@
 </template>
 
 <script setup>
+import {navigateTo} from "#app";
+
 const auth = useAuthStore();
 const token = useTokenStore();
 const form = reactive({
@@ -117,7 +119,7 @@ const form = reactive({
   email: "",
   password: "",
   password_confirmation: "",
-  // role: "customer",
+  role: "customer",
   photos: "",
 });
 const errors = ref([]);
@@ -129,6 +131,7 @@ const handleSubmit = async () => {
     //   method: "POST",
     //   body: { ...form },
     // });
+    await navigateTo("/");
   } catch (error) {
     // console.log(error.data.errors.email[0]);
     errors.value = error.data.errors;

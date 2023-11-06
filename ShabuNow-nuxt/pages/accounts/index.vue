@@ -26,8 +26,8 @@
           {{ auth.getUser.created_at }}
         </p>
         <p class="mt-4">
-          <span class="font-medium"> แต้มสะสม : </span>
-          0
+          <span class="font-medium"> User ID : </span>
+          {{ auth.getUser.id }}
         </p>
       </div>
 

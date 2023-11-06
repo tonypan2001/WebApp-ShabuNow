@@ -10,18 +10,17 @@
         <button class="text-red-500" @click.prevent="auth.logout()">Logout</button>
         <h1>{{ token.getStatus }}</h1>
       </template> -->
-      {{ auth.getUser.role }}
 
       <!-- category dropdown button -->
       <div class="block flex justify-center items-center">
         <!-- end -->
         <!--        <ButtonBorder v-if="auth.getUser.role === 'admin'">+ เพิ่มเมนู</ButtonBorder>-->
         <!--        <ButtonBorder v-if="auth.getUser.role === 'admin'" href="/admins/createMenu">+ เพิ่มหมวดหมู่</ButtonBorder>-->
-        <ButtonDropdown
-          title="หมวดหมู่อาหาร"
-          :items="categories"
-          class="mx-4"
-        />
+<!--        <ButtonDropdown-->
+<!--          title="หมวดหมู่อาหาร"-->
+<!--          :items="categories"-->
+<!--          class="mx-4"-->
+<!--        />-->
       </div>
     </HeaderContainer>
     <hr />
@@ -43,7 +42,7 @@
         <MenuItemCard
           v-for="menu in categoryMenu"
           :imageUrl="menu.imgPath"
-          :edit_menu="auth.getUser.role === 'chef' ? '/admins/editMenu' : null"
+          :edit_menu="auth.getUser.role === 'chef' ? '/admins/editMenu_' + menu.id : null"
           :to="`/menus/menu_${menu.id}_${table_id}`"
         >
           <template v-slot:title>
