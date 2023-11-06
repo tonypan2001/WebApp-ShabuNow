@@ -71,6 +71,7 @@
 <script setup lang="js">
 import { ref, onMounted } from "vue";
 const router = useRouter()
+const config = useRuntimeConfig()
 
 const editChef = (id) => {
   // ทำการ routing ไปยังหน้าแก้ไขเชฟ (chef)
@@ -82,7 +83,7 @@ console.log(auth.getUser.id)
 let table_id = 0;
 const tokenStore = useTokenStore();
 if (tokenStore.getStatus) {
-  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+  const user = await $fetch(config.public.apiBaseURL + `staff/${auth.getUser.id}`);
   if(user.tableNumber)
   {
     table_id = user.tableNumber;
@@ -107,7 +108,7 @@ function categorizeMenusByCategory(menus) {
 async function getPrice() {
   if ( table_id != 0)
   {
-    const data = await $fetch(`http://localhost/api/order/${table_id}`);
+    const data = await $fetch(config.public.apiBaseURL + `order/${table_id}`);
     console.log('order :', data)
     if (data) {
       let totalPrice = 0;
@@ -124,13 +125,13 @@ async function getPrice() {
 
 }
 
-const menus = await $fetch("http://localhost/api/menu", {
+const menus = await $fetch(config.public.apiBaseURL + "menu", {
       method: "GET",
       headers: {
         Accept: "application/json",
       },
 });
-const categories = await $fetch('http://localhost/api/category', {
+const categories = await $fetch(config.public.apiBaseURL + 'category', {
   method: "GET",
   headers: {
     Accept: "application/json",
