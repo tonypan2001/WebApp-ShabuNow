@@ -74,17 +74,44 @@
         </ContentContainer>
         <hr>
         <!-- History table -->
-        <!-- <Table :datas="tableData" :headers="tableHeaders" class="mt-8">
+        <Table :datas="getHistory" :headers="tableHeaders" class="mt-8">
             <template v-slot:title>
                 ประวัติการใช้บริการ
             </template>
-
-        </Table> -->
+        </Table>
     </MainContainer>
 </template>
 
 <script setup lang="ts">
+import {Hist} from "~/models/defineType";
+
 const auth = useAuthStore()
+const route = useRoute()
+console.log(auth.getUser.id)
+// User history
+const tableHeaders = [
+    'ลำดับ',
+    'เมนู',
+    'จำนวน',
+    'วันที่',
+]
+const history = await $fetch<Hist[]>(`http://localhost/api/history/show/${auth.getUser.id}`)
+let i = 1
+function filterHistory(histories: Hist[]) {
+  const historyList: Hist[] = []
+  histories.forEach((hist) => {
+    historyList.push({
+      id: i++,
+      name: hist.name,
+      quantity: hist.quantity,
+      created_at: hist.created_at,
+    })
+  })
+  return historyList
+}
+const getHistory = filterHistory(history);
+console.log(getHistory)
+
 console.log(auth.getUser.username)
 const formData = reactive({
   old_password: "",

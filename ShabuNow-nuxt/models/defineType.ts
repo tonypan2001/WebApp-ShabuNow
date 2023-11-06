@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export type User = {
     id: number;
     name: string;
@@ -52,6 +54,16 @@ export type Order = {
     status: 'pending' | 'ordered' | 'ready' | 'served';
     table_id: number; // Assuming the foreign key is a number
 };
+
+export type Hist = {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    name: string;
+    detail: string;
+    quantity: number;
+    user_id: number;
+}
 
 export type Category = {
     id: number;
