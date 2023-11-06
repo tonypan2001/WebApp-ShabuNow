@@ -26,21 +26,6 @@
               this.errorList.name[0]
             }}</span>
           </label>
-          <label class="relative block mt-4">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-              <slot name="icon"> </slot>
-            </span>
-            <input
-              class="placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-red-600 focus:ring-red-600 focus:ring-1 sm:text-base"
-              placeholder="placeholder"
-              type="number"
-              name="category_id"
-              v-model="menu.category_id"
-            />
-            <span class="text-red-500" v-if="errorList.category_id">{{
-              this.errorList.category_id[0]
-            }}</span>
-          </label>
           <!-- <label class="relative block mt-4">
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
               <slot name="icon"> </slot>
@@ -48,12 +33,12 @@
             <input
               class="placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md w-full py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-red-600 focus:ring-red-600 focus:ring-1 sm:text-base"
               placeholder="placeholder"
-              type="text"
-              name="status"
-              v-model="menu.status"
+              type="string"
+              name="category"
+              v-model="menu.category"
             />
-            <span class="text-red-500" v-if="errorList.status">{{
-              this.errorList.status[0]
+            <span class="text-red-500" v-if="errorList.category">{{
+              this.errorList.category
             }}</span>
           </label> -->
           <label class="relative block mt-4">
@@ -123,8 +108,6 @@
           <span class="text-red-500" v-if="errorList.description">{{
             this.errorList.description[0]
           }}</span>
-          <h1>MenuId is : {{ menuId }}</h1>
-          <h1>menusidid is : {{ menusidid }}</h1>
 
           <div class="mx-auto mt-2">
             <label class="mt-4 mb-1 block text-lg font-medium text-gray-700"
@@ -169,10 +152,13 @@ export default {
   },
   methods: {
     getMenu(menuId) {
-      axios.get(`http://localhost/api/menu/show/${menuId}/edit`).then((res) => {
+      axios.get(`http://localhost/api/menu/show/${menuId}`).then((res) => {
         console.log(res);
-        this.menu = res.data.menu;
-        this.menusidid = res.data.menu.id;
+        this.menu = res.data;
+        this.menusidid = res.data.id;
+
+        // this.menusidid = res.data.menu.id;
+        // console.log(`res data menu คืออะไร` + res.data.menu.id);
       });
     },
     updateMenu() {
@@ -180,16 +166,16 @@ export default {
 
       //   alert(`update menu is worked:` + menuId);
       axios
-        .put(`http://localhost/api/menu/show/${this.menusidid}/edit`, this.menu)
+        .put(`http://localhost/api/menu/update/${this.menuId}`, this.menu)
         .then((res) => {
           console.log(res, "res");
-          alert(res.data.message);
-          //   this.menu = res.data.menu;
+          alert(res.data);
+          // this.menu = res.data.menu;
           this.errorList = {};
         })
         .catch(function (error) {
           console.log(error, "errors");
-          console.log(`update menu is worked:` + menuId);
+          // console.log(`update menu is worked:` + this.menuId);
 
           if (error.response) {
             if (error.response.status == 422) {
