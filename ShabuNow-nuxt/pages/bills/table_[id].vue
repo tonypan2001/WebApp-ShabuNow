@@ -41,6 +41,7 @@
 
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
+const config = useRuntimeConfig()
 const route = useRoute()
 const auth = useAuthStore();
 
@@ -50,7 +51,7 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
   return { data };
 }
 
-const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/${route.params.id}`)
+const { data: orders } = await useFetch<Order[]>(config.public.apiBaseURL + `order/${route.params.id}`)
 
 const tableHeaders = [
   'ลำดับ',
@@ -91,7 +92,7 @@ async function onSubmit() {
   try
   {
     console.log(route.params.id)
-    const checkBill = await $fetch(`http://localhost/api/order/checkBill/${route.params.id}/`, {
+    const checkBill = await $fetch(config.public.apiBaseURL + `order/checkBill/${route.params.id}/`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

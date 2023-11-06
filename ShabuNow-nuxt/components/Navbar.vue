@@ -137,6 +137,7 @@
 <script lang="js" setup>
 
 import { ref } from 'vue';
+const config = useRuntimeConfig()
 const auth = useAuthStore();
 
 const open = ref(false);
@@ -154,7 +155,7 @@ function menuOpen() {
 let table_id = 0;
 const tokenStore = useTokenStore();
 if (tokenStore.getStatus) {
-  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+  const user = await $fetch(config.public.apiBaseURL + `staff/${auth.getUser.id}`);
   if(user.tableNumber)
   {
     table_id = user.tableNumber;

@@ -58,9 +58,10 @@ import {navigateTo} from "#app";
 definePageMeta({
   middleware: ['admin']
 })
-
+const config = useRuntimeConfig()
 const route = useRoute()
 const auth = useAuthStore();
+
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
   const res = await fetch(url);
@@ -68,7 +69,7 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
   return { data };
 }
 
-const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/checkPending/${route.params.id}`)
+const { data: orders } = await useFetch<Order[]>(config.public.apiBaseURL + `order/checkPending/${route.params.id}`)
 console.log(orders);
 
 let sum = 0;
@@ -83,7 +84,7 @@ const totalPrice = sumPrice(orders);
 async function onSubmit() {
   console.log(orders)
   try {
-    const menu = await $fetch(`http://localhost/api/order/sendOrders/${route.params.id}`,{     method: "POST",
+    const menu = await $fetch(config.public.apiBaseURL + `order/sendOrders/${route.params.id}`,{     method: "POST",
       method: "POST",
     })
     await navigateTo(`/bills/table_${route.params.id}`)

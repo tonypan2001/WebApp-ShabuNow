@@ -34,6 +34,8 @@
 import {Category, Table} from "~/models/defineType";
 import {navigateTo} from "#app";
 
+const config = useRuntimeConfig()
+
 const formData = reactive({
   userid: "",
   tableid: ""
@@ -46,7 +48,7 @@ const error = reactive({
 async function onSubmit() {
   console.log(formData)
   try {
-    const res = await $fetch("http://localhost/api/table/checkIn", {
+    const res = await $fetch(config.public.apiBaseURL + "table/checkIn", {
       method: "POST",
       body: formData
     })
@@ -56,7 +58,7 @@ async function onSubmit() {
   }
 }
 
-const tables = await $fetch('http://localhost/api/table')
+const tables = await $fetch(config.public.apiBaseURL + 'table')
 
 function filterTable(tables: Table[])
 {

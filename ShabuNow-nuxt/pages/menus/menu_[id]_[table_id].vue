@@ -69,10 +69,10 @@ definePageMeta({
 })
 import {useRoute} from "vue-router";
 import {useAuthStore} from "~/stores/auth";
-
+const config = useRuntimeConfig()
 const auth = useAuthStore();
 const route = useRoute();
-const menu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`)
+const menu = await $fetch(config.public.apiBaseURL + `menu/show/${route.params.id}`)
 let table_id = 0;
 if(route.params.table_id)
 {
@@ -86,7 +86,7 @@ async function addMenu() {
   const menu_id = route.params.id;
   const quantity = document.getElementsByName('custom-input-number')[0].value
   console.log(menu_id, quantity)
-  const response = await $fetch(`http://localhost/api/order/store/${route.params.table_id}`, {
+  const response = await $fetch(config.public.apiBaseURL + `order/store/${route.params.table_id}`, {
     method: 'POST',
     body: { menu_id, quantity }
   });

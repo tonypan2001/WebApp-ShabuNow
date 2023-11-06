@@ -1,7 +1,5 @@
 import { defineStore } from "pinia";
 import { useTokenStore } from "./token";
-import { useRoute } from "vue-router";
-
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     //Prompan
@@ -17,14 +15,14 @@ export const useAuthStore = defineStore("auth", {
   },
   actions: {
     async login(formData) {
+      const config = useRuntimeConfig()
       try {
-        const express = require('express');
-        const cors = require('cors');
-        const app = express();
-
-// Allow requests from all origins (be cautious in a production environment)
-        app.use(cors());
-        const config = useRuntimeConfig()
+//         const express = require('express');
+//         const cors = require('cors');
+//         const app = express();
+//
+// // Allow requests from all origins (be cautious in a production environment)
+//         app.use(cors());
         const { data } = await $fetch( config.public.apiBaseURL + "login", {
           method: "POST",
           body: { ...formData },
@@ -37,8 +35,9 @@ export const useAuthStore = defineStore("auth", {
       }
     },
     async register(formData) {
+      const config = useRuntimeConfig()
       try {
-        const { data } = await $fetch("http://localhost/api/register ", {
+        const { data } = await $fetch(config.public.apiBaseURL + "register", {
           method: "POST",
           body: { ...formData },
         });
@@ -50,9 +49,11 @@ export const useAuthStore = defineStore("auth", {
       }
     },
     async logout() {
+      const config = useRuntimeConfig()
       const tokenStore = useTokenStore();
       try {
-        const res = await $fetch("http://localhost/api/logout ", {
+        const config = useRuntimeConfig()
+        const res = await $fetch( config.public.apiBaseURL + "logout", {
           method: "POST",
           headers: {
             Accept: "application/json",

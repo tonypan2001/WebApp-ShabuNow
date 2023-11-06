@@ -64,7 +64,8 @@
     },
     methods: {
       getMenus() {
-        axios.get(`http://localhost/api/menu`).then((res) => {
+        const config = useRuntimeConfig()
+        axios.get(config.public.apiBaseURL + `menu`).then((res) => {
           console.log(res);
           this.menus = res.data;
         });

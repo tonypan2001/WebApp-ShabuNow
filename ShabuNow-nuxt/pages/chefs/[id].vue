@@ -169,18 +169,20 @@ export default {
   },
   methods: {
     getMenu(menuId) {
-      axios.get(`http://localhost/api/menu/show/${menuId}/edit`).then((res) => {
+      const config = useRuntimeConfig()
+      axios.get(config.public.apiBaseURL + `menu/show/${menuId}/edit`).then((res) => {
         console.log(res);
         this.menu = res.data.menu;
         this.menusidid = res.data.menu.id;
       });
     },
     updateMenu() {
+      const config = useRuntimeConfig()
       var myThis = this;
 
       //   alert(`update menu is worked:` + menuId);
       axios
-        .put(`http://localhost/api/menu/show/${this.menusidid}/edit`, this.menu)
+        .put(config.public.apiBaseURL + `menu/show/${this.menusidid}/edit`, this.menu)
         .then((res) => {
           console.log(res, "res");
           alert(res.data.message);
