@@ -7,28 +7,32 @@
         </HeaderContainer>
         <hr>
         <ContentContainer>
-          <Table :datas="FilteredOrder" :headers="tableHeaders" class="mt-8">
-            <template v-slot:title>
-              โต๊ะที่ #{{ route.params.id }}
-            </template>
-          </Table>
-<!--            &lt;!&ndash; Ordered List &ndash;&gt;-->
-<!--            <CartListCard v-for="order in orders">-->
-<!--              <div class="w-60 mt-4 text-center">-->
-<!--                <h1 class="text-2xl">-->
-<!--                  {{ order.name}}-->
-<!--                </h1>-->
-<!--              </div>-->
-<!--              &lt;!&ndash; increment and decrement button&ndash;&gt;-->
-<!--                  {{ order.quantity }}-->
+            <!-- Ordered List -->
+            <div v-for="order in orders"
+            class="flex flex-col lg:flex-row justify-around items-center border-2 border-red-500 rounded-lg mt-8 py-4 w-full min-h-[150px] overflow-hidden">
+              <div class="max-h-[250px] overflow-hidden object-center rounded-lg">
+                <img class="object-cover" width="250" height="250" :src="getFullImageUrl(order.imgPath)" alt="">
+              </div>
+              <div class="mt-8 lg:mt-0">
+                <h1 class="text-2xl">
+                  {{ order.name}}
+                </h1>
+              </div>
+              <!-- increment and decrement button-->
+              <div class="text-2xl flex justify-center">
+                <h1>จำนวน: </h1>
+                <h1 class="ml-2">
+                  {{ order.quantity }}
+                </h1>
+              </div>
 
-<!--              <div class="mt-4 text-center w-40">-->
-<!--                <h1 class="text-2xl">-->
-<!--                  ราคา: ฿-->
-<!--                  {{ order.price*order.quantity }}-->
-<!--                </h1>-->
-<!--              </div>-->
-<!--            </CartListCard>-->
+              <div class="text-center w-40">
+                <h1 class="text-2xl">
+                  ราคา: ฿
+                  {{ order.price*order.quantity }}
+                </h1>
+              </div>
+            </div>
 
             <!-- Total Price -->
             <TotalPrice>
@@ -38,18 +42,20 @@
                 </div>
                 <hr>
                 <!-- Add menu button -->
-              <NuxtLink v-if="auth.getUser.role === 'customer'"  :to="`/`">
-                <Button class="mt-8 py-4 w-full md:w-auto">
-                  <i class="bi bi-plus-lg mr-1"></i>
-                  เพิ่มเมนูอาหาร
-                </Button>
-              </NuxtLink>
-              <form @submit.prevent="onSubmit()" action="" v-if="auth.getUser.role === 'customer'" >
-                <Button class="mt-8 py-4 w-full md:w-auto">
-                  <i class="bi bi-plus-lg mr-1"></i>
-                  ส่งรายการอาหาร
-                </Button>
-              </form>
+              <div class="flex gap-x-4">
+                <NuxtLink v-if="auth.getUser.role === 'customer'"  :to="`/`">
+                  <Button class="mt-8 py-4 w-full md:w-auto">
+                    <i class="bi bi-plus-lg mr-1"></i>
+                    เพิ่มเมนูอาหาร
+                  </Button>
+                </NuxtLink>
+                <form @submit.prevent="onSubmit()" action="" v-if="auth.getUser.role === 'customer'" >
+                  <Button class="mt-8 py-4 w-full md:w-auto">
+                    <i class="bi bi-send-fill mr-1"></i>
+                    ส่งรายการอาหาร
+                  </Button>
+                </form>
+              </div>
             </TotalPrice>
 
         </ContentContainer>
@@ -58,6 +64,12 @@
 
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
+import {navigateTo} from "#app";
+
+definePageMeta({
+  middleware: ['admin']
+})
+
 const route = useRoute()
 const auth = useAuthStore();
 
@@ -68,41 +80,16 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
 }
 
 const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/checkPending/${route.params.id}`)
+console.log(orders);
 
-const tableHeaders = [
-  'ลำดับ',
-  'รายการอาหาร',
-  'จำนวน',
-  'ราคา']
-console.log(tableHeaders)
-
-// const FilteredOrder = orders.map((order) => {
-//   return {
-//     name: order.name,
-//     quantity: order.quantity,
-//     price: order.price
-//   }
-// })
-
-let sum = 0
-function filterOrder(orders: Order[])
-{
-  const orderList: Order[] = [];
-
-  let i = 1
+let sum = 0;
+function sumPrice(orders: Order[]) {
   orders.forEach((order) => {
-    orderList.push({
-      id: i++,
-      name: order.name,
-      quantity: order.quantity,
-      price: order.price * order.quantity,
-    })
-    sum += order.price * order.quantity
-  })
-  return orderList
+    sum += order.price*order.quantity;
+  });
 }
 
-const FilteredOrder = filterOrder(orders)
+const totalPrice = sumPrice(orders);
 
 async function onSubmit() {
   console.log(orders)
@@ -121,4 +108,8 @@ async function onSubmit() {
   }
 }
 
+const getFullImageUrl = (imageUrl) => {
+  // Combine the base path with the image URL
+  return `/_nuxt/public/images/chef_menus/${imageUrl}`;
+};
 </script>

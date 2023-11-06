@@ -39,7 +39,7 @@
                 <!-- หมายเลขโต๊ะ -->
               <div v-for="(tableNumber, index) in tableNumbers" :key="index"
                 class="relative p-4 m-4 ease-out duration-300 border-2 hover:border-red-600 rounded-lg cursor-pointer">
-                <GraphicsTable :tableNumber="tableNumber" :href="'/orders/table_' + tableNumber" />
+                <GraphicsTable :class="[isAvailable ? 'bg-amber-600':'bg-green-600']" :tableNumber="tableNumber" :href="'/orders/table_' + tableNumber" />
               </div>
 
             </GridContainer>
@@ -58,6 +58,7 @@
 <script setup lang="ts">
 
   import { ref, reactive } from "vue";
+  import {Table} from "~/models/defineType";
 
   const tableNumbers = ref([]);
   const counter = ref(0);
@@ -145,72 +146,4 @@
       tableNumbers.value.pop();
     }
   };
-
-// import { reactive } from 'vue';
-//
-// export default {
-//     data() {
-//         return {
-//             tableNumbers: [],
-//             counter: reactive({count:0}),
-//
-//             // Show dialog
-//             showDialog: false,
-//             dialogHeaderMessage: '',
-//             dialogMessage: '',
-//             dialogAction: '',
-//         }
-//     },
-//     created() {
-//         this.tableNumbers = this.tableNumbersGen(this.counter.count)
-//     },
-//     methods: {
-//         showConfirmationDialog(action) {
-//             this.showDialog = true;
-//             this.dialogAction = action;
-//             if (this.dialogAction === 'add') {
-//                 this.dialogHeaderMessage = 'Add the table?'
-//                 this.dialogMessage = 'คุณแน่ใจหรือไม่ว่าต้องการเพิ่มจำนวนโต๊ะ?'
-//             } else if (this.dialogAction === 'delete') {
-//                 this.dialogHeaderMessage = 'Remove the table?'
-//                 this.dialogMessage = 'คุณแน่ใจหรือไม่ว่าต้องการลดจำนวนโต๊ะ?'
-//             }
-//         },
-//         hideConfirmationDialog() {
-//             this.showDialog = false;
-//         },
-//         handleDialogConfirm() {
-//             if (this.dialogAction === 'add') {
-//                 this.incrementTable();
-//                 this.showDialog = false;
-//                 console.log('Add');
-//             } else if (this.dialogAction === 'delete') {
-//                 this.decrementTable();
-//                 this.showDialog = false;
-//                 console.log('Delete');
-//             }
-//         },
-//         tableNumbersGen(count) {
-//             const tableNumbers = []
-//             for(let i = 1; i<= count; i++) {
-//                 tableNumbers.push(i);
-//             }
-//             return tableNumbers
-//         },
-//         incrementTable() {
-//             this.hideConfirmationDialog()
-//             this.counter.count++
-//             this.tableNumbers.push(this.tableNumbers.length + 1)
-//
-//         },
-//         decrementTable() {
-//             if (this.tableNumbers.length > 0) {
-//                 this.counter.count--
-//                 this.tableNumbers.pop()
-//             }
-//         },
-//     }
-//
-//
-// }
 </script>
