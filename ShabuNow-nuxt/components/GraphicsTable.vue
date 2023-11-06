@@ -1,5 +1,5 @@
 <template>
-    <a :href="href" :tableNumber="tableNumber" class="">
+    <a :href="href" :tableNumber="tableNumber">
         <div class="w-[100px] h-[120px] bg-amber-600 rounded-lg flex justify-center items-center z-10">
             <div class="flex flex-col justify-center items-center">
                 <span class="text-base text-white">โต๊ะที่</span>
@@ -16,8 +16,13 @@
     </a>
 </template>
 
-<script>
-export default {
-    props: ['tableNumbers','href', "tableNumber"],
-}
+<script setup lang="ts">
+import {Table} from "~/models/defineType";
+defineProps([
+    'tableNumbers',
+    'tableNumber',
+    'href',
+    'class'
+])
+
 </script>
