@@ -109,6 +109,7 @@
 
           <!-- login and register -->
           <a v-if="!auth.getUser"
+
           href="/login"
           class="bg-gray-100 p-2 mt-4 lg:mt-0 rounded flex items-center border-2 hover:border-red-600 cursor-pointer text-red-600 hover:text-red-500 ease-out duration-300"
           >

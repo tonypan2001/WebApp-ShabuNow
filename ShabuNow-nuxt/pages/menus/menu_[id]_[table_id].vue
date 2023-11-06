@@ -43,7 +43,7 @@
                             </div>
 
                             <!-- for customer -->
-                            <counter-button class="w-full" title="จำนวน" v-if="table_id !== `0` && ">
+                            <counter-button class="w-full" title="จำนวน" v-if="table_id !== `0` && auth.getUser.role === 'customer'">
 
                             </counter-button>
                             <div v-if="auth.getUser.role === 'customer' && table_id !== `0`" class="flex flex-col justify-start items-start text-lg">
@@ -73,7 +73,11 @@ import {useAuthStore} from "~/stores/auth";
 const auth = useAuthStore();
 const route = useRoute();
 const menu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`)
-const table_id = route.params.table_id;
+let table_id = 0;
+if(roue.params.table.id)
+{
+  table_id = route.params.table.id;
+}
 
 async function addMenu() {
   if (auth.getUser.role !== 'customer') {

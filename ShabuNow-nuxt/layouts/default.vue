@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-  // const tokenStore = useTokenStore();
-  // const auth = useAuthStore();
-  // const route = useRoute();
-  // if (!tokenStore.getStatus) {
-  //   await navigateTo("/login");
-  // }
+  const tokenStore = useTokenStore();
+  const auth = useAuthStore();
+  const route = useRoute();
+  if (!tokenStore.getStatus) {
+    await navigateTo("/login");
+  }
   // const accessCustomerPath = ['/home','/', '/menus/menu_[id]_[table_id]', '/accounts', '/bills', '/carts/table_[id]','/[category_id]', '/orders/table_[id]']
   // const accessStaffPath = ['/home','/', '/orders', '/accounts', '/orders/table_[id]','/[category_id]']
   // const accessAdminPath = ['/home','/','/admins','/admins/staff','/admins/staff/create','/accounts','/[category_id]']
