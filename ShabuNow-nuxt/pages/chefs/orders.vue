@@ -61,7 +61,6 @@ $table->enum('status', ['pending','ordered','ready','served']);
 $table->foreignIdFor(\App\Models\Table::class); //table_id (fk) -->
 <script>
 import axios from "axios";
-const config = useRuntimeConfig()
 
 export default {
   // just some data
@@ -80,7 +79,7 @@ export default {
   },
   methods: {
     getOrders() {
-      axios.get(config.public.apiBaseURL + `order/checkOrdered/1/`).then((res) => {
+      axios.get(`https://api-shabunow.bezathecat.com/order/checkOrdered/1/`).then((res) => {
         console.log(res.data);
         this.orders = res.data;
       });
