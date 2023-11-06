@@ -124,6 +124,20 @@ sail artisan migrate:fresh --seed
 [JIRA](https://prompan.atlassian.net/jira/software/projects/SFP/boards/2/timeline?shared=&atlOrigin=eyJpIjoiMWVhNjg4MDUyYjZkNGY0YjhlOTk4ZGIyNTA2YmU4OWIiLCJwIjoiaiJ9)
 >
 >
-[burndown chart](https://o365ku-my.sharepoint.com/:x:/g/personal/pathorn_y_live_ku_th/EfLxkyPJhPZEnIFoOK0Jze4Bsv_FvRxumKjyl6oxUfindg?rtime=8lWkPube20g)
+[burndown chart](https://o365ku-my.sharepoint.com/:x:/g/personal/pathorn_y_live_ku_th/EfLxkyPJhPZEnIFoOK0Jze4Bsv_FvRxumKjyl6oxUfindg?rtime=8lWkPube20g
+
+# ผลการรัน unit test
+>รันด้วยคำสั่ง
+```bash
+sail artisan test
+```
+>
+>
+
+>พบการทดสอบ unit test 17 unit test โดยแยกตามหมวดหมู่ Category,Menu,Table และ User โดยการเทสให้โดยให้ตีกลับมาด้วย https ที่คาดหวังเอาไว้ เช่น การ การเข้าสู่ระบบ,การได้รับผลลัพธ์จาก GET METHODS,การกรอกฟอร์มที่ทั้งถูกต้องและไม่ถูกต้องของ POST METHODS พบว่าเป็นไปตามคาดหวัง
+>
+>
+<img width="554" alt="Screenshot 2566-11-07 at 00 53 55" src="https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/27704135-128e-4a36-9953-7c882156ba02">
+
 
 
