@@ -118,4 +118,4 @@ sail artisan migrate:fresh --seed
 >
 
 # ลิ้งที่เกี่ยวข้องกับโปรเจคนี้ ?
-> [UI flow](https://www.figma.com/file/KcFptRWJXq77pDqHliNSt9/UI-flow?type=whiteboard&node-id=0-1&t=d3LiMdcWRoBLS9oU-0)
+[UI flow](https://www.figma.com/file/KcFptRWJXq77pDqHliNSt9/UI-flow?type=whiteboard&node-id=0-1&t=d3LiMdcWRoBLS9oU-0)
