@@ -4,33 +4,41 @@
             <HeaderText>
                 คำสั่งซื้อของลูกค้า
             </HeaderText>
-          <li class="lg:m-0 m-4">
-            <a
-                href="/tables/assign"
-                class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+<!--          <li class="lg:m-0 m-4">-->
+<!--            <a-->
+<!--                href="/tables/assign"-->
+<!--                class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">-->
+<!--              จัดการที่นั่ง-->
+<!--            </a>-->
+<!--          </li>-->
+          <nuxt-link to="/tables/assign">
+            <Button class="py-3">
+              <i class="bi bi-person-down text-xl mr-2"></i>
               จัดการที่นั่ง
-            </a>
-          </li>
+            </Button>
+          </nuxt-link>
         </HeaderContainer>
         <hr>
         <ContentContainer>
 
             <h1 class="mt-4 text-xl text-red-600 font-medium">จำนวนโต๊ะทั้งหมด : {{ counter.count }}</h1>
             <!-- Add table and Delete table-->
-            <div class="mt-4 flex justify-center items-center w-full">
-                <Button @click="showConfirmationDialog('add')" class="py-3 ml-2">
+            <div class="mt-4 flex justify-center items-center w-full gap-x-2">
+                <Button @click="showConfirmationDialog('add')" class="py-3">
                     <i class="bi bi-plus-circle text-xl mr-2"></i>
                     เพิ่มโต๊ะ
                 </Button>
-                <Button @click="showConfirmationDialog('delete')" class="py-3 ml-2">
+                <Button @click="showConfirmationDialog('delete')" class="py-3">
                     <i class="bi bi-dash-circle text-xl mr-2"></i>
                     ลดโต๊ะ
                 </Button>
+
             </div>
 
             <GridContainer class="mt-8">
                 <!-- หมายเลขโต๊ะ -->
-              <div v-for="(tableNumber, index) in tableNumbers" :key="index" class="relative">
+              <div v-for="(tableNumber, index) in tableNumbers" :key="index"
+                class="relative p-4 m-4 ease-out duration-300 border-2 hover:border-red-600 rounded-lg cursor-pointer">
                 <GraphicsTable :tableNumber="tableNumber" :href="'/orders/table_' + tableNumber" />
               </div>
 

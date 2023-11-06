@@ -3,7 +3,7 @@
     class="relative border border-red-600 rounded-xl shadow-lg w-72 h-auto mt-4 p-4 flex flex-col justify-center items-center">
     <img
       class="rounded-xl object-cover h-[256px] w-full"
-      :src="imageUrl || ''"
+      :src="getFullImageUrl(imageUrl)"
       alt=""/>
 
       <!-- edit menu button for admin -->
@@ -43,4 +43,9 @@ defineProps({
   edit_menu: String,
   to: String
 })
+
+const getFullImageUrl = (imageUrl) => {
+  // Combine the base path with the image URL
+  return `/_nuxt/public/images/chef_menus/${imageUrl}`;
+};
 </script>

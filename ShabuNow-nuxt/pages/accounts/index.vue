@@ -74,7 +74,7 @@
         </ContentContainer>
         <hr>
         <!-- History table -->
-        <Table :datas="getHistory" :headers="tableHeaders" class="mt-8">
+        <Table v-if="auth.getUser.role === 'customer'" :datas="getHistory" :headers="tableHeaders" class="mt-8">
             <template v-slot:title>
                 ประวัติการใช้บริการ
             </template>

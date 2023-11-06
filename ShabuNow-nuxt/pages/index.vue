@@ -36,7 +36,7 @@
             </HeaderContainer>
             <GridContainer>
                 <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :edit_menu="auth.getUser.role === 'admin'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
+                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :edit_menu="auth.getUser.role === 'chef'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
                     <template v-slot:title>
                         <!-- สลัดผักรวมมิตร -->
@@ -59,6 +59,8 @@
 </template>
 
 <script setup lang="js">
+
+
 const auth = useAuthStore();
 console.log(auth.getUser.id)
 let table_id = 0;

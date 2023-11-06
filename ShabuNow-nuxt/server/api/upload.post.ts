@@ -4,7 +4,7 @@ import fsLiteDriver from 'unstorage/drivers/fs-lite'
 import {randomUUID} from "node:crypto";
 
 const storage = createStorage({
-    driver: fsLiteDriver({base: './resources/img/menus'})
+    driver: fsLiteDriver({base: './public/images/chef_menus/'})
 })
 
 const FILE_KEYS = ['name','filename','type','data']
