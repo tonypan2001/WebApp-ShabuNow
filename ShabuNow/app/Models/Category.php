@@ -11,6 +11,9 @@ class Category extends Model
 {
     use HasFactory;
 
+    // Mass Assignment ควรใส่ "name" ลงในอาร์เรย์ "fillable" ในโมเดล Menu เพื่ออนุญาตให้มีการกำหนดค่าผ่าน Mass Assignment ได้แบบปลอดภัย.
+    protected $fillable = ['name'];
+
     public function menus() : HasMany
     {
         return $this->hasMany(Menu::class);

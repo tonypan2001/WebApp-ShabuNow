@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+    // 'name' => $foodNames[array_rand($foodNames)],
+    //         'category_id' => Category::find(rand(1, 5)),
+    //         'description' => fake()->realTextBetween(120,200,2),
+    //         'status' => $status[array_rand($status)],
+    //         'price' => fake()->numberBetween(20,200),
+
+    protected $fillable = ['name','description','status','price','category_id'];
 
     // set time format
     protected $dates = ['created_at', 'updated_at'];

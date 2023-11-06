@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MenuFactory extends Factory
 {
+    
+
     /**
      * Define the model's default state.
      *
@@ -17,6 +19,7 @@ class MenuFactory extends Factory
      */
     public function definition(): array
     {
+        
         $status = array('available','outofstock');
         $foodNames = array(
             'Spaghetti Bolognese',

@@ -11,6 +11,16 @@ class Order extends Model
 {
     use HasFactory;
 
+    // 'menu_id' => $number,
+    //         'name' => $name,
+    //         'quantity' => fake()->numberBetween(1,10),
+    //         'detail' => fake()->realTextBetween(120,200,2),
+    //         'status' => $status[array_rand($status)],
+    //         'table_id' => fake()->numberBetween(1,20),
+    protected $fillable = ['name', 'detail','quantity','status'];
+
+
+
     public function menus() : HasMany
     {
         return $this->hasMany(Menu::class);
