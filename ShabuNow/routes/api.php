@@ -67,6 +67,7 @@ Route::group([
     Route::post('store', [MenuController::class, 'store']);
     Route::get('show/{menu}', [MenuController::class, 'show']);
     Route::get('/', [MenuController::class, 'index']);
+    Route::put('update/{menu}', [MenuController::class, 'update']);
 });
 
 
