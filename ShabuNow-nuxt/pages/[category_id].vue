@@ -36,7 +36,7 @@
       </HeaderContainer>
       <GridContainer>
         <!-- menu item card -->
-        <MenuItemCard v-for="menu in categorizedMenus" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'chef'? '/admins/editMenu' : null" :to="`/menus/menu_${menu.id}_${table_id}`">
+        <MenuItemCard v-for="menu in categorizedMenus" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'chef'? `/admins/editMenu_${menu.id}` : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
           <template v-slot:title>
             <!-- สลัดผักรวมมิตร -->

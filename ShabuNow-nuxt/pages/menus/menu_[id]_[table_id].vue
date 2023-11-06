@@ -74,9 +74,9 @@ const auth = useAuthStore();
 const route = useRoute();
 const menu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`)
 let table_id = 0;
-if(roue.params.table.id)
+if(route.params.table_id)
 {
-  table_id = route.params.table.id;
+  table_id = route.params.table_id;
 }
 
 async function addMenu() {
