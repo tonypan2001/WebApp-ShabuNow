@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     getOrders() {
-      axios.get(`https://api-shabunow.bezathecat.com/order/checkOrdered/1/`).then((res) => {
+      axios.get(`https://api-shabunow.bezathecat.com/api/order/checkOrdered/1/`).then((res) => {
         console.log(res.data);
         this.orders = res.data;
       });
