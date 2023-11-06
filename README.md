@@ -23,70 +23,27 @@
 
 >เข้าไปใน file ShabuNow ด้วยคำสั่ง
 ```bash
-cd ShabuNow
+cd ShabuNow-nuxt
 ```
 >จากนั้นหลังด้วยคำสั่ง run คำสั่งใน bash
 
+
+
+> run คำสั่งใน bash
+
+
+> run คำสั่งใน bash
+
 ```bash
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html \
-    laravelsail/php82-composer:latest \
-    composer install --ignore-platform-reqs
+npm run install
 ```
 
 > run คำสั่งใน bash
 
 ```bash
-cp .env.example .env
+npm run dev
 ```
 
-> เข้าไปใน file (.env) ของ project
-
-```
-APP_NAME="Laravel Layout"
-DB_HOST=mysql
-DB_USERNAME=sail
-DB_PASSWORD=password
-REDIS_HOST=redis
-```
-
-> run คำสั่งใน bash
-
-```bash
-sail up -d
-```
-
-> run คำสั่งใน bash
-
-```bash
-sail artisan key:generate
-```
-
-> run คำสั่งใน bash
-
-```bash
-sail yarn install
-```
-
-> run คำสั่งใน bash
-
-```bash
-sail artisan storage:link
-```
-
-> run คำสั่งใน bash
-
-```bash
-sail yarn dev
-```
-
-> รัน seeder และสร้าง table ใหม่
-
-```bash
-sail artisan migrate:fresh --seed
-```
 
 ### role ในการใช้งาน
 
