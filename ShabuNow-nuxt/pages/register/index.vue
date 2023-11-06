@@ -5,75 +5,95 @@
       <!-- form -->
       <div class="sm:w-1/2 px-8">
         <h1 class="font-bold text-2xl">Register</h1>
-        <p class="mt-4 text-sm">Let's create your account</p>
-        <form
-          @submit.prevent="handleSubmit"
-          action=""
-          class="flex flex-col gap-4 mt-4"
-        >
+        <p class="mt-4 text-sm">Let's create your account.</p>
+        <form @submit.prevent="handleSubmit" action="" class="flex flex-col gap-4 mt-4">
           <InputField
-            class=""
+            class="p-2 rounded-xl mt-4"
             type="text"
-            name="name"
-            placeholder="Name NEED FIX!! DONHAVE SURNAME"
-            v-model="form.name"
+            name="username"
+            placeholder="Username"
+            v-model="form.username"
           />
-          <InputField
-            class=""
+          <span v-if="errors.username" class="text-red-500">{{
+            errors.username[0]
+          }}</span>
+          <!-- <InputField
+            class="p-2 rounded-xl"
             type="text"
-            name="lastname"
-            placeholder="LastName"
+            name="firstname"
+            placeholder="Firstname"
+            v-model="form.firstname"
           />
+          <span v-if="errors.firstname" class="text-red-500">{{
+            errors.firstname[0]
+          }}</span> -->
+          <!-- <InputField
+            class="p-2 rounded-xl"
+            type="text"
+            name="surname"
+            placeholder="Surname"
+            v-model="form.surname"
+          />
+          <span v-if="errors.surname" class="text-red-500">{{
+            errors.surname[0]
+          }}</span> -->
           <InputField
-            class=""
+            class="p-2 rounded-xl"
             type="email"
             name="email"
             placeholder="Email"
             v-model="form.email"
           />
+          <span v-if="errors.email" class="text-red-500">{{
+            errors.email[0]
+          }}</span>
           <InputField
-            class=""
+            class="p-2 rounded-xl"
             type="password"
             name="password"
             placeholder="Password"
             v-model="form.password"
           />
+          <span v-if="errors.password" class="text-red-500">{{
+            errors.password[0]
+          }}</span>
           <InputField
-            class=""
+            class="p-2 rounded-xl"
             type="password"
-            name="confirm-password"
-            placeholder="Confirm Password"
+            name="confirmPassword"
+            placeholder="Confirm password"
             v-model="form.password_confirmation"
           />
-          <div class="mx-auto mt-2">
-            <label
-              for="example1"
-              class="mb-1 block text-sm font-medium text-gray-700"
-              >อัพโหลดรูปภาพ</label
-            >
-            <input
-              id="example1"
-              type="file"
-              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
-            />
-          </div>
+          <span v-if="errors.password_confirmation" class="text-red-500">{{
+            errors.password_confirmation[0]
+          }}</span>
+<!--          <div class="mx-auto mt-2">-->
+<!--            <label-->
+<!--              for="example1"-->
+<!--              class="mb-1 block text-sm font-medium text-gray-700"-->
+<!--              >อัพโหลดรูปภาพ</label-->
+<!--            >-->
+<!--            <input-->
+<!--              id="example1"-->
+<!--              type="file"-->
+<!--              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"-->
+<!--              name="photos"-->
+<!--            />-->
+<!--            <span v-if="errors.photos" class="text-red-500">{{-->
+<!--              errors.photos[0]-->
+<!--            }}</span>-->
+<!--          </div>-->
           <!-- Register Button -->
           <Button>
             <slot name="button"> สมัครสมาชิก </slot>
           </Button>
           <br />
           <!-- Login Here -->
-          <p>
+          <p class="mb-8">
             สมัครบัญชีไว้แล้ว?
             <a href="/login" class="underline">เข้าสู่ระบบที่นี่</a>
           </p>
         </form>
-        <div class="mt-8 text-red-600 hover:text-red-500 hover:underline">
-          <a href="/login">
-            <i class="bi bi-arrow-left-short"></i>
-            Back To Login
-          </a>
-        </div>
       </div>
       <!-- image -->
       <div class="w-1/2 sm:block hidden">
@@ -89,23 +109,33 @@
 
 <script setup>
 const auth = useAuthStore();
+const token = useTokenStore();
 const form = reactive({
-  name: null,
-  email: null,
-  password: null,
-  password_confirmation: null,
+  username: "",
+  // firstname: "",
+  // surname: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+  // role: "customer",
+  photos: "",
 });
 const errors = ref([]);
 const handleSubmit = async () => {
+  console.log(form)
   try {
     await auth.register(form);
+    // const { data } = await $fetch("http://localhost/api/login", {
+    //   method: "POST",
+    //   body: { ...form },
+    // });
   } catch (error) {
-    errors.value = console.log(error.response.errors);
+    // console.log(error.data.errors.email[0]);
+    errors.value = error.data.errors;
   }
 };
-
 definePageMeta({
-  layout: "custom",
   middleware: ["guest"],
+  layout: "no-navbar",
 });
 </script>

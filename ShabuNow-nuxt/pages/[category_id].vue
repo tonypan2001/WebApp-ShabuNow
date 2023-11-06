@@ -5,7 +5,7 @@
       <!-- debug by pooh -->
       <!-- <h1>email : {{ auth.getUser?.email }}</h1>
       <h1>password :{{ auth.getUser?.surname }}</h1> -->
-<!--      <h1>all :{{ auth.getUser }}</h1>-->
+      <!--      <h1>all :{{ auth.getUser }}</h1>-->
       <!-- <template v-if="token.getStatus">
         <button class="text-red-500" @click.prevent="auth.logout()">Logout</button>
         <h1>{{ token.getStatus }}</h1>
@@ -25,74 +25,75 @@
     </HeaderContainer>
     <hr />
 
-        <ContentContainer v-for="categoryMenu in categorizedMenus">
-            <!-- menu container -->
-            <!-- Category Tag -->
-            <HeaderContainer class="w-full">
-                <div class="text-2xl font-medium m-4 py-1.5 px-4 rounded-lg bg-red-600 text-white">
-                    <h1>ประเภท : {{ categories[categoryMenu[0].category_id-1].name }}</h1>
-                </div>
+    <ContentContainer>
+      <!-- menu container -->
+      <!-- Category Tag -->
+      <HeaderContainer class="w-full">
+        <div class="text-2xl font-medium m-4 py-1.5 px-4 rounded-lg bg-red-600 text-white">
+          <h1>ประเภท : {{ category.name }}</h1>
+        </div>
 
-            </HeaderContainer>
-            <GridContainer>
-                <!-- menu item card -->
-                <MenuItemCard v-for="menu in categoryMenu" :imageUrl="menu.imgPath" :edit_menu="auth.getUser.role === 'chef'? `/admins/editMenu_${menu.id}` : null" :to="`/menus/menu_${menu.id}_${table_id}`">
+      </HeaderContainer>
+      <GridContainer>
+        <!-- menu item card -->
+        <MenuItemCard v-for="menu in categorizedMenus" :imageUrl="menu.imgPath" :add_to_cart="'menus/menu_' + menu.id + '_' + table_id" :edit_menu="auth.getUser.role === 'chef'? `/admins/editMenu_${menu.id}` : null" :to="`/menus/menu_${menu.id}_${table_id}`">
 
-                    <template v-slot:title>
-                        <!-- สลัดผักรวมมิตร -->
-                        {{ menu.name }}
-                    </template>
-                    <template v-slot:price>
-                        <!-- ราคา ฿55 บาท -->
-                        {{ menu.price }}
-                    </template>
-                    <template v-slot:button>
-                        เลือกเมนูนี้
-                    </template>
-                </MenuItemCard>
-                <!-- end -->
-            </GridContainer>
-            <!-- end menu container -->
-        </ContentContainer>
+          <template v-slot:title>
+            <!-- สลัดผักรวมมิตร -->
+            {{ menu.name }}
+          </template>
+          <template v-slot:price>
+            <!-- ราคา ฿55 บาท -->
+            {{ menu.price }}
+          </template>
+          <template v-slot:button>
+            เลือกเมนูนี้
+          </template>
+        </MenuItemCard>
+        <!-- end -->
+      </GridContainer>
+      <!-- end menu container -->
+    </ContentContainer>
 
-    </MainContainer>
+
+  </MainContainer>
 </template>
 
+<!--<script lang="js">-->
+<!--export default {-->
+<!--  data() {-->
+<!--    definePageMeta({-->
+<!--      middleware: ["auth2"],-->
+<!--    });-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
 <script setup lang="js">
 
+import {useRoute} from "vue-router";
 
 const auth = useAuthStore();
-console.log(auth.getUser.id)
+const route = useRoute();
 let table_id = 0;
-const tokenStore = useTokenStore();
-if (tokenStore.getStatus) {
-  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
-  if(user.tableNumber)
-  {
-    table_id = user.tableNumber;
-  }
+const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+if(user.tableNumber)
+{
+  table_id = user.tableNumber;
 }
-
-
-console.log(auth.getUser.role)
-function categorizeMenusByCategory(menus) {
+function categorizeMenusByCategory(menus, category) {
   const categorizedMenus = [];
 
   menus.forEach((menu) => {
-    const categoryId = menu.category_id;
-    if (categorizedMenus[categoryId - 1]) {
-      categorizedMenus[categoryId - 1].push(menu);
-    } else {
-      categorizedMenus[categoryId - 1] = [menu];
+    if (menu.category_id === category.id) {
+      categorizedMenus.push(menu);
     }
   });
+
   return categorizedMenus;
 }
 async function getPrice() {
-  if ( table_id != 0)
-  {
+  if ( table_id != 0) {
     const data = await $fetch(`http://localhost/api/order/${table_id}`);
-    console.log('order :', data)
     if (data) {
       let totalPrice = 0;
       data.forEach(item => {
@@ -105,14 +106,13 @@ async function getPrice() {
   {
     return "-";
   }
-
 }
 
 const menus = await $fetch("http://localhost/api/menu", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+  },
 });
 const categories = await $fetch('http://localhost/api/category', {
   method: "GET",
@@ -120,10 +120,21 @@ const categories = await $fetch('http://localhost/api/category', {
     Accept: "application/json",
   },
 });
+let category = null;
+categories.forEach(item => {
+  if (item.id.toString() === route.params.category_id) {
+    category = item;
+  }
+})
 categories.forEach(category => {
   category.link = `/${category.id}`
 })
-const categorizedMenus = categorizeMenusByCategory(menus)
+categories.unshift({
+  name : 'แสดงทั้งหมด',
+  link : '/'
+});
+const categorizedMenus = categorizeMenusByCategory(menus, category)
+console.log('menu', categorizedMenus)
 const price = await getPrice();
 console.log(auth.getUser)
 

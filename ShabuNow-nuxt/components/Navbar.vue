@@ -36,11 +36,46 @@
       :class="[open ? 'hidden' : 'block']"
     >
       <ul class="lg:flex justify-around items-center w-auto mr-2">
-        <li class="lg:m-0 m-4" v-for="link in links">
+        <!-- <li class="lg:m-0 m-4" v-for="link in links">
           <a
             :href="link.link"
             class="hover:border hover:border-red-600 hover:border-2 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             {{ link.name }}
+          </a>
+        </li> -->
+        <li class="lg:m-0 m-4">
+          <a
+              href="/home"
+              class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            หน้าแรก
+          </a>
+        </li>
+        <li class="lg:m-0 m-4">
+          <a
+            href="/"
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            เลือกเมนู
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer' && table_id !== 0">
+          <a
+            :href="`/carts/table_${table_id}`"
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            ตะกร้าสินค้า
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer' && table_id !== 0">
+          <a
+              :href="`/bills/table_${table_id}`"
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            รายการที่สั่ง
+          </a>
+        </li>
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'staff'">
+          <a
+            href="/orders"
+            class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            คำสั่งซื้อลูกค้า
           </a>
         </li>
       </ul>
@@ -51,7 +86,7 @@
           class="flex items-center flex-col lg:flex-row border-t-2 lg:border-l-2 lg:border-t-0 pt-5 lg:pt-0 lg:pl-2"
           >
 
-          <a 
+          <a v-if="auth.getUser.role === 'admin' || auth.getUser.role === 'chef'"
           class="flex justify-center items-center text-gray-600 hover:text-red-500 mb-4 lg:mb-0 ease-out duration-300"
           href="/admins">
           <i class="bi bi-house-gear-fill text-2xl mx-2"></i>
@@ -66,13 +101,15 @@
             <i class="bi bi-person-fill md:text-xl text-2xl mr-2"></i>
             <div class="">
               <p>สวัสดีคุณ,</p>
-              <p>Guest1175</p>
+              <p>{{ auth.getUser.username }} <span v-if="auth.getUser.role === 'staff' || auth.getUser.role === 'admin' || auth.getUser.role === 'chef'">({{ auth.getUser.role }})</span></p>
+              <!-- <p>Guest1175</p> -->
             </div>
           </a>
           <!-- end of welcome user-->
 
           <!-- login and register -->
-          <a
+          <a v-if="!auth.getUser"
+
           href="/login"
           class="bg-gray-100 p-2 mt-4 lg:mt-0 rounded flex items-center border-2 hover:border-red-600 cursor-pointer text-red-600 hover:text-red-500 ease-out duration-300"
           >
@@ -85,37 +122,50 @@
           <!-- end of login and register -->
 
           <!-- logout btn -->
-          <Button class="lg:mx-4 mt-4 lg:mt-0 flex items-center">
+          <Button @click.prevent="auth.logout()" class="lg:mx-4 mt-4 lg:mt-0 flex items-center">
             <i class="bi bi-box-arrow-right md:text-xl text-2xl mr-2"></i>
             <p class="">ออกจากระบบ</p>
           </Button>
           <!-- end of logout btn -->
-
+          {{  }}
         </div>
       </div>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-    setup() {
-        const open = ref(false);
-        const links = [
-            {name : "เลือกเมนู" , link : "/"},
-            {name : "ตะกร้าสินค้า" , link : "/carts"},
-            {name : "รายการที่สั่ง" , link : "/bills"},
-            {name : "คำสั่งซื้อลูกค้า" , link : "/orders"},
-        ];
+<script lang="js" setup>
 
-    function menuOpen() {
-      open.value = !open.value;
-    }
+import { ref } from 'vue';
+const auth = useAuthStore();
 
-    return { links, open, menuOpen };
-  },
-};
+const open = ref(false);
+// const links = [
+//   { name: "เลือกเมนู", link: "/" },
+//   { name: "ตะกร้าสินค้า", link: "/carts" },
+//   { name: "รายการที่สั่ง", link: "/bills" },
+//   { name: "คำสั่งซื้อลูกค้า", link: "/orders" },
+// ];
+
+function menuOpen() {
+  open.value = !open.value;
+}
+
+let table_id = 0;
+const tokenStore = useTokenStore();
+if (tokenStore.getStatus) {
+  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+  if(user.tableNumber)
+  {
+    table_id = user.tableNumber;
+  }
+}
+
+
+
+
 </script>
+
 
 <style lang="scss" scoped>
 * {

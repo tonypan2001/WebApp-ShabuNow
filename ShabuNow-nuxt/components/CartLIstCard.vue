@@ -8,28 +8,7 @@
 
         <div class="flex flex-col md:flex-row justify-between items-center mx-8 my-4">
             <img class="rounded-lg object-cover h-[300px] w-[750px] md:h-[200px] md:w-[200px]" :src="imageUrl || ''" alt="">
-            <div class="w-60 mt-4 text-center">
-                <h1 class="text-2xl">
-                    <slot name="cart_menu">
-                        Default Menu
-                    </slot>
-                </h1>
-            </div>
-            <!-- increment and decrement button-->
-            <CounterButton class="mt-4 h-auto">
-                <template v-slot:counter_title>
-                    ใส่จำนวน
-                </template>
-            </CounterButton>
-    
-            <div class="mt-4 text-center w-40">
-                <h1 class="text-2xl">
-                    ราคา: ฿
-                    <slot name="cart_price">
-                        Default Price
-                    </slot>
-                </h1>
-            </div>
+            <slot></slot>
         </div>
     </div>
 </template>
