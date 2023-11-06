@@ -26,14 +26,6 @@ class MenuController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
@@ -75,6 +67,23 @@ class MenuController extends Controller
 //            $imagePath = $request->file('imgPath')->store('foodImages', 'public');
 //            $menu->imgPath = $imagePath;
 //        }
+
+        $menu->save();
+        $menu->refresh();
+
+        return $menu;
+    }
+
+    public function update(Request $request, Menu $menu)
+    {
+        $category = Category::where('name', $request->get('category'))->first();
+
+        $menu->name = $request->get('name');
+        $menu->price = $request->get('price');
+        $menu->category_id = $category->id;
+        $menu->description = $request->get('description');
+        $menu->status = 'available';
+        $menu->imgPath = $request->get('imgPath');
 
         $menu->save();
         $menu->refresh();
