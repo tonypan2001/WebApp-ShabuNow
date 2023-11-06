@@ -67,22 +67,22 @@
           <span v-if="errors.password_confirmation" class="text-red-500">{{
             errors.password_confirmation[0]
           }}</span>
-          <div class="mx-auto mt-2">
-            <label
-              for="example1"
-              class="mb-1 block text-sm font-medium text-gray-700"
-              >อัพโหลดรูปภาพ</label
-            >
-            <input
-              id="example1"
-              type="file"
-              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
-              name="photos"
-            />
-            <span v-if="errors.photos" class="text-red-500">{{
-              errors.photos[0]
-            }}</span>
-          </div>
+<!--          <div class="mx-auto mt-2">-->
+<!--            <label-->
+<!--              for="example1"-->
+<!--              class="mb-1 block text-sm font-medium text-gray-700"-->
+<!--              >อัพโหลดรูปภาพ</label-->
+<!--            >-->
+<!--            <input-->
+<!--              id="example1"-->
+<!--              type="file"-->
+<!--              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"-->
+<!--              name="photos"-->
+<!--            />-->
+<!--            <span v-if="errors.photos" class="text-red-500">{{-->
+<!--              errors.photos[0]-->
+<!--            }}</span>-->
+<!--          </div>-->
           <!-- Register Button -->
           <Button>
             <slot name="button"> สมัครสมาชิก </slot>

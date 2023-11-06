@@ -64,11 +64,16 @@
 const auth = useAuthStore();
 console.log(auth.getUser.id)
 let table_id = 0;
-const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
-if(user.tableNumber)
-{
-  table_id = user.tableNumber;
+const tokenStore = useTokenStore();
+if (tokenStore.getStatus) {
+  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+  if(user.tableNumber)
+  {
+    table_id = user.tableNumber;
+  }
 }
+
+
 console.log(auth.getUser.role)
 function categorizeMenusByCategory(menus) {
   const categorizedMenus = [];

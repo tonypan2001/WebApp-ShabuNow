@@ -87,18 +87,18 @@ import { Input } from 'postcss';
             <p class="text-green-500">{{ message.success }}</p>
           </div>
 
-          <div class="mx-auto my-8">
-            <label
-              for="example1"
-              class="mt-4 mb-1 block text-lg font-medium text-gray-700"
-              >อัพโหลดรูปภาพ</label
-            >
-            <input
-              id="example1"
-              type="file"
-              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
-            />
-          </div>
+<!--          <div class="mx-auto my-8">-->
+<!--            <label-->
+<!--              for="example1"-->
+<!--              class="mt-4 mb-1 block text-lg font-medium text-gray-700"-->
+<!--              >อัพโหลดรูปภาพ</label-->
+<!--            >-->
+<!--            <input-->
+<!--              id="example1"-->
+<!--              type="file"-->
+<!--              class="mt-2 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-700 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-slate-900 focus:outline-none disabled:pointer-events-none disabled:opacity-60"-->
+<!--            />-->
+<!--          </div>-->
           <!-- <button class="bg-red-500 text-white rounded-xl ">Log in</button> -->
           <hr class="mt-4">
           <Button class="mt-4 w-full">
