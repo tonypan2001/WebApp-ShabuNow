@@ -48,12 +48,13 @@
 
 <script setup lang="js">
 
+const config = useRuntimeConfig()
 const categoryName = ref('');
 async function addCategory() {
   const name = categoryName.value;
   console.log(categoryName)
   const response = await $fetch(
-      "http://localhost/api/category/store",
+      config.public.apiBaseURL + "category/store",
       {
         method: "POST",
         body: { name }
@@ -75,7 +76,7 @@ const header = {
 // ตัวอย่างการใช้งาน async function
 async function fetchData() {
   try {
-    let categories = await $fetch('http://localhost/api/category');
+    let categories = await $fetch(config.public.apiBaseURL + 'category');
     categorys.value = categories;
     count.value = categories.length;
   } catch (error) {

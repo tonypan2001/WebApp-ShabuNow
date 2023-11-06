@@ -55,6 +55,7 @@
 
 <script>
 import axios from "axios";
+const config = useRuntimeConfig()
 
 export default {
   // just some data
@@ -73,7 +74,7 @@ export default {
   },
   methods: {
     getMenus() {
-      axios.get(`http://localhost/api/menu`).then((res) => {
+      axios.get(config.public.apiBaseURL + `menu`).then((res) => {
         console.log(res.data.menus);
         this.menus = res.data.menus;
       });

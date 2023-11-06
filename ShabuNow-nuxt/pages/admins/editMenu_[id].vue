@@ -67,6 +67,7 @@
 <script setup lang="ts">
 import {getElementById} from "domutils";
 
+const config = useRuntimeConfig()
 const route = useRoute()
 console.log(route.params.id)
 
@@ -102,7 +103,7 @@ const handleChangeFile = (event: Event) => {
 }
 
 // get old info
-const showMenu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`, {
+const showMenu = await $fetch(config.public.apiBaseURL + `menu/show/${route.params.id}`, {
   method: "GET",
   headers: {
     Accept: "application/json",
@@ -124,7 +125,7 @@ async function onSubmit() {
     })
 
     console.log(formData)
-    const menu = await $fetch(`http://localhost/api/menu/update/${route.params.id}`, {
+    const menu = await $fetch(config.public.apiBaseURL + `menu/update/${route.params.id}`, {
       method: "PUT",
       body: formData
     })
@@ -138,7 +139,7 @@ async function onSubmit() {
   }
 }
 
-const categories = await $fetch('http://localhost/api/category', {
+const categories = await $fetch(config.public.apiBaseURL + 'category', {
   method: "GET",
   headers: {
     Accept: "application/json",

@@ -59,6 +59,8 @@ import {Category} from "~/models/defineType";
 import {navigateTo} from "#app";
 import {format} from "node:url";
 
+const config = useRuntimeConfig()
+
 const formData = reactive({
   name: "",
   price: "",
@@ -102,7 +104,7 @@ async function onSubmit() {
       method: "POST", body
     })
 
-    await $fetch("http://localhost/api/menu/store", {
+    await $fetch(config.public.apiBaseURL + "menu/store", {
       method: "POST",
       body: formData
     })
@@ -120,7 +122,7 @@ async function onSubmit() {
   }
 }
 
-const categories = await $fetch('http://localhost/api/category', {
+const categories = await $fetch(config.public.apiBaseURL + 'category', {
   method: "GET",
   headers: {
     Accept: "application/json",

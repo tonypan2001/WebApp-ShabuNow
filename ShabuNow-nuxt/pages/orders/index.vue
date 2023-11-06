@@ -66,6 +66,8 @@
   const dialogMessage = ref("");
   const dialogAction = ref("");
 
+  const config = useRuntimeConfig()
+
   const tableNumbersGen = (count) => {
     const tableNumbers = [];
     for (let i = 1; i <= count; i++) {
@@ -96,7 +98,7 @@
       showDialog.value = false;
       console.log("Add");
       try {
-        const table = $fetch("http://localhost/api/table/create", {
+        const table = $fetch(config.public.apiBaseURL + "table/create", {
           method: "POST",
           body: { tableNumber: counter.value },
         });
@@ -112,7 +114,7 @@
       showDialog.value = false;
       console.log("Delete");
       try {
-        const table = $fetch("http://localhost/api/table/delete", {
+        const table = $fetch(config.public.apiBaseURL + "table/delete", {
           method: "DELETE",
           body: { tableNumber: counter.value },
         });
@@ -126,7 +128,7 @@
     }
   };
 
-  const numberofTable = await $fetch(`http://localhost/api/table/count`);
+  const numberofTable = await $fetch(config.public.apiBaseURL + `table/count`);
   for (let i = 1; i <= numberofTable; i++) {
     tableNumbers.value.push(i);
   }

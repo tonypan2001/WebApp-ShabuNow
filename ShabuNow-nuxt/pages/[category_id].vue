@@ -72,10 +72,11 @@
 
 import {useRoute} from "vue-router";
 
+const config = useRuntimeConfig()
 const auth = useAuthStore();
 const route = useRoute();
 let table_id = 0;
-const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+const user = await $fetch(config.public.apiBaseURL + `staff/${auth.getUser.id}`);
 if(user.tableNumber)
 {
   table_id = user.tableNumber;
@@ -93,7 +94,7 @@ function categorizeMenusByCategory(menus, category) {
 }
 async function getPrice() {
   if ( table_id != 0) {
-    const data = await $fetch(`http://localhost/api/order/${table_id}`);
+    const data = await $fetch(config.public.apiBaseURL + `order/${table_id}`);
     if (data) {
       let totalPrice = 0;
       data.forEach(item => {
@@ -108,13 +109,13 @@ async function getPrice() {
   }
 }
 
-const menus = await $fetch("http://localhost/api/menu", {
+const menus = await $fetch(config.public.apiBaseURL + "menu", {
   method: "GET",
   headers: {
     Accept: "application/json",
   },
 });
-const categories = await $fetch('http://localhost/api/category', {
+const categories = await $fetch(config.public.apiBaseURL + 'category', {
   method: "GET",
   headers: {
     Accept: "application/json",

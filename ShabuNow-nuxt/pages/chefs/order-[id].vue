@@ -128,19 +128,21 @@ export default {
   },
   methods: {
     getOrder(orderId) {
-      axios.get(`http://localhost/api/order/show/${orderId}`).then((res) => {
+      const config = useRuntimeConfig()
+      axios.get(config.public.apiBaseURL + `order/show/${orderId}`).then((res) => {
         console.log(`axios คำตอบ ของ res คือ status:` + res.data.status);
         this.order = res.data;
         // this.menusidid = res.data.menu.id;
       });
     },
     updateOrder() {
+      const config = useRuntimeConfig()
       var myThis = this;
 
       // served/{order}
       //   alert(`update menu is worked:` + menuId);
       axios
-        .put(`http://localhost/api/order/served/${this.orderId}`, this.order)
+        .put(config.public.apiBaseURL + `order/served/${this.orderId}`, this.order)
         .then((res) => {
           console.log(res, "res");
           alert(res.data);

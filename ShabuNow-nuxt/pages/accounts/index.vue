@@ -85,6 +85,7 @@
 <script setup lang="ts">
 import {Hist} from "~/models/defineType";
 
+const config = useRuntimeConfig()
 const auth = useAuthStore()
 const route = useRoute()
 console.log(auth.getUser.id)
@@ -95,7 +96,7 @@ const tableHeaders = [
     'จำนวน',
     'วันที่',
 ]
-const history = await $fetch<Hist[]>(`http://localhost/api/history/show/${auth.getUser.id}`)
+const history = await $fetch<Hist[]>(config.public.apiBaseURL + `history/show/${auth.getUser.id}`)
 let i = 1
 function filterHistory(histories: Hist[]) {
   const historyList: Hist[] = []
@@ -129,7 +130,7 @@ async function handleChangePassword() {
   console.log(formData)
   try {
     if (formData.old_password !== "") {
-      const customer = await $fetch<any>(`http://localhost/api/customer/${auth.getUser.id}/updatePassword`, {
+      const customer = await $fetch<any>(config.public.apiBaseURL + `customer/${auth.getUser.id}/updatePassword`, {
         method: "POST",
         body: formData,
       })

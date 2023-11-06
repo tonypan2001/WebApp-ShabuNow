@@ -60,13 +60,13 @@
 
 <script setup lang="js">
 
-
+const config = useRuntimeConfig()
 const auth = useAuthStore();
 console.log(auth.getUser.id)
 let table_id = 0;
 const tokenStore = useTokenStore();
 if (tokenStore.getStatus) {
-  const user = await $fetch(`http://localhost/api/staff/${auth.getUser.id}`);
+  const user = await $fetch(config.public.apiBaseURL + `staff/${auth.getUser.id}`);
   if(user.tableNumber)
   {
     table_id = user.tableNumber;
@@ -108,8 +108,6 @@ async function getPrice() {
   }
 
 }
-
-const config = useRuntimeConfig()
 const menus = await $fetch( config.public.apiBaseURL + `menu`, {
       method: "GET",
       headers: {

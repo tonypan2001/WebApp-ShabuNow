@@ -111,6 +111,7 @@ import { Input } from 'postcss';
 </template>
 
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const auth = useAuthStore()
 const token = useTokenStore()
 const formData = reactive({
@@ -128,7 +129,7 @@ const errors = ref([])
 async function handleRegisterStaff() {
   console.log(formData)
   try {
-    const staff = await $fetch("http://localhost/api/staff/create", {
+    const staff = await $fetch(config.public.apiBaseURL + "staff/create", {
       method: "POST",
       body: formData
     })
