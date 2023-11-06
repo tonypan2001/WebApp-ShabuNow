@@ -66,6 +66,7 @@
 
 <script setup lang="ts">
 import {getElementById} from "domutils";
+import {navigateTo} from "#app";
 
 const config = useRuntimeConfig()
 const route = useRoute()
@@ -132,6 +133,7 @@ async function onSubmit() {
 
     message.success = "แก้ไขเมนูสำเร็จ"
     message.error = ""
+    await navigateTo(`/chefs`)
   } catch (err) {
     console.log(err)
     message.error = "แก้ไขเมนูไม่สำเร็จ โปรดตรวจสอบว่าข้อมูลถูกต้อง"

@@ -6,12 +6,25 @@
   >
     <!-- Logo & toggle -->
     <div class="flex justify-between items-center">
-      <a href="/" class="flex justify-center items-center">
+      <a v-if = "auth.getUser.role === 'customer' || auth.getUser.role === 'admin' || auth.getUser.role === 'staff' "  href="/" class="flex justify-center items-center">
         <div>
           <img
             class="w-[64px] md:w-[64px] ease-out duration-300"
             src="~/assets/img/logo.png"
             alt="ShabuNow"
+          />
+        </div>
+        <h1 class="text-2xl md:text-xl text-red-600 font-bold ease-out duration-300">
+          Shabu<span class="text-black">Now</span>
+        </h1>
+      </a>
+
+      <a v-if = "auth.getUser.role === 'chef'" href="/chefs" class="flex justify-center items-center">
+        <div>
+          <img
+              class="w-[64px] md:w-[64px] ease-out duration-300"
+              src="~/assets/img/logo.png"
+              alt="ShabuNow"
           />
         </div>
         <h1 class="text-2xl md:text-xl text-red-600 font-bold ease-out duration-300">
@@ -44,17 +57,29 @@
           </a>
         </li> -->
         <li class="lg:m-0 m-4">
-          <a
+          <a v-if = "auth.getUser.role === 'customer'"
               href="/home"
               class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             หน้าแรก
           </a>
         </li>
         <li class="lg:m-0 m-4">
-          <a
+          <a v-if = "auth.getUser.role === 'customer'"
             href="/"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             เลือกเมนู
+          </a>
+          <a v-if = "auth.getUser.role === 'chef'"
+             href="/chefs"
+             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            เลือกเมนู
+          </a>
+        </li>
+        <li class="lg:m-0 m-4">
+          <a v-if = "auth.getUser.role === 'chef'"
+             href="/chefs/orders"
+             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
+            คำสั่งซื้อ
           </a>
         </li>
         <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer' && table_id !== 0">

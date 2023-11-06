@@ -7,23 +7,28 @@
         </HeaderContainer>
         <hr>
         <ContentContainer>
-            <!-- Ordered List -->
-            <CartListCard v-for="order in orders">
-              <div class="w-60 mt-4 text-center">
-                <h1 class="text-2xl">
-                  {{ order.name}}
-                </h1>
-              </div>
-              <!-- increment and decrement button-->
-                  {{ order.quantity }}
+          <Table :datas="FilteredOrder" :headers="tableHeaders" class="mt-8">
+            <template v-slot:title>
+              โต๊ะที่ #{{ route.params.id }}
+            </template>
+          </Table>
+<!--            &lt;!&ndash; Ordered List &ndash;&gt;-->
+<!--            <CartListCard v-for="order in orders">-->
+<!--              <div class="w-60 mt-4 text-center">-->
+<!--                <h1 class="text-2xl">-->
+<!--                  {{ order.name}}-->
+<!--                </h1>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; increment and decrement button&ndash;&gt;-->
+<!--                  {{ order.quantity }}-->
 
-              <div class="mt-4 text-center w-40">
-                <h1 class="text-2xl">
-                  ราคา: ฿
-                  {{ order.price*order.quantity }}
-                </h1>
-              </div>
-            </CartListCard>
+<!--              <div class="mt-4 text-center w-40">-->
+<!--                <h1 class="text-2xl">-->
+<!--                  ราคา: ฿-->
+<!--                  {{ order.price*order.quantity }}-->
+<!--                </h1>-->
+<!--              </div>-->
+<!--            </CartListCard>-->
 
             <!-- Total Price -->
             <TotalPrice>
@@ -53,15 +58,8 @@
 
 <script setup lang="ts">
 import { Order} from "~/models/defineType";
-import {navigateTo} from "#app";
-
-definePageMeta({
-  middleware: ['admin']
-})
-const config = useRuntimeConfig()
 const route = useRoute()
 const auth = useAuthStore();
-
 
 async function useFetch<T>(url: string): Promise<{ data: T}> {
   const res = await fetch(url);
@@ -69,22 +67,47 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
   return { data };
 }
 
-const { data: orders } = await useFetch<Order[]>(config.public.apiBaseURL + `order/checkPending/${route.params.id}`)
-console.log(orders);
+const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/checkPending/${route.params.id}`)
 
-let sum = 0;
-function sumPrice(orders: Order[]) {
+const tableHeaders = [
+  'ลำดับ',
+  'รายการอาหาร',
+  'จำนวน',
+  'ราคา']
+console.log(tableHeaders)
+
+// const FilteredOrder = orders.map((order) => {
+//   return {
+//     name: order.name,
+//     quantity: order.quantity,
+//     price: order.price
+//   }
+// })
+
+let sum = 0
+function filterOrder(orders: Order[])
+{
+  const orderList: Order[] = [];
+
+  let i = 1
   orders.forEach((order) => {
-    sum += order.price*order.quantity;
-  });
+    orderList.push({
+      id: i++,
+      name: order.name,
+      quantity: order.quantity,
+      price: order.price * order.quantity,
+    })
+    sum += order.price * order.quantity
+  })
+  return orderList
 }
 
-const totalPrice = sumPrice(orders);
+const FilteredOrder = filterOrder(orders)
 
 async function onSubmit() {
   console.log(orders)
   try {
-    const menu = await $fetch(config.public.apiBaseURL + `order/sendOrders/${route.params.id}`,{     method: "POST",
+    const menu = await $fetch(`http://localhost/api/order/sendOrders/${route.params.id}`,{     method: "POST",
       method: "POST",
     })
     await navigateTo(`/bills/table_${route.params.id}`)

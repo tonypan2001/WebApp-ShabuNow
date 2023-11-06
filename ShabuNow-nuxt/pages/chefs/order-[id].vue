@@ -105,6 +105,7 @@
 </template>
 <script>
 import axios from "axios";
+import {navigateTo} from "#app";
 
 export default {
   // just some data
@@ -123,7 +124,7 @@ export default {
   },
   mounted() {
     this.orderId = this.$route.params.id;
-    alert(this.orderId);
+    // alert(this.orderId);
     this.getOrder(this.orderId);
   },
   methods: {
@@ -145,9 +146,10 @@ export default {
         .put(config.public.apiBaseURL + `order/served/${this.orderId}`, this.order)
         .then((res) => {
           console.log(res, "res");
-          alert(res.data);
+          // alert(res.data);
           //   this.menu = res.data.menu;
           this.errorList = {};
+          navigateTo ("/chefs/orders");
         })
         .catch(function (error) {
           console.log(error, "errors");
