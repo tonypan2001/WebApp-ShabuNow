@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('detail')->nullable();
             $table->integer('quantity');
-            $table->foreignIdFor(\App\Models\User::class); //user_id (fk)
+            $table->foreignIdFor(\App\Models\User::class)->nullable(); //user_id (fk)
         });
     }
 

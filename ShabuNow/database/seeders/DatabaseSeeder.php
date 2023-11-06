@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Order;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TableSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(MenuSeeder::class);
-        $this->call(OrderSeeder::class);
+//        $this->call(OrderSeeder::class);
         $this->call(HistorySeeder::class);
         // \App\Models\User::factory(10)->create();
 
@@ -49,5 +51,23 @@ class DatabaseSeeder extends Seeder
             'email' => 'Customer@example.com',
             'role' => 'customer',
         ]);
+
+        foreach (User::all() as $user) {
+            if($user->role == 'customer') {
+                $number = rand(1, 20);
+                $table = Table::where('id', $number)->first();
+                if($table->status == 'available')
+                    $user->tableNumber = $number;
+                    $table->user_id = $user->id;
+                    $table->status = 'used';
+
+                    Order::factory()->create([
+                        'table_id' => $table->id,
+                    ]);
+
+                $table->save();
+                $user->save();
+            }
+        }
     }
 }
