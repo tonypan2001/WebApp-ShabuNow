@@ -1,7 +1,7 @@
 <template>
   <MainContainer>
     <HeaderContainer>
-      <HeaderText>สร้างเมนู</HeaderText>
+      <HeaderText>จัดการโต๊ะ</HeaderText>
     </HeaderContainer>
     <hr />
     <form @submit.prevent="onSubmit()" action="">
@@ -46,10 +46,11 @@ const error = reactive({
 async function onSubmit() {
   console.log(formData)
   try {
-    const res = await $fetch("http://localhost/api/checkIn", {
+    const res = await $fetch("http://localhost/api/table/checkIn", {
       method: "POST",
       body: formData
     })
+    await navigateTo("/orders")
   } catch (error) {
     console.log(error)
   }
@@ -70,5 +71,6 @@ function filterTable(tables: Table[])
 }
 
 const filteredTables = filterTable(tables)
+console.log(tables)
 
 </script>
