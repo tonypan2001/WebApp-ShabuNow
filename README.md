@@ -20,6 +20,9 @@
 
 
 # วิธีการติดตั้ง Laravel Project **ShabuNow** (Backend)
+
+>เข้าไปใน file ShabuNow ด้วยคำสั่ง cd ShabuNow จากนั้นรันคำสั่งดังนี้
+>
 >run คำสั่งใน bash
 
 ```bash
