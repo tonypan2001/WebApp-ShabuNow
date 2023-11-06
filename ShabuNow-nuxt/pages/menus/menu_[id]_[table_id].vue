@@ -44,10 +44,10 @@
                 </div>
 
                 <!-- for customer -->
-                <counter-button class="w-full" title="จำนวน">
+                <counter-button class="w-full" title="จำนวน" v-if="table_id !== `0`">
 
                 </counter-button>
-                <div v-if="auth.getUser.role === 'customer'" class="flex flex-col justify-start items-start text-lg">
+                <div v-if="auth.getUser.role === 'customer' && table_id !== `0`" class="flex flex-col justify-start items-start text-lg">
                     <Button @click="addMenu()" class="mt-4 w-full">
                         <i class="bi bi-cart-plus mr-2"></i>
                         เพิ่มเข้าตะกร้า
@@ -71,6 +71,7 @@ import {useAuthStore} from "~/stores/auth";
 const auth = useAuthStore();
 const route = useRoute();
 const menu = await $fetch(`http://localhost/api/menu/show/${route.params.id}`)
+const table_id = route.params.table_id;
 
 async function addMenu() {
   if (auth.getUser.role !== 'customer') {
