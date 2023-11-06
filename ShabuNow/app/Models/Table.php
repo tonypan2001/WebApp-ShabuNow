@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Table extends Model
 {
+    // 'status' => 'available',
+    protected $fillable = ['status'];
     use HasFactory;
 
     public function user() : HasOne

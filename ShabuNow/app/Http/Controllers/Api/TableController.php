@@ -33,6 +33,7 @@ class TableController extends Controller
 
     public function store()
     {
+        
         $table = new Table();
         $table->id = Table::count() + 1;
         $table->status = 'available';

@@ -46,13 +46,14 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'name' => ['required', 'string', 'min:1'],
-//            'price' => ['required', 'integer', 'min:1'],
-//            'category' => ['required', 'string'],
-//            'description' => ['required', 'string', 'min:1'],
-//            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-//        ]);
+        // ตอนแรกคอมเม้นไว้ทำไมหว่า ขออนุญาต un comment นะ by pooh!?
+       $request->validate([
+           'name' => ['required', 'string', 'min:1'],
+           'price' => ['required', 'integer', 'min:1'],
+           'category' => ['required', 'string'],
+           'description' => ['required', 'string', 'min:1'],
+           'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+       ]);
 
 
         // Store image in 'public/images' folder
