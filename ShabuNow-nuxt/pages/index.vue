@@ -91,7 +91,8 @@ function categorizeMenusByCategory(menus) {
 async function getPrice() {
   if ( table_id != 0)
   {
-    const data = await $fetch(`http://localhost/api/order/${table_id}`);
+    const config = useRuntimeConfig()
+    const { data } = await $fetch( config.public.apiBaseURL + `order/${table_id}`)
     console.log('order :', data)
     if (data) {
       let totalPrice = 0;
@@ -108,13 +109,14 @@ async function getPrice() {
 
 }
 
-const menus = await $fetch("http://localhost/api/menu", {
+const config = useRuntimeConfig()
+const menus = await $fetch( config.public.apiBaseURL + `menu`, {
       method: "GET",
       headers: {
         Accept: "application/json",
       },
 });
-const categories = await $fetch('http://localhost/api/category', {
+const categories = await $fetch(config.public.apiBaseURL + 'category', {
   method: "GET",
   headers: {
     Accept: "application/json",

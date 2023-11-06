@@ -54,7 +54,7 @@ async function useFetch<T>(url: string): Promise<{ data: T}> {
   return { data };
 }
 
-const { data: orders } = await useFetch<Order[]>(`http://localhost/api/order/${route.params.id}`)
+const { data: orders } = await useFetch<Order[]>($config.apiBaseURL + `order/${route.params.id}`)
 
 const tableHeaders = [
     'ลำดับ',

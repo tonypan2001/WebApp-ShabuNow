@@ -18,7 +18,14 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(formData) {
       try {
-        const { data } = await $fetch("http://localhost/api/login", {
+        const express = require('express');
+        const cors = require('cors');
+        const app = express();
+
+// Allow requests from all origins (be cautious in a production environment)
+        app.use(cors());
+        const config = useRuntimeConfig()
+        const { data } = await $fetch( config.public.apiBaseURL + "login", {
           method: "POST",
           body: { ...formData },
         });

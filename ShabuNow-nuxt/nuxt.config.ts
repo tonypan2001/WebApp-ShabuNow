@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig :{
     public: {
-      apiBaseURL : "http://localhost/api/"
+      apiBaseURL : "https://api-shabunow.bezathecat.com/api/"
     }
   },
 });
