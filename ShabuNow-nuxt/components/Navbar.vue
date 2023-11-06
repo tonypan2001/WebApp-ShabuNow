@@ -57,14 +57,14 @@
             เลือกเมนู
           </a>
         </li>
-        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer' && table_id !== 0">
           <a
             :href="`/carts/table_${table_id}`"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
             ตะกร้าสินค้า
           </a>
         </li>
-        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer'">
+        <li class="lg:m-0 m-4" v-if="auth.getUser.role === 'customer' && table_id !== 0">
           <a
               :href="`/bills/table_${table_id}`"
             class="hover:border-2 hover:border-red-600 hover:text-red-600 cursor-pointer rounded-xl px-1 py-1.5 mx-2">
