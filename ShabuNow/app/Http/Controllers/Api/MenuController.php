@@ -77,14 +77,33 @@ class MenuController extends Controller
 
     public function update(Request $request, Menu $menu)
     {
-        $category = Category::where('name', $request->get('category'))->first();
+        if($request->get('name') != null)
+        {
+            $menu->name = $request->get('name');
+        }
+        if ($request->get('price') != null)
+        {
+            $menu->price = $request->get('price');
+        }
 
-        $menu->name = $request->get('name');
-        $menu->price = $request->get('price');
-        $menu->category_id = $category->id;
-        $menu->description = $request->get('description');
-        $menu->status = 'available';
-        $menu->imgPath = $request->get('imgPath');
+        // fixed by pooh for chef update
+        if($request->get('category') != null){
+            $category = Category::where('name', $request->get('category'))->first();
+            $menu->category_id = $category->id;
+        }
+
+        if ($request->get('description') != null)
+        {
+            $menu->description = $request->get('description');
+        }
+        if($request->get('status') != null)
+        {
+            $menu->status = $request->get('status');;
+        }
+        if($request->get('imgPath') != null)
+        {
+            $menu->imgPath = $request->get('imgPath');
+        }
 
         $menu->save();
         $menu->refresh();
