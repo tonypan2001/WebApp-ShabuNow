@@ -43,7 +43,7 @@
                             </div>
 
                             <!-- for customer -->
-                            <counter-button class="w-full" title="จำนวน" v-if="table_id !== `0`">
+                            <counter-button class="w-full" title="จำนวน" v-if="table_id !== `0` && ">
 
                             </counter-button>
                             <div v-if="auth.getUser.role === 'customer' && table_id !== `0`" class="flex flex-col justify-start items-start text-lg">

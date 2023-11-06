@@ -71,6 +71,6 @@ function filterTable(tables: Table[])
 }
 
 const filteredTables = filterTable(tables)
-console.log(tables)
+console.log(filteredTables)
 
 </script>
