@@ -19,7 +19,7 @@
 > จิรกิตต์ ชนะกลาง 6410450095 หมู่ 200
 
 
-# วิธีการติดตั้ง Laravel Project **ShabuNow** (Backend)
+# วิธีการติดตั้ง Project **ShabuNow** (Frontend)
 
 >เข้าไปใน file ShabuNow ด้วยคำสั่ง
 ```bash
