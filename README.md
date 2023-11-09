@@ -88,6 +88,31 @@ sail yarn dev
 sail artisan migrate:fresh --seed
 ```
 
+# วิธีการติดตั้ง Project **ShabuNow** (Frontend)
+
+>เข้าไปใน file ShabuNow ด้วยคำสั่ง
+```bash
+cd ShabuNow-nuxt
+```
+>จากนั้นหลังด้วยคำสั่ง run คำสั่งใน bash
+
+
+
+> run คำสั่งใน bash
+
+
+> run คำสั่งใน bash
+
+```bash
+npm run install
+```
+
+> run คำสั่งใน bash
+
+```bash
+npm run dev
+```
+
 ### role ในการใช้งาน
 
 ---
