@@ -19,31 +19,74 @@
 > จิรกิตต์ ชนะกลาง 6410450095 หมู่ 200
 
 
-# วิธีการติดตั้ง Project **ShabuNow** (Frontend)
+# วิธีการติดตั้ง Laravel Project **ShabuNow** (Backend)
 
 >เข้าไปใน file ShabuNow ด้วยคำสั่ง
 ```bash
-cd ShabuNow-nuxt
+cd ShabuNow
 ```
 >จากนั้นหลังด้วยคำสั่ง run คำสั่งใน bash
 
-
-
-> run คำสั่งใน bash
-
-
-> run คำสั่งใน bash
-
 ```bash
-npm run install
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
 ```
 
 > run คำสั่งใน bash
 
 ```bash
-npm run dev
+cp .env.example .env
 ```
 
+> เข้าไปใน file (.env) ของ project
+
+```
+APP_NAME="Laravel Layout"
+DB_HOST=mysql
+DB_USERNAME=sail
+DB_PASSWORD=password
+REDIS_HOST=redis
+```
+
+> run คำสั่งใน bash
+
+```bash
+sail up -d
+```
+
+> run คำสั่งใน bash
+
+```bash
+sail artisan key:generate
+```
+
+> run คำสั่งใน bash
+
+```bash
+sail yarn install
+```
+
+> run คำสั่งใน bash
+
+```bash
+sail artisan storage:link
+```
+
+> run คำสั่งใน bash
+
+```bash
+sail yarn dev
+```
+
+> รัน seeder และสร้าง table ใหม่
+
+```bash
+sail artisan migrate:fresh --seed
+```
 
 ### role ในการใช้งาน
 
@@ -117,6 +160,7 @@ sail artisan test
 >
 
 ![burndownChart](https://github.com/ThanadonMhp/Backend2-ShabuNow/assets/108661996/b71011c9-16b1-4f91-b470-69a9a2a2096e)
+
 
 
 
